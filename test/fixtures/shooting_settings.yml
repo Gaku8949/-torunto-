@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  photo: one
+  aperture: MyString
+  iso: 1
+  shutter_speed: MyString
+  focal_length: MyString
+
+two:
+  photo: two
+  aperture: MyString
+  iso: 1
+  shutter_speed: MyString
+  focal_length: MyString

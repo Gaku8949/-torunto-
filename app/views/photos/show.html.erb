@@ -1,0 +1,24 @@
+<h1><%= @photo.title %></h1>
+
+<% if @photo.image.attached? %>
+  <%= image_tag @photo.image %>
+<% end %>
+
+<p>写真のポイント : <%= @photo.description %></p>
+
+<h2>撮影場所</h2>
+
+<% if @photo.location.present? %>
+  <p><%= @photo.location %></p>
+<% end %>
+
+<h2>撮影設定</h2>
+
+<% if @photo.shooting_setting.present? %>
+  <p>F値 : <%= @photo.shooting_setting.aperture %></p>
+  <p>ISO : <%= @photo.shooting_setting.iso %></p>
+  <p>シャッタースピード : <%= @photo.shooting_setting.shutter_speed %></p>
+  <p>焦点距離 : <%= @photo.shooting_setting.focal_length %></p>
+<% end %>
+
+<p>投稿者 : <%= @photo.user.email %></p>
