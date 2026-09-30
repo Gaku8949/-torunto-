@@ -1,0 +1,12 @@
+<h1>撮影場所を登録</h1>
+
+<%= form_with model: @location do |f| %>
+
+  <div>
+    <%= f.label :name, "場所名" %>
+    <%= f.text_field :name %>
+  </div>
+
+  <%= f.submit "登録する" %>
+  
+<% end %>

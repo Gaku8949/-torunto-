@@ -1,0 +1,17 @@
+<h1>写真一覧</h1>
+
+<% @photos.each do |photo| %>
+  <div>
+    <% if photo.image.attached? %>
+      <%= image_tag photo.image, width: 300 %>
+    <% end %>
+
+    <h2>
+      <%= link_to photo.title, photo_path(photo) %>
+    </h2>
+
+    <p><%= photo.description %></p>
+  </div>
+<% end %>
+
+<%= link_to "写真を投稿する", new_photo_path %>
