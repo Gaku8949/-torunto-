@@ -22,6 +22,21 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
    end
 
+   def edit
+    @photo = Photo.find(params[:id])
+   end
+
+   def update
+     @photo = Photo.find(params[:id])
+
+     if @photo.update(photo_params)
+       redirect_to @photo, notice: "写真を更新しました"
+     else
+
+       render :edit, status: :unprocessable_entity
+     end
+   end
+
    private
         
    def photo_params

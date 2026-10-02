@@ -21,4 +21,5 @@
   <p>焦点距離 : <%= @photo.shooting_setting.focal_length %></p>
 <% end %>
 
+<%= link_to "編集する", edit_photo_path(@photo) %>
 <p>投稿者 : <%= @photo.user.email %></p>
