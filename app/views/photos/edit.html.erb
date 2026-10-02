@@ -1,0 +1,51 @@
+<h1>写真を編集</h1>
+
+<%= form_with model: @photo do |f| %>
+
+  <div>
+    <%= f.label :image, "写真" %>
+    <%= f.file_field :image %>
+  </div>
+
+  <div>
+    <%= f.label :title, "タイトル" %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :description, "説明" %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div>
+    <%= f.label :location, "撮影場所" %>
+    <%= f.text_field :location %>
+  </div>
+
+  <%= f.fields_for :shooting_setting do |sf| %>
+
+    <div>
+      <%= sf.label :aperture, "F値" %>
+      <%= sf.text_field :aperture %>
+    </div>
+
+    <div>
+      <%= sf.label :iso, "ISO" %>
+      <%= sf.number_field :iso %>
+    </div>
+
+    <div>
+      <%= sf.label :shutter_speed, "シャッタースピード" %>
+      <%= sf.text_field :shutter_speed %>
+    </div>
+
+    <div>
+      <%= sf.label :focal_length, "焦点距離" %>
+      <%= sf.text_field :focal_length %>
+    </div>
+
+  <% end %>
+
+  <%= f.submit "更新する" %>
+
+<% end %>
