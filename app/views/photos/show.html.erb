@@ -22,4 +22,10 @@
 <% end %>
 
 <%= link_to "編集する", edit_photo_path(@photo) %>
+
+<%= button_to "削除する",
+            @photo,
+            method: :delete,
+            data: { turbo_confirm: "本当に削除しますか？" } %>
+
 <p>投稿者 : <%= @photo.user.email %></p>
