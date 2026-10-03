@@ -21,6 +21,14 @@
   <p>焦点距離 : <%= @photo.shooting_setting.focal_length %></p>
 <% end %>
 
+<h2>撮影技法・構図</h2>
+
+<% if @photo.techniques.any? %>
+  <% @photo.techniques.each do |technique| %>
+    <p><%= technique.name %></p>
+  <% end %>
+<% end %>
+
 <%= link_to "編集する", edit_photo_path(@photo) %>
 
 <%= button_to "削除する",

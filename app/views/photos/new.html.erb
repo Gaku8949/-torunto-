@@ -44,6 +44,18 @@
     </div>
   <% end %>
 
+  <div>
+    <h2>撮影技法・構図</h2>
+
+    <% @techniques.each do |technique| %>
+      <div>
+        <%= check_box_tag "photo[technique_ids][]", technique.id, false, id: "technique_#{technique.id}" %>
+
+        <%= label_tag "technique_#{technique.id}", technique.name %>
+      </div>
+    <% end %>
+  </div>
+    
   <%= f.submit "投稿する" %>
 
 <% end %>
