@@ -46,6 +46,15 @@
 
   <% end %>
 
+  <% @techniques.each do |technique| %>
+    <div>
+      <%= check_box_tag("photo[technique_ids][]", technique.id, @photo.technique_ids.include?(technique.id)
+      ) %>
+
+      <%= label_tag "photo_technique_ids_#{technique.id}", technique.name %>
+    </div>
+  <% end %>
+
   <%= f.submit "更新する" %>
 
 <% end %>

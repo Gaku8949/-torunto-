@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_09_30_081212) do
+ActiveRecord::Schema[7.2].define(version: 2026_10_03_021725) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,6 +48,16 @@ ActiveRecord::Schema[7.2].define(version: 2026_09_30_081212) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "photo_techniques", force: :cascade do |t|
+    t.bigint "photo_id", null: false
+    t.bigint "technique_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["photo_id", "technique_id"], name: "index_photo_techniques_on_photo_id_and_technique_id", unique: true
+    t.index ["photo_id"], name: "index_photo_techniques_on_photo_id"
+    t.index ["technique_id"], name: "index_photo_techniques_on_technique_id"
+  end
+
   create_table "photos", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "title"
@@ -69,6 +79,14 @@ ActiveRecord::Schema[7.2].define(version: 2026_09_30_081212) do
     t.index ["photo_id"], name: "index_shooting_settings_on_photo_id"
   end
 
+  create_table "techniques", force: :cascade do |t|
+    t.string "name"
+    t.string "category"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username", null: false
     t.string "email", default: "", null: false
@@ -84,6 +102,8 @@ ActiveRecord::Schema[7.2].define(version: 2026_09_30_081212) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "photo_techniques", "photos"
+  add_foreign_key "photo_techniques", "techniques"
   add_foreign_key "photos", "users"
   add_foreign_key "shooting_settings", "photos"
 end

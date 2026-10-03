@@ -6,6 +6,7 @@ class PhotosController < ApplicationController
    def new
     @photo = Photo.new
     @photo.build_shooting_setting
+    @techniques = Technique.all
    end
    
    def create
@@ -24,6 +25,7 @@ class PhotosController < ApplicationController
 
    def edit
     @photo = Photo.find(params[:id])
+    @techniques = Technique.all
    end
 
    def update
@@ -52,6 +54,7 @@ class PhotosController < ApplicationController
         :title,
         :description,
         :location,
+        technique_ids: [],
         shooting_setting_attributes: [
           :aperture,
           :iso,
