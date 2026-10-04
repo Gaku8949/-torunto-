@@ -1,3 +1,11 @@
+<% if notice %>
+  <p><%= notice %></p>
+<% end %>
+
+<% if alert %>
+  <p><%= alert %></p>
+<% end %>
+
 <h1><%= @photo.title %></h1>
 
 <% if @photo.image.attached? %>
@@ -36,4 +44,32 @@
             method: :delete,
             data: { turbo_confirm: "本当に削除しますか？" } %>
 
-<p>投稿者 : <%= @photo.user.email %></p>
+<h2>コメント</h2>
+
+<%= form_with model: [@photo, Comment.new] do |f| %>
+  <div>
+    <%= f.text_area :body, placeholder: "コメントを入力してください" %>
+  </div>
+
+  <%= f.submit "コメントする" %>
+<% end %>
+
+<h2>投稿されたコメント</h2>
+
+<% @photo.comments.each do |comment| %>
+  <div>
+    <p>
+      <strong><%= comment.user.username %></strong>
+    </p>
+
+    <p>
+      <%= comment.body %>
+    </p>
+
+    <% if comment.user == current_user %>
+      <%= button_to "削除", photo_comment_path(@photo, comment), method: :delete, data: { turbo_confirm: "このコメントを削除しますか？" } %>
+    <% end %>
+  </div>
+<% end %>
+
+<p>投稿者 : <%= @photo.user.username %></p>
