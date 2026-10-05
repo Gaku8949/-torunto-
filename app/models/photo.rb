@@ -10,5 +10,7 @@ class Photo < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
+  has_many :challenges, foreign_key: :reference_photo_id, dependent: :destroy
+
   accepts_nested_attributes_for :shooting_setting, update_only: true
 end

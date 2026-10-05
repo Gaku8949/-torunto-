@@ -20,6 +20,8 @@
   <%= button_to "♡ お気に入り", photo_favorites_path(@photo), method: :post %>
 <% end %>
 
+<%= link_to "📷 この写真を参考に撮影する", new_photo_challenge_path(@photo) %>
+
 <p>写真のポイント : <%= @photo.description %></p>
 
 <h2>撮影場所</h2>
@@ -76,6 +78,28 @@
 
     <% if comment.user == current_user %>
       <%= button_to "削除", photo_comment_path(@photo, comment), method: :delete, data: { turbo_confirm: "このコメントを削除しますか？" } %>
+    <% end %>
+  </div>
+<% end %>
+
+<h2>撮影チャレンジ</h2>
+
+<% @photo.challenges.each do |challenge| %>
+  <div>
+    <p>
+      <strong><%= challenge.user.username %></strong>
+    </p>
+
+    <% if challenge.image.attached? %>
+      <%= image_tag challenge.image, width: 300 %>
+    <% end %>
+
+    <% if challenge.comment.present? %>
+      <p><%= challenge.comment %></p>
+    <% end %>
+
+    <% if challenge.user == current_user %>
+      <%= button_to "削除", photo_challenge_path(@photo, challenge), method: :delete, data: { turbo_confirm: "この撮影チャレンジを削除しますか？" } %>
     <% end %>
   </div>
 <% end %>

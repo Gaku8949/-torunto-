@@ -1,0 +1,23 @@
+<h1>撮影チャレンジ</h1>
+
+<h2>参考写真</h2>
+
+<% if @photo.image.attached? %>
+  <%= image_tag @photo.image, width: 400 %>
+<% end %>
+
+<h2>チャレンジ写真</h2>
+
+<%= form_with model: [@photo, @challenge] do |f| %>
+  <div>
+    <%= f.label :image, "撮影した写真" %>
+    <%= f.file_field :image %>
+  </div>
+
+  <div>
+    <%= f.label :comment, "コメント" %>
+    <%= f.text_area :comment, placeholder: "撮影してみた感想や意識したポイント" %>
+  </div>
+
+  <%= f.submit "チャレンジを投稿する" %>
+<% end %>
