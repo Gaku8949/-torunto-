@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_10_03_054654) do
+ActiveRecord::Schema[7.2].define(version: 2026_10_04_014752) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,15 @@ ActiveRecord::Schema[7.2].define(version: 2026_10_03_054654) do
     t.datetime "updated_at", null: false
     t.index ["photo_id"], name: "index_comments_on_photo_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "photo_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["photo_id"], name: "index_favorites_on_photo_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -114,6 +123,8 @@ ActiveRecord::Schema[7.2].define(version: 2026_10_03_054654) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "photos"
   add_foreign_key "comments", "users"
+  add_foreign_key "favorites", "photos"
+  add_foreign_key "favorites", "users"
   add_foreign_key "photo_techniques", "photos"
   add_foreign_key "photo_techniques", "techniques"
   add_foreign_key "photos", "users"
