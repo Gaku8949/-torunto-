@@ -8,6 +8,7 @@ class Photo < ApplicationRecord
   has_many :techniques, through: :photo_techniques
 
   has_many :comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   accepts_nested_attributes_for :shooting_setting, update_only: true
 end

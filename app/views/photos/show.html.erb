@@ -12,6 +12,14 @@
   <%= image_tag @photo.image %>
 <% end %>
 
+<% favorite = @photo.favorites.find_by(user: current_user) %>
+
+<% if favorite %>
+  <%= button_to "お気に入り解除", photo_favorite_path(@photo, favorite), method: :delete, data: { turbo_confirm: "お気に入りを解除しますか？" } %>
+<% else %>
+  <%= button_to "♡ お気に入り", photo_favorites_path(@photo), method: :post %>
+<% end %>
+
 <p>写真のポイント : <%= @photo.description %></p>
 
 <h2>撮影場所</h2>
