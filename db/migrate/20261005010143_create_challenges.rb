@@ -7,5 +7,8 @@ class CreateChallenges < ActiveRecord::Migration[7.2]
 
       t.timestamps
     end
+
+    add_foreign_key :challenges, :photos, column: :reference_photo_id
+    add_index :challenges, :reference_photo_id
   end
 end
