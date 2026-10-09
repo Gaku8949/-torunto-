@@ -11,6 +11,26 @@
   </head>
 
   <body>
+    <header class="site-header">
+      <div class="header-logo">
+        <%= link_to root_path do %>
+          <%= image_tag "TORUNTOimage.png", alt: "TORUNTO" %>
+        <% end %>
+      </div>
+
+      <nav class="header-nav">
+        <%= link_to "ホーム", root_path %>
+        <%= link_to "写真一覧", photos_path %>
+        <%= link_to "写真を投稿", new_photo_path %>
+
+        <% if user_signed_in? %>
+          <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
+        <% end %>
+      </nav>
+    </header>
+
+    <main>
     <%= yield %>
+    </main>
   </body>
 </html>
