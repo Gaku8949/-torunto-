@@ -13,3 +13,56 @@
  *= require_tree .
  *= require_self
  */
+.photo-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin: 20px;
+}
+
+.photo-card {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background-color: #fff;
+}
+
+.photo-card img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.photo-card h2 {
+    margin: 12px 0 8px;
+}
+
+.photo-card p {
+    margin: 6px 0;
+}
+
+@media (max-width: 768px) {
+    .photo-list { grid-template-columns: 1fr; margin: 12px; }
+}
+
+.photo-card h2 a {
+    color: #222;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.photo-card h2 a:hover {
+    text-decoration: underline;
+}
+
+.photo-card p {
+    color: #555;
+    font-size: 14px;
+}
+
+.photo-stats {
+    color: #666;
+    font-size: 13px;
+    margin-top: 10px;
+}

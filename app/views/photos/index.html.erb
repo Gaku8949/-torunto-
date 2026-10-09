@@ -1,17 +1,38 @@
 <h1>写真一覧</h1>
 
-<% @photos.each do |photo| %>
-  <div>
-    <% if photo.image.attached? %>
-      <%= image_tag photo.image, width: 300 %>
-    <% end %>
+<div class="photo-list">
+  <% @photos.each do |photo| %>
+    <div class="photo-card">
 
-    <h2>
-      <%= link_to photo.title, photo_path(photo) %>
-    </h2>
+      <% if photo.image.attached? %>
+        <%= image_tag photo.image, width: 300 %>
+      <% end %>
 
-    <p><%= photo.description %></p>
-  </div>
-<% end %>
+      <h2>
+        <%= link_to photo.title, photo_path(photo) %>
+      </h2>
+    
+      <% if photo.location.present? %>
+        <p>📍  <%= photo.location %></p>
+      <% end %>
+
+      <p>👤  <%= photo.user.username %></p>
+
+      <p class="photo-stats">
+        ♡ <%= photo.favorites.count %>
+        💬 <%= photo.comments.count %>
+      </p>
+
+      <% if photo.techniques.any? %>
+        <p>
+          撮影技法・構図 : <%= photo.techniques.map(&:name).join("・") %>
+        </p>
+      <% end %>
+
+      <p><%= photo.description %></p>
+    
+    </div>
+  <% end %>
+</div>
 
 <%= link_to "写真を投稿する", new_photo_path %>
