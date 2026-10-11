@@ -1,11 +1,13 @@
 <div class="profile-page">
 
   <h1>プロフィール</h1>
+  <%= link_to "プロフィールを編集", edit_profile_path %>
 
   <section class="profile-into">
-    <h2><%= @user.username %></h2>
+  <p>ユーザー名: <%= @user.username %></p>
   </section>
 
+  <p>メールアドレス: <%= @user.email %></p>
   <section class="profile-photos">
     <h2>投稿した写真</h2>
 

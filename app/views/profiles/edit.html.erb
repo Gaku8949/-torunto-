@@ -1,0 +1,25 @@
+<div class="profile-page">
+
+  <h1>プロフィール編集</h1>
+
+  <%= form_with model: @user, url: edit_profile_path, method: :patch do |f| %>
+
+    <div>
+      <%= f.label :username, "ユーザー名" %>
+      <%= f.text_field :username %>
+    </div>
+
+    <div>
+      <%= f.label :email, "メールアドレス" %>
+      <%= f.email_field :email %>
+    </div>
+
+    <div>
+      <%= f.submit "保存" %>
+    </div>
+
+    <% end %>
+
+    <%=link_to "プロフィールに戻る", profile_path %>
+
+</div>
