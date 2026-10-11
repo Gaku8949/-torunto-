@@ -66,3 +66,25 @@
     font-size: 13px;
     margin-top: 10px;
 }
+
+.profile-page {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.profile-info {
+    margin-bottom: 40px;
+}
+
+.profile-info h2 {
+    margin-bottom: 10px;
+}
+
+.profile-photos h2 {
+    margin-bottom: 20px;
+}
+
+.profile-photos .photo-list {
+    margin: 0;
+}
