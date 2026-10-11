@@ -24,6 +24,7 @@
         <%= link_to "写真一覧", photos_path %>
         <%= link_to "写真を投稿", new_photo_path %>
         <%= link_to "プロフィール", profile_path %>
+        <%= link_to "使い方", how_to_use_path %>
 
         <% if user_signed_in? %>
           <%= button_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo_confirm: "ログアウトしますか？" }  %>

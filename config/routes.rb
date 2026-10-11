@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  get "how_to_uses/show"
   devise_for :users
 
   get "profile", to: "profiles#show"
   get "profile/edit", to: "profiles#edit", as: :edit_profile
   patch "profile/edit", to: "profiles#update"
+  get "how_to_use", to: "how_to_uses#show"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
