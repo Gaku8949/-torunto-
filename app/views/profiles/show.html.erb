@@ -1,0 +1,37 @@
+<div class="profile-page">
+
+  <h1>プロフィール</h1>
+
+  <section class="profile-into">
+    <h2><%= @user.username %></h2>
+  </section>
+
+  <section class="profile-photos">
+    <h2>投稿した写真</h2>
+
+    <% if @photos.any? %>
+      <div class="photo-list">
+        <% @photos.each do |photo| %>
+          <div class="photo-card">
+
+            <% if photo.image.attached? %>
+              <%= image_tag photo.image %>
+            <% end %>
+
+            <h3>
+              <%= link_to photo.title, photo_path(photo) %>
+            </h3>
+
+            <% if photo.location.present? %>
+              <p>📍 <%= photo.location %></p>
+            <% end %>
+
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p>まだ写真を投稿していません。</p>
+    <% end %>
+  </section>
+
+</div>
