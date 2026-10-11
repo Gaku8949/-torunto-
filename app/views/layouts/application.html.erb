@@ -26,7 +26,7 @@
         <%= link_to "プロフィール", profile_path %>
 
         <% if user_signed_in? %>
-          <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
+          <%= button_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo_confirm: "ログアウトしますか？" }  %>
         <% end %>
       </nav>
     </header>
