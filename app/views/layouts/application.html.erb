@@ -32,6 +32,14 @@
     </header>
     <% end %>
 
+    <% if notice %>
+      <p><%= notice %></p>
+    <% end %>
+
+    <% if alert %>
+      <p><%= alert %></p>
+    <% end %>
+
     <main>
     <%= yield %>
     </main>
