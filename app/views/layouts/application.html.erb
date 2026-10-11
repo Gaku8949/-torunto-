@@ -11,6 +11,7 @@
   </head>
 
   <body>
+  <% unless controller_name == "home" && action_name == "landing" %>
     <header class="site-header">
       <div class="header-logo">
         <%= link_to root_path do %>
@@ -28,6 +29,7 @@
         <% end %>
       </nav>
     </header>
+    <% end %>
 
     <main>
     <%= yield %>
