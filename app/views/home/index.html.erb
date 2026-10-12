@@ -1,8 +1,48 @@
-<%= image_tag "yozora.JPG", alt: "TORUNTO" %>
+<div class="home-page">
 
-<% if user_signed_in? %>
-  <p>ようこそ、TORUNTOへ</p>
-<% else %>
-  <%= link_to "ログイン", new_user_session_path %>
-  <%= link_to "新規登録", new_user_registration_path %>
-<% end %>
+  <div class="home-logo">
+    <%= image_tag "TORUNTOimage.png", alt: "TORUNTO" %>
+  </div>
+
+  <div class="home-hero">
+    <%= image_tag "yozora.JPG", alt: "TORUNTO", id: "home-main-image" %>
+    
+    <button type="button" class="home-prev-button" id="home-prev-button">
+      ←
+    </button>
+
+    <button type="button" class="home-next-button" id="home-next-button">
+      →
+    </button>
+  </div>
+
+  <section class="home-intro">
+    <h1>写真を見て、撮影を学ぼう。</h1>
+    <p>写真から撮影のヒントを見つけて、実際の撮影につなげよう。</p>
+
+    <%= link_to "写真を見る", photos_path, class: "home-main-button" %>
+  </section>
+
+  <section class="home-features">
+
+    <%=link_to photos_path, class: "home-feature" do %>
+      <div class="home-feature-icon">📷</div>
+      <h2>写真を見る</h2>
+      <p>いろんな写真から撮影のヒントを探す</p>
+    <% end %>
+
+    <%=link_to how_to_use_path, class: "home-feature" do %>
+      <div class="home-feature-icon">📖</div>
+      <h2>撮影を学ぶ</h2>
+      <p>撮影設定や技法・構図を知る</p>
+    <% end %>
+
+    <%=link_to challenges_path, class: "home-feature" do %>
+      <div class="home-feature-icon">🔥</div>
+      <h2>撮影チャレンジ</h2>
+      <p>参考写真をもとに実際に撮ってみる</p>
+    <% end %>
+
+  </section>
+
+</div>

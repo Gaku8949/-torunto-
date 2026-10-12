@@ -1,0 +1,28 @@
+ja:
+  devise:
+    confirmations:
+      confirmed: "メールアドレスの確認が完了しました。"
+
+    failure:
+      already_authenticated: "すでにログインしています。"
+      invalid: "メールアドレスまたはパスワードが正しくありません。"
+      unauthenticated: "ログインまたは新規登録が必要です。"
+      not_found_in_database: "メールアドレスまたはパスワードが正しくありません。"
+
+    registrations:
+      signed_up: "アカウントを作成しました！"
+      updated: "アカウント情報を更新しました。"
+
+    sessions:
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"
+
+    passwords:
+      send_instructions: "パスワード再設定の方法をメールでご案内します。"
+      updated: "パスワードを変更しました。"
+
+  errors:
+    messages:
+      not_saved:
+        one: "エラーが発生したため保存できませんでした。"
+        other: "エラーが発生したため保存できませんでした。"
