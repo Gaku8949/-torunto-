@@ -5,7 +5,9 @@
     <div class="photo-card">
 
       <% if photo.image.attached? %>
-        <%= image_tag photo.image, width: 300 %>
+        <%= link_to photo_path(photo) do %>
+          <%= image_tag photo.image, width: 300 %>
+        <% end %>
       <% end %>
 
       <h2>

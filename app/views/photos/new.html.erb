@@ -1,26 +1,28 @@
-<h1>写真を投稿</h1>
+<div class="form-container">
 
-<%= form_with model: @photo do |f| %>
+  <h1>写真を投稿</h1>
 
-  <div>
-    <%= f.label :image, "写真" %>
-    <%= f.file_field :image %>
-  </div>
+  <%= form_with model: @photo do |f| %>
 
-  <div>
-    <%= f.label :title, "タイトル" %>
-    <%= f.text_field :title %>
-  </div>
+    <div>
+      <%= f.label :image, "写真" %>
+      <%= f.file_field :image %>
+    </div>
 
-  <div>
-    <%= f.label :title, "説明" %>
-    <%= f.text_area :description %>
-  </div>
+    <div>
+      <%= f.label :title, "タイトル" %>
+      <%= f.text_field :title %>
+    </div>
 
-  <div>
-    <%= f.label :location, "撮影場所" %>
-    <%= f.text_field :location %>
-  </div>
+    <div>
+      <%= f.label :title, "説明" %>
+      <%= f.text_area :description %>
+    </div>
+
+    <div>
+      <%= f.label :location, "撮影場所" %>
+      <%= f.text_field :location %>
+    </div>
 
   <%= f.fields_for :shooting_setting do |sf| %>
     <div>
@@ -58,4 +60,5 @@
     
   <%= f.submit "投稿する" %>
 
-<% end %>
+  <% end %>
+</div>
