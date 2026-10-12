@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_10_05_010143) do
+ActiveRecord::Schema[7.2].define(version: 2026_10_11_092526) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,12 +42,26 @@ ActiveRecord::Schema[7.2].define(version: 2026_10_05_010143) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "challenge_techniques", force: :cascade do |t|
+    t.bigint "challenge_id", null: false
+    t.bigint "technique_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["challenge_id"], name: "index_challenge_techniques_on_challenge_id"
+    t.index ["technique_id"], name: "index_challenge_techniques_on_technique_id"
+  end
+
   create_table "challenges", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.integer "reference_photo_id"
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "location"
+    t.string "aperture"
+    t.integer "iso"
+    t.string "shutter_speed"
+    t.string "focal_length"
     t.index ["user_id"], name: "index_challenges_on_user_id"
   end
 
@@ -130,6 +144,8 @@ ActiveRecord::Schema[7.2].define(version: 2026_10_05_010143) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "challenge_techniques", "challenges"
+  add_foreign_key "challenge_techniques", "techniques"
   add_foreign_key "challenges", "users"
   add_foreign_key "comments", "photos"
   add_foreign_key "comments", "users"

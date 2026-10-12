@@ -15,6 +15,40 @@
   </div>
 
   <div>
+    <%= f.label :location, "撮影場所" %>
+    <%= f.text_field :location %>
+  </div>
+
+  <div>
+    <%= f.label :aperture, "F値" %>
+    <%= f.text_field :aperture %>
+  </div>
+
+  <div>
+    <%= f.label :iso, "ISO" %>
+    <%= f.number_field :iso %>
+  </div>
+
+  <div>
+    <%= f.label :shutter_speed, "シャッタースピード" %>
+    <%= f.text_field :shutter_speed %>
+  </div>
+
+  <div>
+    <%= f.label :focal_length, "焦点距離" %>
+    <%= f.text_field :focal_length %>
+  </div>
+
+  <div>
+    <%= f.label :technique_ids, "意識した撮影技法・構図" %>
+
+    <%= f.collection_check_boxes :technique_ids, Technique.all, :id, :name do |b| %>
+      <div>
+        <%= b.check_box %>
+        <%= b.label %>
+      </div>
+    <% end %>
+  <div>
     <%= f.label :comment, "コメント" %>
     <%= f.text_area :comment, placeholder: "撮影してみた感想や意識したポイント" %>
   </div>
