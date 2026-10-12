@@ -1,6 +1,11 @@
 class ChallengesController < ApplicationController
   before_action :authenticate_user!
 
+
+  def index
+    @challenges = current_user.challenges
+  end
+
   def new
     @photo = Photo.find(params[:photo_id])
     @challenge = @photo.challenges.build
@@ -33,6 +38,6 @@ class ChallengesController < ApplicationController
   private
 
   def challenge_params
-    params.require(:challenge).permit(:image, :comment)
+    params.require(:challenge).permit(:image, :location, :aperture, :iso, :shutter_speed, :focal_length, :comment, technique_ids: [] )
   end
 end

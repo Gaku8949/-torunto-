@@ -1,0 +1,60 @@
+<h1>チャレンジ一覧</h1>
+
+<% if @challenges.any? %>
+  <% @challenges.each do |challenge| %>
+    <div>
+      <h2>撮影チャレンジ</h2>
+
+      <% if challenge.reference_photo.image.attached? %>
+        <%= image_tag challenge.reference_photo.image, width: 300 %>
+      <% end %>
+
+      <p>参考写真: <%= link_to challenge.reference_photo.title, photo_path(challenge.reference_photo) %></p>
+
+      <% if challenge.image.attached? %>
+        <p>チャレンジ写真</p>
+        <%= image_tag challenge.image, width: 300 %>
+      <% end %>
+
+      <h3>参考写真の撮影技法・構図</h3>
+
+      <% if challenge.reference_photo.techniques.any? %>
+        <ul>
+          <% challenge.reference_photo.techniques.each do |technique| %>
+            <li><%= technique.name %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>登録されていません</p>
+      <% end %>
+
+      <h3>意識した撮影技法・構図</h3>
+
+      <% if challenge.techniques.any? %>
+        <ul>
+          <% challenge.techniques.each do |technique| %>
+            <li><%= technique.name %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>登録されていません</p>
+      <% end %>
+
+      <h3>撮影設定</h3>
+
+      <p>撮影場所: <%= challenge.location %></p>
+      <p>F値: <%= challenge.aperture %></p>
+      <p>ISO: <%= challenge.iso %></p>
+      <p>シャッタースピード: <%= challenge.shutter_speed %></p>
+      <p>焦点距離: <%= challenge.focal_length %></p> 
+
+      <p>コメント: <%= challenge.comment %></p>
+    </div> 
+
+    <hr>
+  <% end %>
+<% else %>
+  <p>まだ撮影チャレンジがありません。</p>
+<% end %>
+
+<%= link_to "ホームに戻る", home_path %>
