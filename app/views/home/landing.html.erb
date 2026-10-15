@@ -1,12 +1,25 @@
 <div class="landing-page">
 
-  <div class="landing-logo">
-    <%= image_tag "TORUNTOimage.png", alt: "TORUNTO" %>
-  </div>
+  <div class="landing-content">
 
-  <div class="landing-actions">
-    <%= link_to "新規登録", new_user_registration_path %>
-    <%= link_to "ログイン", new_user_session_path %>
+    <div class="landing-logo">
+      <%= image_tag "TORUNTOimage.png", alt: "TORUNTO" %>
+    </div>
+
+    <div class="landing-catchcopy-image">
+      <%= image_tag "writing.png", alt: "視て、学ぶ。" %>
+    </div>
+
+    <p class="landing-description">
+      写真から撮影のヒントを見つけて、<br>
+      実際の撮影につなげよう。
+    </p>
+
+    <div class="landing-actions">
+      <%= link_to "新規登録 →", new_user_registration_path, class: "landing-button landing-button-primary" %>
+      <%= link_to "ログイン →", new_user_session_path, class: "landing-button landing-button-secondary" %>
+    </div>
+
   </div>
 
 </div>
