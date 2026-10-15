@@ -481,8 +481,14 @@ main {
 .flash-messages {
   width: 90%;
   max-width: 900px;
-  margin: 20px auto;
+  margin: 0px auto;
   text-align: center;
+
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
 }
 
 .flash-notice {

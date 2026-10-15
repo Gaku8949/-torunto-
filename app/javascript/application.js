@@ -10,7 +10,6 @@ document.addEventListener("turbo:load", () => {
   if (!image || !nextButton || !prevButton) return
 
   const images = [
-    "/assets/yozora.JPG",
     "/assets/ame.JPG",
     "/assets/blue.JPG",
     "/assets/cosmos.JPG",
