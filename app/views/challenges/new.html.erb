@@ -19,36 +19,110 @@
     <%= f.text_field :location %>
   </div>
 
-  <div>
-    <%= f.label :aperture, "F値" %>
-    <%= f.text_field :aperture %>
-  </div>
+<%= f.fields_for :shooting_setting do |sf| %>
+  <div class="shooting-setting-item">
 
-  <div>
-    <%= f.label :iso, "ISO" %>
-    <%= f.number_field :iso %>
-  </div>
+    <details class="shooting-setting-details">
 
-  <div>
-    <%= f.label :shutter_speed, "シャッタースピード" %>
-    <%= f.text_field :shutter_speed %>
-  </div>
+      <summary class="shooting-setting-header">
+        <%= sf.label :aperture, "F値" %>
+        <%= sf.number_field :aperture %>
+        <span class="info-icon">ⓘ</span>
+      </summary>
 
-  <div>
-    <%= f.label :focal_length, "焦点距離" %>
-    <%= f.text_field :focal_length %>
-  </div>
-
-  <div>
-    <%= f.label :technique_ids, "意識した撮影技法・構図" %>
-
-    <%= f.collection_check_boxes :technique_ids, Technique.all, :id, :name do |b| %>
-      <div>
-        <%= b.check_box %>
-        <%= b.label %>
+      <div class="shooting-setting-description">
+        ➤F値はレンズの絞りの大きさを表す値です。
+        数値が小さいほど背景をぼかしやすくなります。
       </div>
-    <% end %>
-  <div>
+
+    </details>
+
+  </div>
+
+  <div class="shooting-setting-item">
+
+    <details class="shooting-setting-details">
+
+      <summary class="shooting-setting-header">
+        <%= sf.label :iso, "ISO" %>
+        <%= sf.number_field :iso %>
+        <span class="info-icon">ⓘ</span>
+      </summary>
+
+      <div class="shooting-setting-description">
+        ➤ISO感度は、カメラが光を受け取る感度を表します。
+        数値を上げると暗い場所でも明るく撮影できますが、ノイズが増えやすくなります。
+      </div>
+
+    </details>      
+      
+  </div>
+
+  <div class="shooting-setting-item">
+  
+    <details class="shooting-setting-details">
+    
+      <summary class="shooting-setting-header">
+        <%= sf.label :shutter_speed, "シャッタースピード" %>
+        <%= sf.text_field :shutter_speed %>
+        <span class="info-icon">ⓘ</span> 
+      </summary>
+
+      <div class="shooting-setting-description">
+        ➤シャッターが開いている時間を表します。
+        速くすると動きを止めやすく、遅くすると動きのブレや光の軌跡を表現できます。
+      </div> 
+    
+    </details>
+    
+  </div>
+
+
+  <div class="shooting-setting-item">
+
+    <details class="shooting-setting-details">
+
+      <summary class="shooting-setting-header">
+        <%= sf.label :focal_length, "焦点距離" %>
+        <%= sf.text_field :focal_length %>
+        <span class="info-icon">ⓘ</span>
+      </summary>
+
+      <div class="shooting-setting-description">
+        ➤レンズの焦点距離を表す値です。
+        数値が小さいほど広い範囲を写し、数値が大きいほど遠くの被写体を大きく写せます。
+      </div>
+    
+    </details>
+
+  </div>
+<% end %>
+
+<h3>意識した撮影技法・構図</h3>
+
+<% @techniques.each do |technique| %>
+  <div class="technique-item">
+
+    <%= check_box_tag "challenge[technique_ids][]",
+        technique.id,
+        false,
+        id: "challenge_technique_#{technique.id}" %>
+
+    <details class="technique-details">
+
+      <summary>
+        <%= label_tag "technique_#{technique.id}", technique.name %>
+        <span class="info-icon">ⓘ</span>
+      </summary>
+
+      <div class="technique-description">
+        <%= technique.description %>
+      </div>
+
+    </details>
+
+  </div>
+<% end %>
     <%= f.label :comment, "コメント" %>
     <%= f.text_area :comment, placeholder: "撮影してみた感想や意識したポイント" %>
   </div>

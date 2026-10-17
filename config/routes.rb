@@ -19,4 +19,7 @@ Rails.application.routes.draw do
     resources :favorites, only: [:create, :destroy]
     resources :challenges, only: [:new, :create, :destroy]
   end
+
+  resources :techniques, only: [:show]
+
 end

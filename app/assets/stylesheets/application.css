@@ -507,3 +507,100 @@ main {
   width: 420px;
   margin: 70px auto;
 }
+
+/* F値や構図 */
+
+.shooting-setting-item {
+    margin-bottom: 10px;
+}
+
+.shooting-setting-item label {
+    white-space: wrap;
+}
+
+.shooting-setting-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.shooting-setting-details {
+  display: contents;
+}
+
+.shooting-setting-details summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+.shooting-setting-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.shooting-setting-description {
+    margin-top: 8px;
+    max-width: 600px;
+    flex-basis: 100%;
+}
+
+.shooting-setting-show-details summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+.shooting-setting-show-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.shooting-setting-show-details .shooting-setting-description {
+  margin-top: 8px;
+  max-width: 600px;
+}
+
+.info-details summary {
+    list-style: none;
+    cursor: pointer;
+}
+
+.info-details summary::-webkit-details-marker {
+    display: none;
+}
+
+.info-details p {
+    margin: 0;
+}
+
+.technique-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.technique-details summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.technique-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.technique-description {
+    margin-top: 8px;
+    max-width: 600px;
+}
+
+.technique-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.technique-header .info-details {
+  flex-shrink: 0;
+}
