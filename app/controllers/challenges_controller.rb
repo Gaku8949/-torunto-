@@ -9,6 +9,7 @@ class ChallengesController < ApplicationController
   def new
     @photo = Photo.find(params[:photo_id])
     @challenge = @photo.challenges.build
+    @techniques = Technique.all
   end
 
   def create
