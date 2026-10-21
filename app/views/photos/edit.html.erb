@@ -1,60 +1,128 @@
-<h1>写真を編集</h1>
+<div class="form-container">
 
-<%= form_with model: @photo do |f| %>
+  <h1>写真を編集</h1>
 
-  <div>
-    <%= f.label :image, "写真" %>
-    <%= f.file_field :image %>
-  </div>
+  <%= form_with model: @photo do |f| %>
 
-  <div>
-    <%= f.label :title, "タイトル" %>
-    <%= f.text_field :title %>
-  </div>
+    <div>
+      <%= f.label :image, "写真" %>
+      <%= f.file_field :image %>
+    </div>
 
-  <div>
-    <%= f.label :description, "説明" %>
-    <%= f.text_area :description %>
-  </div>
+    <div>
+      <%= f.label :title, "タイトル" %>
+      <%= f.text_field :title %>
+    </div>
 
-  <div>
-    <%= f.label :location, "撮影場所" %>
-    <%= f.text_field :location %>
-  </div>
+    <div>
+      <%= f.label :title, "説明" %>
+      <%= f.text_area :description %>
+    </div>
+
+    <div>
+      <%= f.label :location, "撮影場所" %>
+      <%= f.text_field :location %>
+    </div>
 
   <%= f.fields_for :shooting_setting do |sf| %>
+    <div class="shooting-setting-item">
 
-    <div>
-      <%= sf.label :aperture, "F値" %>
-      <%= sf.text_field :aperture %>
+      <div class="shooting-setting-header">
+        <%= sf.label :aperture, "F値" %>
+        <%= sf.number_field :aperture, placeholder: "例：5.6" %>
+
+        <details class="shooting-setting-details">
+          <summary>ⓘ</summary>
+
+          <div class="shooting-setting-description">
+            ➤F値はレンズの絞りの大きさを表す値です。
+            数値が小さいほど背景をぼかしやすくなります。
+          </div>
+        </details>
+      </div>
     </div>
 
-    <div>
-      <%= sf.label :iso, "ISO" %>
-      <%= sf.number_field :iso %>
+    <div class="shooting-setting-item">
+
+      <div class="shooting-setting-header">
+        <%= sf.label :iso, "ISO" %>
+        <%= sf.number_field :iso, placeholder: "例：100" %>
+
+        <details class="shooting-setting-details">
+          <summary>ⓘ</summary>
+
+          <div class="shooting-setting-description">
+            ➤ISO感度は、カメラが光を受け取る感度を表します。
+            数値を上げると暗い場所でも明るく撮影できますが、ノイズが増えやすくなります。
+          </div>      
+        </details>
+      </div>
     </div>
 
-    <div>
-      <%= sf.label :shutter_speed, "シャッタースピード" %>
-      <%= sf.text_field :shutter_speed %>
+    <div class="shooting-setting-item">
+
+      <div class="shooting-setting-header">
+        <%= sf.label :shutter_speed, "シャッタースピード" %>
+        <%= sf.text_field :shutter_speed, placeholder: "例：1/250" %>
+
+        <details class="shooting-setting-details">
+          <summary>ⓘ</summary>
+
+          <div class="shooting-setting-description">
+            ➤シャッターが開いている時間を表します。
+            速くすると動きを止めやすく、遅くすると動きのブレや光の軌跡を表現できます。
+          </div> 
+        </details>
+      </div>
     </div>
 
-    <div>
-      <%= sf.label :focal_length, "焦点距離" %>
-      <%= sf.text_field :focal_length %>
-    </div>
+    <div class="shooting-setting-item">
 
+      <div class="shooting-setting-header">
+        <%= sf.label :focal_length, "焦点距離" %>
+        <%= sf.text_field :focal_length, placeholder: "例：50mm" %>
+
+        <details class="shooting-setting-details">
+          <summary>ⓘ</summary>
+
+          <div class="shooting-setting-description">
+            ➤レンズの焦点距離を表す値です。
+            数値が小さいほど広い範囲を写し、数値が大きいほど遠くの被写体を大きく写せます。
+          </div>
+        </details>
+      </div>
+    </div>
   <% end %>
 
-  <% @techniques.each do |technique| %>
-    <div>
-      <%= check_box_tag("photo[technique_ids][]", technique.id, @photo.technique_ids.include?(technique.id)
-      ) %>
+  <div>
+    <h2>撮影技法・構図</h2>
 
-      <%= label_tag "photo_technique_ids_#{technique.id}", technique.name %>
-    </div>
-  <% end %>
+    <% @techniques.each do |technique| %>
+      <div class="technique-item">
 
+        <%= check_box_tag "photo[technique_ids][]",
+            technique.id,
+            false,
+            id: "technique_#{technique.id}" %>
+
+        <details class="technique-details">
+
+          <summary>
+            <%= label_tag "technique_#{technique.id}", technique.name %>
+            <span class="info-icon">ⓘ</span>
+          </summary>
+
+          <div class="technique-description">
+            <%= technique.description %>
+          </div>
+
+        </details>
+
+      </div>
+    <% end %>
+  </div>
+    
   <%= f.submit "更新する" %>
 
-<% end %>
+  <% end %>
+</div>

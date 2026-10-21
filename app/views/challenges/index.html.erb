@@ -5,52 +5,252 @@
     <div>
       <h2>撮影チャレンジ</h2>
 
-      <% if challenge.reference_photo.image.attached? %>
-        <%= image_tag challenge.reference_photo.image, width: 300 %>
-      <% end %>
+      <div class="challenge-photo-comparison">
 
-      <p>参考写真: <%= link_to challenge.reference_photo.title, photo_path(challenge.reference_photo) %></p>
+        <div class="challenge-photo-card">
+          <h3>📷 参考写真</h3>
 
-      <% if challenge.image.attached? %>
-        <p>チャレンジ写真</p>
-        <%= image_tag challenge.image, width: 300 %>
-      <% end %>
-
-      <h3>参考写真の撮影技法・構図</h3>
-
-      <% if challenge.reference_photo.techniques.any? %>
-        <ul>
-          <% challenge.reference_photo.techniques.each do |technique| %>
-            <li><%= technique.name %></li>
+          <% if challenge.reference_photo.image.attached? %>
+            <%= image_tag challenge.reference_photo.image, class: "challenge-photo" %>
           <% end %>
-        </ul>
-      <% else %>
-        <p>登録されていません</p>
-      <% end %>
 
-      <h3>意識した撮影技法・構図</h3>
+          <p class="challenge-title">
+            <strong>タイトル</strong><br>
+            <%= link_to challenge.reference_photo.title, photo_path(challenge.reference_photo) %> </p> 
 
-      <% if challenge.techniques.any? %>
-        <ul>
-          <% challenge.techniques.each do |technique| %>
-            <li><%= technique.name %></li>
+        <div class="challenge-reference-techniques">
+
+          <h4>参考元の撮影技法・構図</h4>
+
+          <% if challenge.reference_photo.techniques.any? %>
+          
+            <% challenge.reference_photo.techniques.each do |technique| %>
+          
+              <details class="technique-details">
+
+                <summary class="technique-header">
+                  <span><%= technique.name %></span>
+                  <span>ⓘ</span>
+                </summary>
+
+                <div class="technique-description">
+                   <%= technique.description %>
+                </div>
+
+              </details>
+            
+            <% end %>
+
+          <% else %>
+            <p>登録されていません</p>
           <% end %>
-        </ul>
-      <% else %>
-        <p>登録されていません</p>
-      <% end %>
 
-      <h3>撮影設定</h3>
+        </div>
 
-      <p>撮影場所: <%= challenge.location %></p>
-      <p>F値: <%= challenge.aperture %></p>
-      <p>ISO: <%= challenge.iso %></p>
-      <p>シャッタースピード: <%= challenge.shutter_speed %></p>
-      <p>焦点距離: <%= challenge.focal_length %></p> 
+          <h4>撮影設定</h4>
 
-      <p>撮影してみた感想・意識したポイント: <%= challenge.comment %></p>
-    </div> 
+          <% if challenge.reference_photo.shooting_setting.present? %>
+            <p>
+              撮影場所：
+              <%= challenge.reference_photo.location %>
+            </p>
 
+            <div class="shooting-setting-item">
+
+              <details class="shooting-setting-show-details">
+
+                <summary>
+                  F値：
+                  <%= challenge.reference_photo.shooting_setting.aperture %>
+                  ⓘ
+                </summary>
+
+                <div class="shooting-setting-description">
+                  ➤ F値はレンズの絞りの大きさを表す値です。
+                  数値が小さいほど背景をぼかしやすくなります。
+                </div>
+
+              </details>
+
+            </div>
+
+
+            <div class="shooting-setting-item">
+
+              <details class="shooting-setting-show-details">
+
+                <summary>
+                  ISO：
+                  <%= challenge.reference_photo.shooting_setting.iso %>
+                  ⓘ
+                </summary>
+
+                <div class="shooting-setting-description">
+                  ➤ ISO感度は、カメラが光を受け取る感度を表します。
+                  数値を上げると暗い場所でも明るく撮影できますが、
+                  ノイズが増えやすくなります。
+                </div>
+
+              </details>
+
+            </div>
+
+
+            <div class="shooting-setting-item">
+
+              <details class="shooting-setting-show-details">
+
+                <summary>
+                  シャッタースピード：
+                  <%= challenge.reference_photo.shooting_setting.shutter_speed %>
+                  ⓘ
+                </summary>
+
+                <div class="shooting-setting-description">
+                  ➤ シャッターが開いている時間を表します。
+                  速くすると動きを止めやすく、
+                  遅くすると動きのブレや光の軌跡を表現できます。
+                </div>
+
+              </details>
+
+            </div>
+
+
+            <div class="shooting-setting-item">
+
+              <details class="shooting-setting-show-details">
+
+                <summary>
+                  焦点距離：
+                  <%= challenge.reference_photo.shooting_setting.focal_length %>
+                  ⓘ
+                </summary>
+
+                <div class="shooting-setting-description">
+                  ➤ レンズの焦点距離を表す値です。
+                  数値が小さいほど広い範囲を写し、
+                  数値が大きいほど遠くの被写体を大きく写せます。
+                </div>
+
+              </details>
+
+            </div>
+
+          <% end %>
+        </div>
+
+        <div class="challenge-arrow">
+          ➡
+        </div>
+
+        <div class="challenge-photo-card">
+          <h3>🎯 チャレンジ写真</h3>
+
+          <% if challenge.image.attached? %>
+            <%= image_tag challenge.image, class: "challenge-photo" %>
+          <% end %>
+
+          <p>
+            <strong>タイトル</strong><br>
+            <%= challenge.title %>
+          </p>
+
+        <div class="challenge-techniques">  
+          <h4>意識した撮影技法・構図</h4>
+
+          <% if challenge.techniques.any? %>
+
+            <% challenge.techniques.each do |technique| %>
+
+              <details class="technique-details">
+
+                <summary class="technique-header">
+                  <span><%= technique.name %></span>
+                  <span>ⓘ</span>
+                </summary>
+
+                <div class="technique-description">
+                  <%= technique.description %>
+                </div>
+                
+              </details>
+
+            <% end %>
+            
+          <% else %>
+            <p>登録されていません</p>
+          <% end %>
+        </div>  
+         
+          <h4>撮影設定</h4>
+
+          <p>
+            撮影場所：
+            <%= challenge.location %>
+          </p>
+
+          <% if challenge.shooting_setting.present? %>
+
+            <div class="shooting-setting-item">
+
+              <details class="shooting-setting-show-details">
+                <summary>F値： <%= challenge.shooting_setting.aperture %> ⓘ</summary>
+
+                <div class="shooting-setting-description">
+                  ➤F値はレンズの絞りの大きさを表す値です。
+                  数値が小さいほど背景をぼかしやすくなります。
+                </div>
+              </details>
+            </div>
+
+            <div class="shooting-setting-item">
+
+              <details class="shooting-setting-show-details">
+                <summary>ISO：<%= challenge.shooting_setting.iso %> ⓘ</summary>
+
+                <div class="shooting-setting-description">
+                  ➤ISO感度は、カメラが光を受け取る感度を表します。
+                  数値を上げると暗い場所でも明るく撮影できますが、
+                  ノイズが増えやすくなります。
+                </div>
+              </details>
+            </div>
+
+            <div class="shooting-setting-item">
+
+              <details class="shooting-setting-show-details">
+                <summary>シャッタースピード：<%= challenge.shooting_setting.shutter_speed %> ⓘ</summary>
+
+                <div class="shooting-setting-description">
+                  ➤シャッターが開いている時間を表します。
+                  速くすると動きを止めやすく、
+                  遅くすると動きのブレや光の軌跡を表現できます。
+                </div>
+              </details>
+            </div>
+
+            <div class="shooting-setting-item">
+            
+              <details class="shooting-setting-show-details">
+                <summary>焦点距離：<%= challenge.shooting_setting.focal_length %> ⓘ</summary>
+
+                <div class="shooting-setting-description">
+                  ➤レンズの焦点距離を表す値です。
+                  数値が小さいほど広い範囲を写し、
+                  数値が大きいほど遠くの被写体を大きく写せます。
+                </div>
+              </details>
+            </div>
+
+          <% end %>
+
+          <p>撮影してみた感想・意識したポイント: <%= challenge.comment %></p>
+        </div>
+
+      </div> 
+
+    </div>
     <hr>
   <% end %>
 <% else %>

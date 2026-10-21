@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_10_11_092526) do
+ActiveRecord::Schema[7.2].define(version: 2026_10_19_080232) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,6 +62,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_10_11_092526) do
     t.integer "iso"
     t.string "shutter_speed"
     t.string "focal_length"
+    t.string "title"
     t.index ["user_id"], name: "index_challenges_on_user_id"
   end
 
@@ -111,13 +112,15 @@ ActiveRecord::Schema[7.2].define(version: 2026_10_11_092526) do
   end
 
   create_table "shooting_settings", force: :cascade do |t|
-    t.bigint "photo_id", null: false
+    t.bigint "photo_id"
     t.string "aperture"
     t.integer "iso"
     t.string "shutter_speed"
     t.string "focal_length"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "challenge_id"
+    t.index ["challenge_id"], name: "index_shooting_settings_on_challenge_id"
     t.index ["photo_id"], name: "index_shooting_settings_on_photo_id"
   end
 
@@ -154,5 +157,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_10_11_092526) do
   add_foreign_key "photo_techniques", "photos"
   add_foreign_key "photo_techniques", "techniques"
   add_foreign_key "photos", "users"
+  add_foreign_key "shooting_settings", "challenges"
   add_foreign_key "shooting_settings", "photos"
 end

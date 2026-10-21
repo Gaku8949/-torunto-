@@ -604,3 +604,102 @@ main {
 .technique-header .info-details {
   flex-shrink: 0;
 }
+
+.photo-show-image {
+    width: 800px;
+    height: 600px;
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+.challenge-photo-comparison {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 40px;
+    margin: 30px;
+}
+
+.challenge-reference-card,
+.challenge-result-card {
+    width: 45%;
+}
+
+.challenge-photo-card {
+    width: 450px;
+    text-align: center;
+}
+
+.challenge-photo-card h3 {
+    margin-bottom: 15px;
+}
+
+.challenge-photo {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    display: block;
+}
+
+.challenge-arrow {
+    display: flex;
+    align-items: center;
+    font-size: 40px;
+    padding-top: 150px;
+}
+
+.challenge-title {
+    margin-top: 15px;
+    line-height: 1.8;
+}
+
+.challenge-reference-card h4,
+.challenge-result-card h4 {
+    margin-top: 25px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+}
+
+.challenge-techniques {
+    text-align: center;
+}
+
+.challenge-reference-techniques {
+    text-align: center;
+}
+
+.challenge-reference-techniques .technique-details {
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.challenge-reference-techniques .technique-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.challenge-reference-techniques .technique-description {
+    text-align: center;
+}
+
+.challenge-techniques .technique-details {
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.challenge-techniques .technique-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.challenge-techniques .technique-description {
+    text-align: center;
+}
