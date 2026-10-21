@@ -29,7 +29,7 @@
 
       <div class="shooting-setting-header">
         <%= sf.label :aperture, "F値" %>
-        <%= sf.number_field :aperture %>
+        <%= sf.number_field :aperture, placeholder: "例：5.6" %>
 
         <details class="shooting-setting-details">
           <summary>ⓘ</summary>
@@ -46,7 +46,7 @@
 
       <div class="shooting-setting-header">
         <%= sf.label :iso, "ISO" %>
-        <%= sf.number_field :iso %>
+        <%= sf.number_field :iso, placeholder: "例：100" %>
 
         <details class="shooting-setting-details">
           <summary>ⓘ</summary>
@@ -63,7 +63,7 @@
 
       <div class="shooting-setting-header">
         <%= sf.label :shutter_speed, "シャッタースピード" %>
-        <%= sf.text_field :shutter_speed %>
+        <%= sf.text_field :shutter_speed, placeholder: "例：1/250" %>
 
         <details class="shooting-setting-details">
           <summary>ⓘ</summary>
@@ -80,7 +80,7 @@
 
       <div class="shooting-setting-header">
         <%= sf.label :focal_length, "焦点距離" %>
-        <%= sf.text_field :focal_length %>
+        <%= sf.text_field :focal_length, placeholder: "例：50mm" %>
 
         <details class="shooting-setting-details">
           <summary>ⓘ</summary>

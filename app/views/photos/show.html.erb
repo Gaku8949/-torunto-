@@ -1,7 +1,7 @@
 <h1><%= @photo.title %></h1>
 
 <% if @photo.image.attached? %>
-  <%= image_tag @photo.image %>
+  <%= image_tag @photo.image, class: "photo-show-image" %>
 <% end %>
 
 <% favorite = @photo.favorites.find_by(user: current_user) %>

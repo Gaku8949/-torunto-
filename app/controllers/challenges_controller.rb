@@ -9,6 +9,7 @@ class ChallengesController < ApplicationController
   def new
     @photo = Photo.find(params[:photo_id])
     @challenge = @photo.challenges.build
+    @challenge.build_shooting_setting
     @techniques = Technique.all
   end
 
@@ -39,6 +40,18 @@ class ChallengesController < ApplicationController
   private
 
   def challenge_params
-    params.require(:challenge).permit(:image, :location, :aperture, :iso, :shutter_speed, :focal_length, :comment, technique_ids: [] )
+    params.require(:challenge).permit(
+      :image,
+      :title,
+      :location,
+      :comment,
+      technique_ids: [],
+      shooting_setting_attributes: [
+        :aperture,
+        :iso,
+        :shutter_speed,
+        :focal_length
+      ]
+    )
   end
 end
