@@ -26,6 +26,28 @@ class ChallengesController < ApplicationController
     end
   end
 
+  def edit
+    @challenge = Challenge.find(params[:id])
+    @photo = @challenge.reference_photo
+    @techniques = Technique.all
+  end
+
+  def update
+    @challenge = Challenge.find(params[:id])
+
+    if @challenge.user == current_user
+      if @challenge.update(challenge_params)
+        redirect_to challenges_path, notice: "撮影チャレンジを更新しました"
+      else
+        @photo = @challenge.reference_photo
+        @techniques = Technique.all
+        render :edit, status: :unprocessable_entity
+      end
+    else
+      redirect_to challenges_path, alert: "このチャレンジを編集する権限がありません"
+    end
+  end
+
   def destroy
     @challenge = Challenge.find(params[:id])
 

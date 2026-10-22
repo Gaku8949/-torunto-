@@ -26,73 +26,78 @@
 
 <%= f.fields_for :shooting_setting do |sf| %>
   <div class="shooting-setting-item">
-        
-    <%= sf.label :aperture, "F値" %>
-    <%= sf.number_field :aperture, step: 0.1, placeholder: "例：5.6" %>
-    
-    <details class="shooting-setting-details">
-      <summary class="info-icon">ⓘ</summary>
+
+      <details class="shooting-setting-details">
+
+        <summary class="shooting-setting-header">
+          <%= sf.label :aperture, "F値" %>
+          <%= sf.number_field :aperture, placeholder: "例：5.6" %>
+          <span class="info-icon">ⓘ</span>
+        </summary>
+
+        <div class="shooting-setting-description">
+          ➤F値はレンズの絞りの大きさを表す値です。
+          数値が小さいほど背景をぼかしやすくなります。
+        </div>
+
+      </details>
+    </div>
+
+    <div class="shooting-setting-item">
+
+      <details class="shooting-setting-details">
+
+        <summary class="shooting-setting-header">
+          <%= sf.label :iso, "ISO" %>
+          <%= sf.number_field :iso, placeholder: "例：100" %>
+            <span class="info-icon">ⓘ</span>
+        </summary>
+
+        <div class="shooting-setting-description">
+          ➤ISO感度は、カメラが光を受け取る感度を表します。
+          数値を上げると暗い場所でも明るく撮影できますが、ノイズが増えやすくなります。
+        </div>
+
+      </details>
+    </div>
+
+    <div class="shooting-setting-item">
+       
+      <details class="shooting-setting-details">
+
+        <summary class="shooting-setting-header">
+          <%= sf.label :shutter_speed, "シャッタースピード" %>
+          <%= sf.text_field :shutter_speed, placeholder: "例：1/250" %>
+            <span class="info-icon">ⓘ</span>
+        </summary>
+
+        <div class="shooting-setting-description">
+          ➤シャッターが開いている時間を表します。
+          速くすると動きを止めやすく、遅くすると動きのブレや光の軌跡を表現できます。
+        </div> 
+
+      </details>
+    </div>
+
+    <div class="shooting-setting-item">
+
+      <details class="shooting-setting-details">
+
+        <summary class="shooting-setting-header">
+          <%= sf.label :focal_length, "焦点距離" %>
+          <%= sf.text_field :focal_length, placeholder: "例：50mm" %>
+            <span class="info-icon">ⓘ</span>
+        </summary>
       
-      <div class="shooting-setting-description">
-        ➤F値はレンズの絞りの大きさを表す値です。
-        数値が小さいほど背景をぼかしやすくなります。
-      </div>
-    </details>
+        <div class="shooting-setting-description">
+          ➤レンズの焦点距離を表す値です。
+          数値が小さいほど広い範囲を写し、数値が大きいほど遠くの被写体を大きく写せます。
+        </div>
 
-  </div>
-
-  <div class="shooting-setting-item">
-
-    <%= sf.label :iso, "ISO" %>
-    <%= sf.number_field :iso, placeholder: "例：100" %>
-      
-    <details class="shooting-setting-details">
-      <summary class="info-icon">ⓘ</summary>
-
-      <div class="shooting-setting-description">
-        ➤ISO感度は、カメラが光を受け取る感度を表します。
-        数値を上げると暗い場所でも明るく撮影できますが、ノイズが増えやすくなります。
-      </div>
-
-    </details>      
-      
-  </div>
-
-  <div class="shooting-setting-item">
-   
-    <%= sf.label :shutter_speed, "シャッタースピード" %>
-    <%= sf.text_field :shutter_speed, placeholder: "例：1/250"  %>
+      </details>
+    </div>
     
-    <details class="shooting-setting-details">
-      <summary class="info-icon">ⓘ</summary>
-      
-      <div class="shooting-setting-description">
-        ➤シャッターが開いている時間を表します。
-        速くすると動きを止めやすく、遅くすると動きのブレや光の軌跡を表現できます。
-      </div> 
-    
-    </details>
-    
-  </div>
-
-
-  <div class="shooting-setting-item">
-    
-    <%= sf.label :focal_length, "焦点距離" %>
-    <%= sf.text_field :focal_length, placeholder: "例：50mm" %>
-    
-    <details class="shooting-setting-details">
-      <summary class="info-icon">ⓘ</summary>
-
-      <div class="shooting-setting-description">
-        ➤レンズの焦点距離を表す値です。
-        数値が小さいほど広い範囲を写し、数値が大きいほど遠くの被写体を大きく写せます。
-      </div>
-    
-    </details>
-
-  </div>
-<% end %>
+  <% end %>
 
 <h3>意識した撮影技法・構図</h3>
 
@@ -104,11 +109,10 @@
         false,
         id: "challenge_technique_#{technique.id}" %>
 
-    <%= label_tag "technique_#{technique.id}", technique.name %>
-    
     <details class="technique-details">
 
-      <summary class="technique-info">
+      <summary>
+        <%= label_tag "technique_#{technique.id}", technique.name %>
         <span class="info-icon">ⓘ</span>
       </summary>
 
@@ -117,6 +121,7 @@
       </div>
 
     </details>
+
 
   </div>
 <% end %>
