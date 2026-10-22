@@ -145,7 +145,7 @@
         </div>
 
         <div class="challenge-photo-card">
-          <h3>🎯 チャレンジ写真</h3>
+          <h3>🔥 チャレンジ写真</h3>
 
           <% if challenge.image.attached? %>
             <%= image_tag challenge.image, class: "challenge-photo" %>
@@ -246,6 +246,8 @@
           <% end %>
 
           <p>撮影してみた感想・意識したポイント: <%= challenge.comment %></p>
+        
+          <%= link_to "編集する", edit_photo_challenge_path(challenge.reference_photo, challenge) %>
         </div>
 
       </div> 

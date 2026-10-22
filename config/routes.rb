@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   resources :photos do
     resources :comments, only: [:create, :destroy]
     resources :favorites, only: [:create, :destroy]
-    resources :challenges, only: [:new, :create, :destroy]
+    resources :challenges, only: [:new, :create, :edit, :update, :destroy]
   end
 
   resources :techniques, only: [:show]
