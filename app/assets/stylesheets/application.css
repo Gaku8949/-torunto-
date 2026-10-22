@@ -508,25 +508,51 @@ main {
   margin: 70px auto;
 }
 
-/* F値や構図 */
+/* =================================
+   撮影設定・撮影技法のフォーム
+   ================================= */
+
+/* 撮影設定 */
 
 .shooting-setting-item {
-    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
 }
 
 .shooting-setting-item label {
-    white-space: wrap;
+    white-space: nowrap;
+}
+
+/* 撮影設定の説明 */
+.shooting-setting-item .info-details {
+  display: inline-block;
+}
+
+.shooting-setting-item .info-details summary {
+  display: inline-block;
+  cursor: pointer;
+  list-style: none;
+}
+
+.shooting-setting-item .info-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.shooting-setting-item .shooting-setting-description {
+  margin-top: 8px;
+  max-width: 600px;
 }
 
 .shooting-setting-header {
     display: flex;
     align-items: center;
     gap: 8px;
-    flex-wrap: wrap;
 }
 
 .shooting-setting-details {
-  display: contents;
+  display: block;
 }
 
 .shooting-setting-details summary {
@@ -538,6 +564,10 @@ main {
   display: none;
 }
 
+.info-icon {
+    cursor: pointer;
+}
+
 .shooting-setting-description {
     margin-top: 8px;
     max-width: 600px;
@@ -545,8 +575,10 @@ main {
 }
 
 .shooting-setting-show-details summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   cursor: pointer;
-  list-style: none;
 }
 
 .shooting-setting-show-details summary::-webkit-details-marker {
@@ -554,6 +586,7 @@ main {
 }
 
 .shooting-setting-show-details .shooting-setting-description {
+  display: block;
   margin-top: 8px;
   max-width: 600px;
 }
@@ -571,14 +604,40 @@ main {
     margin: 0;
 }
 
+/* =================================
+   撮影技法・構図
+   ================================= */
+
+/* チェックボックス */
 .technique-item {
   display: flex;
   align-items: flex-start;
-  margin-bottom: 10px;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.technique-item > input[type="checkbox"] {
+  margin: 4px 0 0 0;
+  flex-shrink: 0;
+  top: calc(50% + 2px);
+}
+
+
+
+.technique-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 技法名 + ⓘ */
+.technique-details {
+    display: block;
+    width: fit-content;
 }
 
 .technique-details summary {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
   cursor: pointer;
@@ -589,7 +648,17 @@ main {
   display: none;
 }
 
+
+/* 技法の説明文 */
+.technique-details .technique-description {
+  margin-top: 8px;
+  max-width: 600px;
+  text-align: left;
+}
+
+
 .technique-description {
+    display: block;
     margin-top: 8px;
     max-width: 600px;
 }
@@ -601,10 +670,6 @@ main {
   flex-wrap: nowrap;
 }
 
-.technique-header .info-details {
-  flex-shrink: 0;
-}
-
 .photo-show-image {
     width: 800px;
     height: 600px;
@@ -613,6 +678,10 @@ main {
     display: block;
     margin: 0 auto;
 }
+
+/* =================================
+   チャレンジ画面
+   ================================= */
 
 .challenge-photo-comparison {
     display: flex;
@@ -671,7 +740,8 @@ main {
 }
 
 .challenge-reference-techniques .technique-details {
-    margin: 0 auto;
+    display: block;
+    margin: 0 auto 8px;
     width: fit-content;
 }
 
@@ -680,7 +750,6 @@ main {
     justify-content: center;
     align-items: center;
     gap: 5px;
-    cursor: pointer;
 }
 
 .challenge-reference-techniques .technique-description {
@@ -688,18 +757,29 @@ main {
 }
 
 .challenge-techniques .technique-details {
+    display: block;
     margin: 0 auto;
     width: fit-content;
 }
 
-.challenge-techniques .technique-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-}
-
 .challenge-techniques .technique-description {
     text-align: center;
+}
+
+.challenge-photo-card .shooting-setting-item {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.challenge-photo-card .shooting-setting-show-details {
+    margin: 0 auto;
+}
+
+.challenge-reference-card .shooting-setting-item,
+.challenge-result-card .shooting-setting-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
 }
