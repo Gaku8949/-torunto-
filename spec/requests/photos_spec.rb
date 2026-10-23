@@ -42,4 +42,25 @@ RSpec.describe "Photos", type: :request do
       expect(response).to have_http_status(:success)
     end
   end
+
+  describe "POST /photos" do
+    it "写真を投稿できる" do
+      expect {
+        post photos_path, params: {
+          photo: {
+            title: "投稿テスト写真",
+            description: "投稿テスト説明",
+            location: "福岡",
+            image: fixture_file_upload(
+              Rails.root.join("spec/fixtures/files/test.JPG"),
+              "image/jpeg"
+            )
+          }
+        }
+      }.to change(Photo, :count).by(1)
+
+      expect(response).to redirect_to(photo_path(Photo.last))
+    end
+  end
+
 end
