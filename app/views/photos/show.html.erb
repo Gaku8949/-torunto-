@@ -1,7 +1,15 @@
 <h1><%= @photo.title %></h1>
 
 <% if @photo.image.attached? %>
-  <%= image_tag @photo.image, class: "photo-show-image" %>
+  <div class="photo-zoom-container">
+    <%= image_tag @photo.image, class: "photo-show-image", id: "photo-zoom-trigger" %>
+  </div>
+
+  <div id="photo-zoom-modal" class="photo-zoom-modal">
+    <button id="photo-zoom-close" class="photo-zoom-close">×</button>
+
+    <%= image_tag @photo.image, class: "photo-zoom-image" %>
+  </div>
 <% end %>
 
 <% favorite = @photo.favorites.find_by(user: current_user) %>
