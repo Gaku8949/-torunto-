@@ -14,21 +14,25 @@
     <% if @photos.any? %>
       <div class="photo-list">
         <% @photos.each do |photo| %>
-          <div class="photo-card">
 
-            <% if photo.image.attached? %>
-              <%= image_tag photo.image %>
-            <% end %>
+          <%= link_to photo_path(photo), class: "photo-card-link" do %>
 
-            <h3>
-              <%= link_to photo.title, photo_path(photo) %>
-            </h3>
+            <div class="photo-card">
 
-            <% if photo.location.present? %>
-              <p>📍 <%= photo.location %></p>
-            <% end %>
+              <% if photo.image.attached? %>
+                <%= image_tag photo.image %>
+              <% end %>
 
-          </div>
+              <h3>
+                <%= photo.title %>
+              </h3>
+
+              <% if photo.location.present? %>
+                <p>📍 <%= photo.location %></p>
+              <% end %>
+
+            </div>
+          <% end %>
         <% end %>
       </div>
     <% else %>
