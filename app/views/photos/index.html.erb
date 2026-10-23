@@ -11,7 +11,7 @@
       <% end %>
 
       <h2>
-        <%= link_to photo.title, photo_path(photo) %>
+        <%= photo.title %>
       </h2>
     
       <% if photo.location.present? %>
@@ -33,6 +33,12 @@
 
       <p><%= photo.description %></p>
     
+      <!-- カード全体をクリックするためのリンク -->
+      <%= link_to photo_path(photo),
+          class: "photo-card-overlay",
+          aria: { label: "#{photo.title}の詳細を見る" } do %>
+      <% end %>
+
     </div>
   <% end %>
 </div>

@@ -11,7 +11,9 @@
           <h3>📷 参考写真</h3>
 
           <% if challenge.reference_photo.image.attached? %>
-            <%= image_tag challenge.reference_photo.image, class: "challenge-photo" %>
+            <div class="photo-zoom-container">
+              <%= image_tag challenge.reference_photo.image, class: "challenge-photo challenge-zoom-trigger" %>
+            </div>
           <% end %>
 
           <p class="challenge-title">
@@ -148,7 +150,9 @@
           <h3>🔥 チャレンジ写真</h3>
 
           <% if challenge.image.attached? %>
-            <%= image_tag challenge.image, class: "challenge-photo" %>
+            <div class="photo-zoom-container">
+              <%= image_tag challenge.image, class: "challenge-photo challenge-zoom-trigger" %>
+            </div>
           <% end %>
 
           <p>
@@ -258,5 +262,16 @@
 <% else %>
   <p>まだ撮影チャレンジがありません。</p>
 <% end %>
+
+<div id="challenge-zoom-modal" class="photo-zoom-modal">
+  <button id="challenge-zoom-close" class="photo-zoom-close">×</button>
+
+  <img
+    id="challenge-zoom-image"
+    class="photo-zoom-image"
+    src=""
+    alt="拡大写真"
+  >
+</div>
 
 <%= link_to "ホームに戻る", home_path %>
