@@ -133,7 +133,7 @@ body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Yu Gothic", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
     color: #222;
-    background-color: #fff;
+    background-color: #f8f8f8;
 }
 
 /* ヘッダー */
@@ -192,10 +192,12 @@ body {
 
 /* メインコンテンツ */
 main {
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 0 auto;
     padding: 40px 24px;
     box-sizing: border-box;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.04);
 }
 
 /* ランディング画面 */
@@ -861,3 +863,15 @@ main {
     cursor: pointer;
 }
 
+.back-link {
+    display: inline-block;
+    margin-bottom: 24px;
+    color: #555;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.back-link:hover {
+    color: #222;
+    text-decoration: underline;
+}
