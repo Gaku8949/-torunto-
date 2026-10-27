@@ -20,6 +20,12 @@ Rails.application.routes.draw do
     resources :challenges, only: [:new, :create, :edit, :update, :destroy]
   end
 
+  resources :challenges do
+    resource :challenge_favorite, only: [:create, :destroy]
+    resources :challenge_comments, only: [:create, :destroy]
+    
+  end
+
   resources :techniques, only: [:show]
 
 end

@@ -1,270 +1,145 @@
 <h1>チャレンジ一覧</h1>
 
 <% if @challenges.any? %>
-  <% @challenges.each do |challenge| %>
-    <div>
-      <h2>撮影チャレンジ</h2>
+  <div class="challenge-list">
 
-      <div class="challenge-photo-comparison">
+    <% @challenges.each do |challenge| %>
 
-        <div class="challenge-photo-card">
-          <h3>📷 参考写真</h3>
+      <div class="challenge-card">
 
-          <% if challenge.reference_photo.image.attached? %>
-            <div class="photo-zoom-container">
-              <%= image_tag challenge.reference_photo.image, class: "challenge-photo challenge-zoom-trigger" %>
-            </div>
-          <% end %>
+        <h2>撮影チャレンジ</h2>
 
-          <p class="challenge-title">
-            <strong>タイトル</strong><br>
-            <%= link_to challenge.reference_photo.title, photo_path(challenge.reference_photo) %> </p> 
+        <div class="challenge-photo-comparison">
 
-        <div class="challenge-reference-techniques">
+          <!-- 参考写真 -->
+          <div class="challenge-photo-card">
 
-          <h4>参考元の撮影技法・構図</h4>
+            <h3>📷 参考写真</h3>
 
-          <% if challenge.reference_photo.techniques.any? %>
-          
-            <% challenge.reference_photo.techniques.each do |technique| %>
-          
-              <details class="technique-details">
-
-                <summary class="technique-header">
-                  <span><%= technique.name %></span>
-                  <span>ⓘ</span>
-                </summary>
-
-                <div class="technique-description">
-                   <%= technique.description %>
-                </div>
-
-              </details>
-            
+            <% if challenge.reference_photo.image.attached? %>
+              <div class="photo-zoom-container">
+                <%= image_tag challenge.reference_photo.image,
+                    class: "challenge-photo challenge-zoom-trigger" %>
+              </div>
             <% end %>
 
-          <% else %>
-            <p>登録されていません</p>
-          <% end %>
-
-        </div>
-
-          <h4>撮影設定</h4>
-
-          <% if challenge.reference_photo.shooting_setting.present? %>
-            <p>
-              撮影場所：
-              <%= challenge.reference_photo.location %>
+            <p class="challenge-title">
+              <%= link_to challenge.reference_photo.title,
+                  photo_path(challenge.reference_photo) %>
             </p>
 
-            <div class="shooting-setting-item">
-
-              <details class="shooting-setting-show-details">
-
-                <summary>
-                  F値：
-                  <%= challenge.reference_photo.shooting_setting.aperture %>
-                  ⓘ
-                </summary>
-
-                <div class="shooting-setting-description">
-                  ➤ F値はレンズの絞りの大きさを表す値です。
-                  数値が小さいほど背景をぼかしやすくなります。
-                </div>
-
-              </details>
-
-            </div>
+          </div>
 
 
-            <div class="shooting-setting-item">
-
-              <details class="shooting-setting-show-details">
-
-                <summary>
-                  ISO：
-                  <%= challenge.reference_photo.shooting_setting.iso %>
-                  ⓘ
-                </summary>
-
-                <div class="shooting-setting-description">
-                  ➤ ISO感度は、カメラが光を受け取る感度を表します。
-                  数値を上げると暗い場所でも明るく撮影できますが、
-                  ノイズが増えやすくなります。
-                </div>
-
-              </details>
-
-            </div>
+          <!-- 矢印 -->
+          <div class="challenge-arrow">
+            ➡
+          </div>
 
 
-            <div class="shooting-setting-item">
+          <!-- チャレンジ写真 -->
+          <div class="challenge-photo-card">
 
-              <details class="shooting-setting-show-details">
+            <h3>🔥 チャレンジ写真</h3>
 
-                <summary>
-                  シャッタースピード：
-                  <%= challenge.reference_photo.shooting_setting.shutter_speed %>
-                  ⓘ
-                </summary>
-
-                <div class="shooting-setting-description">
-                  ➤ シャッターが開いている時間を表します。
-                  速くすると動きを止めやすく、
-                  遅くすると動きのブレや光の軌跡を表現できます。
-                </div>
-
-              </details>
-
-            </div>
-
-
-            <div class="shooting-setting-item">
-
-              <details class="shooting-setting-show-details">
-
-                <summary>
-                  焦点距離：
-                  <%= challenge.reference_photo.shooting_setting.focal_length %>
-                  ⓘ
-                </summary>
-
-                <div class="shooting-setting-description">
-                  ➤ レンズの焦点距離を表す値です。
-                  数値が小さいほど広い範囲を写し、
-                  数値が大きいほど遠くの被写体を大きく写せます。
-                </div>
-
-              </details>
-
-            </div>
-
-          <% end %>
-        </div>
-
-        <div class="challenge-arrow">
-          ➡
-        </div>
-
-        <div class="challenge-photo-card">
-          <h3>🔥 チャレンジ写真</h3>
-
-          <% if challenge.image.attached? %>
-            <div class="photo-zoom-container">
-              <%= image_tag challenge.image, class: "challenge-photo challenge-zoom-trigger" %>
-            </div>
-          <% end %>
-
-          <p>
-            <strong>タイトル</strong><br>
-            <%= challenge.title %>
-          </p>
-
-        <div class="challenge-techniques">  
-          <h4>意識した撮影技法・構図</h4>
-
-          <% if challenge.techniques.any? %>
-
-            <% challenge.techniques.each do |technique| %>
-
-              <details class="technique-details">
-
-                <summary class="technique-header">
-                  <span><%= technique.name %></span>
-                  <span>ⓘ</span>
-                </summary>
-
-                <div class="technique-description">
-                  <%= technique.description %>
-                </div>
-                
-              </details>
-
+            <% if challenge.image.attached? %>
+              <div class="photo-zoom-container">
+                <%= image_tag challenge.image,
+                    class: "challenge-photo challenge-zoom-trigger" %>
+              </div>
             <% end %>
-            
-          <% else %>
-            <p>登録されていません</p>
-          <% end %>
-        </div>  
-         
-          <h4>撮影設定</h4>
 
-          <p>
-            撮影場所：
-            <%= challenge.location %>
-          </p>
+            <p class="challenge-title">
+              <%= challenge.title %>
+            </p>
 
-          <% if challenge.shooting_setting.present? %>
+          </div>
 
-            <div class="shooting-setting-item">
-
-              <details class="shooting-setting-show-details">
-                <summary>F値： <%= challenge.shooting_setting.aperture %> ⓘ</summary>
-
-                <div class="shooting-setting-description">
-                  ➤F値はレンズの絞りの大きさを表す値です。
-                  数値が小さいほど背景をぼかしやすくなります。
-                </div>
-              </details>
-            </div>
-
-            <div class="shooting-setting-item">
-
-              <details class="shooting-setting-show-details">
-                <summary>ISO：<%= challenge.shooting_setting.iso %> ⓘ</summary>
-
-                <div class="shooting-setting-description">
-                  ➤ISO感度は、カメラが光を受け取る感度を表します。
-                  数値を上げると暗い場所でも明るく撮影できますが、
-                  ノイズが増えやすくなります。
-                </div>
-              </details>
-            </div>
-
-            <div class="shooting-setting-item">
-
-              <details class="shooting-setting-show-details">
-                <summary>シャッタースピード：<%= challenge.shooting_setting.shutter_speed %> ⓘ</summary>
-
-                <div class="shooting-setting-description">
-                  ➤シャッターが開いている時間を表します。
-                  速くすると動きを止めやすく、
-                  遅くすると動きのブレや光の軌跡を表現できます。
-                </div>
-              </details>
-            </div>
-
-            <div class="shooting-setting-item">
-            
-              <details class="shooting-setting-show-details">
-                <summary>焦点距離：<%= challenge.shooting_setting.focal_length %> ⓘ</summary>
-
-                <div class="shooting-setting-description">
-                  ➤レンズの焦点距離を表す値です。
-                  数値が小さいほど広い範囲を写し、
-                  数値が大きいほど遠くの被写体を大きく写せます。
-                </div>
-              </details>
-            </div>
-
-          <% end %>
-
-          <p>撮影してみた感想・意識したポイント: <%= challenge.comment %></p>
-        
-          <%= link_to "編集する", edit_photo_challenge_path(challenge.reference_photo, challenge) %>
         </div>
 
-      </div> 
 
-    </div>
-    <hr>
-  <% end %>
+        <!-- 撮影技法・構図 -->
+        <div class="challenge-techniques">
+
+          <h4>撮影技法・構図</h4>
+
+          <% techniques = (
+            challenge.reference_photo.techniques +
+            challenge.techniques
+          ).map(&:name).uniq %>
+
+          <% if techniques.any? %>
+
+            <div class="challenge-technique-tags">
+
+              <% techniques.each do |technique_name| %>
+                <span class="technique-tag">
+                  <%= technique_name %>
+                </span>
+              <% end %>
+
+            </div>
+
+          <% else %>
+
+            <p>登録されていません</p>
+
+          <% end %>
+
+        </div>
+
+
+        <!-- チャレンジ情報・詳細ボタン -->
+        <div class="challenge-card-footer">
+
+          <div class="challenge-meta">
+
+            <span class="challenge-user">
+              👤 <%= challenge.user.username %>
+            </span>
+
+            <span class="challenge-stats">
+
+              <%= render "favorite", challenge: challenge %>
+
+              <span class="challenge-comment-count">
+                💬 <%= challenge.challenge_comments.count %>
+              </span>
+
+            </span>
+
+          </div>
+
+          <%= link_to "詳細を見る", 
+              edit_photo_challenge_path(
+                challenge.reference_photo,
+                challenge
+              ),
+              class: "challenge-detail-button" %>
+
+        </div>
+
+      </div>
+
+    <% end %>
+
+  </div>
+
 <% else %>
+
   <p>まだ撮影チャレンジがありません。</p>
+
 <% end %>
 
+
+<!-- 写真拡大モーダル -->
 <div id="challenge-zoom-modal" class="photo-zoom-modal">
-  <button id="challenge-zoom-close" class="photo-zoom-close">×</button>
+
+  <button
+    id="challenge-zoom-close"
+    class="photo-zoom-close">
+    ×
+  </button>
 
   <img
     id="challenge-zoom-image"
@@ -272,6 +147,8 @@
     src=""
     alt="拡大写真"
   >
+
 </div>
+
 
 <%= link_to "ホームに戻る", home_path %>

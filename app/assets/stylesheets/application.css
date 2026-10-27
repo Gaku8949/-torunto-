@@ -784,49 +784,13 @@ main {
     margin: 0;
 }
 
-/* =================================
-   チャレンジ画面
-   ================================= */
 
-.challenge-photo-comparison {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 40px;
-    margin: 30px;
-}
 
 .challenge-reference-card,
 .challenge-result-card {
     width: 45%;
 }
 
-.challenge-photo-card {
-    width: 450px;
-    text-align: center;
-}
-
-.challenge-photo-card h3 {
-    margin-bottom: 15px;
-}
-
-.challenge-photo {
-  width: 400px;
-  height: 300px;
-  object-fit: contain;
-}
-
-.challenge-arrow {
-    display: flex;
-    align-items: center;
-    font-size: 40px;
-    padding-top: 150px;
-}
-
-.challenge-title {
-    margin-top: 15px;
-    line-height: 1.8;
-}
 
 .challenge-reference-card h4,
 .challenge-result-card h4 {
@@ -835,9 +799,6 @@ main {
     padding-bottom: 8px;
 }
 
-.challenge-techniques {
-    text-align: center;
-}
 
 .challenge-reference-techniques {
     text-align: center;
@@ -1786,26 +1747,6 @@ main {
 }
 
 
-/* =========================================
-   共通カード
-   ========================================= */
-
-.challenge-card {
-  background: #f8f9fa;
-  border: 1px solid #dfe3e8;
-  border-radius: 10px;
-  padding: 16px;
-}
-
-.challenge-card h2 {
-  font-size: 15px;
-  margin: 0 0 14px;
-}
-
-.challenge-card h3 {
-  font-size: 14px;
-  margin: 10px 0 0;
-}
 
 
 /* =========================================
@@ -2181,6 +2122,453 @@ main {
   .challenge-page {
     margin: 25px auto;
     padding: 0 15px;
+  }
+
+}
+
+
+
+/* ========================================
+   チャレンジ一覧
+   ======================================== */
+
+.challenge-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+
+  width: 100%;
+  max-width: 1000px;
+
+  margin: 30px auto;
+}
+
+
+/* ========================================
+   チャレンジカード
+   ======================================== */
+
+.challenge-card {
+  width: 100%;
+  min-width: 0;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  background: #fff;
+
+  border: 1px solid #ddd;
+  border-radius: 12px;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+  overflow: hidden;
+}
+
+
+.challenge-card > h2 {
+  margin: 0 0 20px;
+
+  font-size: 18px;
+}
+
+
+/* ========================================
+   参考写真 ⇔ チャレンジ写真
+   ======================================== */
+
+.challenge-photo-comparison {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    32px
+    minmax(0, 1fr);
+
+  gap: 8px;
+
+  width: 100%;
+  min-width: 0;
+
+  align-items: center;
+}
+
+
+/* ========================================
+   写真カード
+   ======================================== */
+
+.challenge-photo-card {
+  width: 100%;
+  min-width: 0;
+
+  box-sizing: border-box;
+
+  text-align: center;
+
+  overflow: hidden;
+}
+
+
+.challenge-photo-card h3 {
+  margin: 0 0 10px;
+
+  font-size: 13px;
+}
+
+
+/* ========================================
+   写真表示エリア
+   ======================================== */
+
+.challenge-photo-card .photo-zoom-container {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  height: 150px;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+
+  border-radius: 8px;
+
+  background: #f5f5f5;
+}
+
+
+/* ========================================
+   写真本体
+   ======================================== */
+
+.challenge-photo-card .challenge-photo {
+  display: block;
+
+  width: 100% !important;
+  max-width: 100% !important;
+
+  height: 150px !important;
+
+  min-width: 0;
+
+  box-sizing: border-box;
+
+  object-fit: cover;
+
+  cursor: pointer;
+
+  transition: transform 0.2s ease;
+}
+
+
+.challenge-photo-card .challenge-photo:hover {
+  transform: scale(1.03);
+}
+
+
+/* ========================================
+   写真タイトル
+   ======================================== */
+
+.challenge-title {
+  width: 100%;
+
+  margin: 8px 0 0;
+
+  box-sizing: border-box;
+
+  text-align: center;
+
+  font-size: 13px;
+  font-weight: bold;
+
+  line-height: 1.4;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* 参考写真タイトルのリンク */
+
+.challenge-title a {
+  color: #222;
+
+  text-decoration: none;
+}
+
+
+.challenge-title a:hover {
+  text-decoration: underline;
+}
+
+
+/* ========================================
+   矢印
+   ======================================== */
+
+.challenge-arrow {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+/* ========================================
+   撮影技法・構図
+   ======================================== */
+
+.challenge-techniques {
+  width: 100%;
+
+  margin-top: 18px;
+  padding-top: 14px;
+
+  box-sizing: border-box;
+
+  border-top: 1px solid #eee;
+}
+
+
+.challenge-techniques h4 {
+  margin: 0 0 10px;
+
+  text-align: center;
+
+  font-size: 13px;
+}
+
+
+/* ========================================
+   技法タグ
+   ======================================== */
+
+.challenge-technique-tags {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+  gap: 6px;
+
+  width: 100%;
+}
+
+
+.technique-tag {
+  display: inline-block;
+
+  padding: 5px 10px;
+
+  border-radius: 20px;
+
+  background: #f3f4f6;
+
+  color: #555;
+
+  font-size: 12px;
+
+  line-height: 1.3;
+}
+
+
+/* 技法がない場合 */
+
+.challenge-techniques > p {
+  margin: 0;
+
+  text-align: center;
+
+  color: #888;
+
+  font-size: 12px;
+}
+
+
+
+
+/* ========================================
+   詳細を見る
+   ======================================== */
+
+.challenge-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 18px;
+  gap: 10px;
+}
+
+
+.challenge-detail-button {
+  display: inline-block;
+  padding: 8px 14px;
+  background-color: #4f83f1;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.challenge-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.challenge-user {
+  font-weight: 500;
+}
+
+.challenge-stats {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+}
+
+/* いいねボタン */
+.challenge-favorite-button {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 14px;
+  color: #777;
+}
+
+/* いいね済み */
+.challenge-favorite-button.liked {
+  color: #e85d75;
+}
+
+/* マウスを乗せたとき */
+.challenge-favorite-button:hover {
+  color: #e85d75;
+}
+
+/* コメント */
+.challenge-comment-count {
+  color: #777;
+}
+
+.challenge-detail-button:hover {
+  background: #2563eb;
+}
+
+
+/* ========================================
+   写真拡大モーダル
+   ======================================== */
+
+.photo-zoom-modal {
+  display: none;
+
+  position: fixed;
+
+  z-index: 9999;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.8);
+}
+
+
+.photo-zoom-modal.active {
+  display: flex;
+}
+
+
+.photo-zoom-image {
+  max-width: 90%;
+  max-height: 90%;
+
+  object-fit: contain;
+}
+
+
+.photo-zoom-close {
+  position: absolute;
+
+  top: 20px;
+  right: 30px;
+
+  border: none;
+
+  background: none;
+
+  color: #fff;
+
+  font-size: 40px;
+
+  cursor: pointer;
+}
+
+
+/* ========================================
+   スマホ
+   ======================================== */
+
+@media (max-width: 768px) {
+
+  .challenge-list {
+    grid-template-columns: 1fr;
+
+    padding: 0 15px;
+
+    box-sizing: border-box;
+  }
+
+
+  .challenge-card {
+    padding: 15px;
+  }
+
+
+  .challenge-photo-comparison {
+    grid-template-columns:
+      minmax(0, 1fr)
+      28px
+      minmax(0, 1fr);
+
+    gap: 5px;
+  }
+
+
+  .challenge-photo-card .photo-zoom-container {
+    height: 120px;
+  }
+
+
+  .challenge-photo-card .challenge-photo {
+    height: 120px !important;
+  }
+
+
+  .challenge-photo-card h3 {
+    font-size: 11px;
+  }
+
+
+  .challenge-title {
+    font-size: 12px;
   }
 
 }
