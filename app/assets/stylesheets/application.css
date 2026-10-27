@@ -131,9 +131,17 @@ body {
 
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Yu Gothic", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+    font-family: "Noto Sans JP", sans-serif;
     color: #222;
     background-color: #f8f8f8;
+    line-height: 1.7;
+}
+
+h1,
+h2,
+h3 {
+    font-weight: 700;
+    letter-spacing: 0.02em;
 }
 
 /* ヘッダー */
@@ -165,6 +173,7 @@ body {
     color: #222;
     text-decoration: none;
     font-size: 14px;
+    font-weight: 500;
 }
 
 .header-nav a:hover {
@@ -212,59 +221,187 @@ main {
 }
 
 /* =========================
-   ホーム画面
+   ホーム画面 ホームヒーロー
    ========================= */
 
 .home-page {
     text-align: center;
 }
 
+.home-logo {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateX(20px);
+}
+
 .home-logo img {
-    width: 300px;
-    height: auto;
+  width: 250px;
+  height: auto;
+  display: block;
+  
 }
-
-.home-hero {
-    max-width: 850;
-    margin: 30px auto;
-}
-
-.home-hero img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* ホーム画面：機能紹介 */
 
 .home-intro {
-    text-align: center;
-    margin: 40px auto 60px;
+  color: #fff;
 }
 
 .home-intro h1 {
-    font-size: 32px;
-    margin-bottom: 20px;
+  margin: 0 0 15px;
+  font-size: 32px;
+  font-weight: 700;
+
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
 }
 
 .home-intro p {
-    margin-bottom: 24px;
-    color: #555;
+  margin: 0 0 25px;
+  font-size: 15px;
+
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
 }
 
+/* ホームヒーロー */
+
+.home-hero {
+  position: relative;
+  overflow: hidden;
+
+  width: min(1000px, 90%);
+  height: 500px;
+
+  margin: 30px auto 0;
+  border-radius: 8px;
+}
+
+.home-hero > #home-main-image {
+  display: block;
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+}
+
+/* 写真の上に重ねる部分 */
+.home-hero-overlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  background: rgba(0, 0, 0, 0.18);
+  color: #fff;
+
+  isolation: isolate;
+}
+
+/* ロゴと文字の後ろに白いもやを作る */
+.home-hero-overlay::before {
+  content: "";
+  position: absolute;
+
+  width: 650px;
+  height: 300px;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 50%;
+
+  filter: blur(45px);
+
+  z-index: -1;
+}
+/* ロゴ */
+.home-hero-logo {
+  width: 220px;
+  height: auto;
+  margin-bottom: 24px;
+}
+
+/* キャッチコピー */
+.home-hero-overlay h1 {
+  margin: 0 0 12px;
+  font-size: 32px;
+  font-weight: 700;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* 説明文 */
+.home-hero-overlay p {
+  margin: 0 0 28px;
+  font-size: 15px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* 写真を見るボタン */
 .home-main-button {
-    display: inline-block;
-    padding: 12px 28px;
-    border: 1px solid #222;
-    border-radius: 999px;
-    color: #222;
-    text-decoration: none;
-    transition: 0.2s;
+  display: inline-block;
+  padding: 12px 32px;
+
+  border: 1px solid #fff;
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.95);
+  color: #222;
+
+  text-decoration: none;
+  font-size: 14px;
+
+  transition: 0.2s;
 }
 
 .home-main-button:hover {
-    transform: translateY(-2px);
+  background: #fff;
+  transform: translateY(-2px);
 }
+
+
+/* =========================
+   ヒーロー 左右ボタン
+   ========================= */
+
+.home-prev-button,
+.home-next-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 44px;
+  height: 44px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.9);
+
+  font-size: 20px;
+  cursor: pointer;
+
+  z-index: 2;
+}
+
+.home-prev-button {
+  left: 20px;
+}
+
+.home-next-button {
+  right: 20px;
+}
+
+.home-prev-button:hover,
+.home-next-button:hover {
+  background: #fff;
+}
+
+
 
 
 /* 3つの機能 */
@@ -273,7 +410,7 @@ main {
     margin: 0 auto 60px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: 20px;
 }
 
 .home-feature {
@@ -540,10 +677,7 @@ main {
 /* 撮影設定 */
 
 .shooting-setting-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .shooting-setting-item label {
@@ -571,13 +705,34 @@ main {
 }
 
 .shooting-setting-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  display: grid;
+  grid-template-columns: 125px minmax(0, 1fr) 18px;
+  align-items: center;
+  column-gap: 8px;
 }
 
-.shooting-setting-details {
-  display: block;
+.shooting-setting-header label {
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.shooting-setting-header input {
+  width: 100%;
+  height: 34px;
+  box-sizing: border-box;
+
+  padding: 8px 10px;
+
+  border: 1px solid #d5d9df;
+  border-radius: 6px;
+
+  background: #fff;
+
+  font-size: 13px;
+}
+
+.shooting-setting-header .info-icon {
+  font-size: 12px;
 }
 
 .shooting-setting-details summary {
@@ -627,82 +782,6 @@ main {
 
 .info-details p {
     margin: 0;
-}
-
-/* =================================
-   撮影技法・構図
-   ================================= */
-
-/* チェックボックス */
-.technique-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  margin-bottom: 14px;
-}
-
-.technique-item > input[type="checkbox"] {
-  margin: 4px 0 0 0;
-  flex-shrink: 0;
-}
-
-.technique-content {
-  flex: 1;
-}
-
-.technique-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-/* 技法名 + ⓘ */
-.technique-details {
-    display: block;
-    width: fit-content;
-}
-
-.technique-details summary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  list-style: none;
-}
-
-.technique-details summary::-webkit-details-marker {
-  display: none;
-}
-
-
-/* 技法の説明文 */
-.technique-details .technique-description {
-  margin-top: 8px;
-  max-width: 600px;
-  text-align: left;
-}
-
-
-.technique-description {
-    display: block;
-    margin-top: 8px;
-    max-width: 600px;
-}
-
-.technique-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: nowrap;
-}
-
-.photo-show-image {
-    width: 800px;
-    height: 600px;
-    max-width: 100%;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto;
 }
 
 /* =================================
@@ -874,4 +953,1234 @@ main {
 .back-link:hover {
     color: #222;
     text-decoration: underline;
+}
+
+/* 写真投稿ボタン */
+
+.photos-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.photos-header h1 {
+  margin: 0;
+}
+
+.photo-post-button {
+  display: inline-block;
+  padding: 10px 18px;
+  background-color: #222;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.photo-post-button:hover {
+  opacity: 0.8;
+}
+
+
+
+/* =========================================
+   写真詳細ページ
+========================================= */
+
+.photo-show-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 30px 40px 60px;
+}
+
+
+/* 戻るボタン */
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+
+/* タイトル部分 */
+
+.photo-show-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.photo-show-header h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+.photo-meta {
+  margin: 0;
+  color: #777;
+  font-size: 14px;
+}
+
+
+/* お気に入り */
+
+.photo-favorite button {
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px 18px;
+  cursor: pointer;
+}
+
+
+/* =========================================
+   左右2カラム
+========================================= */
+
+.photo-show-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 25px;
+  align-items: start;
+}
+
+
+/* =========================================
+   左側
+========================================= */
+
+.photo-show-main {
+  min-width: 0;
+}
+
+
+/* メイン写真 */
+
+.photo-zoom-container {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+.photo-show-image {
+  width: 100%;
+  max-height: 600px;
+  object-fit: contain;
+  display: block;
+}
+
+
+/* 説明・コメント */
+
+.photo-show-section {
+  margin-top: 25px;
+  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.photo-show-section h2 {
+  font-size: 18px;
+  margin: 0 0 15px;
+}
+
+.photo-show-section p {
+  color: #666;
+  line-height: 1.7;
+}
+
+
+/* =========================================
+   右側
+========================================= */
+
+.photo-show-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+
+.photo-info-card {
+  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  background: #fff;
+}
+
+
+.photo-info-card h2 {
+  margin: 0 0 15px;
+  font-size: 17px;
+}
+
+
+/* =========================================
+   撮影設定
+========================================= */
+
+.shooting-setting-show-details {
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+}
+
+.shooting-setting-show-details:last-child {
+  border-bottom: none;
+}
+
+.shooting-setting-show-details summary {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.shooting-setting-description {
+  margin-top: 10px;
+  padding: 10px;
+  background: #f8f8f8;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #666;
+}
+
+/* =========================================
+   アクションボタン
+========================================= */
+
+.photo-action-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+.challenge-button,
+.edit-button {
+  display: block;
+  padding: 13px;
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+
+.challenge-button {
+  background: #222;
+  color: #fff;
+}
+
+
+.edit-button {
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #333;
+}
+
+
+.delete-button {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  color: #777;
+  cursor: pointer;
+}
+
+
+/* =========================================
+   コメント
+========================================= */
+
+.comment-form {
+  display: flex;
+  gap: 10px;
+}
+
+.comment-form textarea {
+  flex: 1;
+  min-height: 45px;
+  resize: vertical;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.comment-form input[type="submit"] {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #222;
+  color: #fff;
+  cursor: pointer;
+}
+
+
+.comment-item {
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.comment-item p {
+  margin: 8px 0;
+}
+
+
+/* =========================================
+   撮影チャレンジ
+========================================= */
+
+.photo-challenges {
+  margin-top: 30px;
+  padding: 25px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.photo-challenges h2 {
+  margin-top: 0;
+}
+
+
+.challenge-item {
+  padding: 20px 0;
+  border-bottom: 1px solid #eee;
+}
+
+
+.challenge-image {
+  max-width: 300px;
+  max-height: 300px;
+  object-fit: contain;
+  display: block;
+  margin: 10px 0;
+}
+
+/* =========================
+   写真投稿画面
+========================= */
+
+.photo-form-page {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 24px 60px;
+}
+
+.photo-form-page h1 {
+  font-size: 28px;
+  margin: 10px 0 24px;
+}
+
+.back-link {
+  color: #555;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+
+/* 2カラム */
+
+.photo-form-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+
+/* 左側 */
+
+.photo-form-left {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+
+/* 右側 */
+
+.photo-form-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+/* セクション */
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-section label {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+
+/* 写真アップロード */
+
+.image-upload-box {
+  position: relative;
+  min-height: 260px;
+
+  border: 1px dashed #cbd1d8;
+  border-radius: 10px;
+
+  background: #fafbfc;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.image-upload-box:hover {
+  background: #f5f7f9;
+  border-color: #999;
+}
+
+.image-upload-icon {
+  font-size: 38px;
+  color: #9ca3af;
+  margin-bottom: 12px;
+}
+
+.image-upload-box strong {
+  font-size: 15px;
+}
+
+.image-upload-box p {
+  font-size: 12px;
+  color: #777;
+  margin: 8px 0 4px;
+}
+
+.image-upload-box span {
+  font-size: 11px;
+  color: #999;
+}
+
+
+/* ファイル選択 */
+
+.image-file-input {
+  margin-top: 15px;
+  font-size: 12px;
+}
+
+
+/* 通常の入力 */
+
+.form-input {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 11px 12px;
+
+  border: 1px solid #d5d9df;
+  border-radius: 6px;
+
+  font-size: 14px;
+}
+
+.form-textarea {
+  width: 100%;
+  min-height: 130px;
+
+  box-sizing: border-box;
+
+  padding: 12px;
+
+  border: 1px solid #d5d9df;
+  border-radius: 6px;
+
+  resize: vertical;
+
+  font-size: 14px;
+}
+
+
+/* 右側カード */
+
+.form-card {
+  background: #f8f9fa;
+
+  border: 1px solid #e1e4e8;
+  border-radius: 10px;
+
+  padding: 16px;
+}
+
+.form-card h2 {
+  font-size: 14px;
+  margin: 0 0 12px;
+}
+
+.optional {
+  font-size: 11px;
+  font-weight: normal;
+  color: #777;
+}
+
+
+/* 撮影設定 */
+
+.setting-row {
+  display: grid;
+  grid-template-columns: 100px 1fr 20px;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 10px;
+}
+
+.setting-row label {
+  font-size: 12px;
+  color: #555;
+}
+
+.setting-input {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 7px 9px;
+
+  border: 1px solid #d5d9df;
+  border-radius: 5px;
+
+  background: white;
+
+  font-size: 12px;
+}
+
+.info-icon {
+  font-size: 12px;
+  color: #777;
+}
+/* =================================
+   撮影技法・構図
+   ================================= */
+
+/* 技法の説明文 */
+.technique-details .technique-description {
+  margin-top: 8px;
+  max-width: 600px;
+  text-align: left;
+}
+
+.photo-show-image {
+    width: 800px;
+    height: 600px;
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+/* =========================================
+   撮影技法
+========================================= */
+
+/* 撮影技法 */
+
+.technique-item label {
+  cursor: pointer;
+}
+
+/* ⓘ */
+.info-icon {
+  font-size: 12px;
+  color: #999;
+}
+
+/* ボタン */
+
+.form-actions {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 12px;
+
+  margin-top: 20px;
+}
+
+.cancel-button,
+.submit-button {
+  height: 44px;
+
+  border-radius: 6px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+
+  text-decoration: none;
+
+  box-sizing: border-box;
+}
+
+.cancel-button {
+  border: 1px solid #bfc5cc;
+  background: white;
+  color: #555;
+}
+
+.submit-button {
+  border: none;
+  background: #1f2937;
+  color: white;
+
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background: #111827;
+}
+
+
+/* スマホ対応 */
+
+@media (max-width: 768px) {
+
+  .photo-form-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .photo-form-page {
+    margin: 24px auto;
+    padding: 0 16px 40px;
+  }
+
+  .technique-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* =================================
+   写真編集画面
+   ================================= */
+
+.photo-edit-container {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 0 24px;
+}
+
+.photo-edit-container h1 {
+  margin-bottom: 30px;
+}
+
+
+/* =================================
+   左右2カラム
+   ================================= */
+
+.photo-edit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+
+/* =================================
+   左側
+   ================================= */
+
+.photo-edit-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+/* =================================
+   右側
+   ================================= */
+
+.photo-edit-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+/* =================================
+   共通フォーム
+   ================================= */
+
+.edit-form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.edit-form-section label {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.edit-form-section input[type="text"],
+.edit-form-section textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #d5d9df;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.edit-form-section textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+
+/* =================================
+   写真アップロード
+   ================================= */
+
+.photo-upload-box {
+  border: 1px dashed #cfd5dc;
+  border-radius: 8px;
+  padding: 25px;
+  background: #f8f9fa;
+}
+
+.photo-upload-box input[type="file"] {
+  width: 100%;
+}
+
+
+/* =================================
+   右側カード
+   ================================= */
+
+.edit-card {
+  background: #f8f9fa;
+  border: 1px solid #dfe3e8;
+  border-radius: 10px;
+  padding: 18px;
+}
+
+.edit-card h2 {
+  font-size: 15px;
+  margin: 0 0 14px;
+}
+
+
+/* =================================
+   撮影場所
+   ================================= */
+
+.edit-card > input[type="text"] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid #d5d9df;
+  border-radius: 6px;
+}
+
+
+/* =================================
+   撮影設定
+   ================================= */
+
+.shooting-setting-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.setting-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  align-items: center;
+  gap: 8px;
+}
+
+.setting-row > label {
+  font-size: 13px;
+}
+
+.setting-row > div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.setting-row input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 7px 9px;
+  border: 1px solid #d5d9df;
+  border-radius: 5px;
+}
+
+/* =========================================
+   撮影チャレンジ
+   ========================================= */
+
+.challenge-page {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+
+.challenge-page h1 {
+  margin: 20px 0 25px;
+}
+
+
+/* =========================================
+   2カラム
+   ========================================= */
+
+.challenge-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+
+/* =========================================
+   左右
+   ========================================= */
+
+.challenge-reference,
+.challenge-target {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+/* =========================================
+   共通カード
+   ========================================= */
+
+.challenge-card {
+  background: #f8f9fa;
+  border: 1px solid #dfe3e8;
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.challenge-card h2 {
+  font-size: 15px;
+  margin: 0 0 14px;
+}
+
+.challenge-card h3 {
+  font-size: 14px;
+  margin: 10px 0 0;
+}
+
+
+/* =========================================
+   参考写真
+   ========================================= */
+
+.reference-hint {
+  font-size: 11px;
+  font-weight: normal;
+  color: #6688aa;
+  margin-left: 8px;
+}
+
+.reference-image {
+  width: 100%;
+  max-height: 360px;
+  object-fit: contain;
+  display: block;
+  border-radius: 6px;
+  background: #fff;
+}
+
+
+/* =========================================
+   参考撮影設定
+   ========================================= */
+
+.reference-setting {
+  margin-top: 16px;
+  padding: 14px;
+  border: 1px solid #dfe3e8;
+  border-radius: 8px;
+  background: #fafbfc
+}
+
+.reference-setting div {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  align-items: center;
+  font-size: 13px;
+}
+
+.reference-setting span {
+  color: #444;
+}
+
+.reference-setting strong {
+  font-weight: normal;
+}
+
+.reference-setting-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.reference-setting-value {
+  background: #fff;
+  border: 1px solid #d5d9df;
+  border-radius: 5px;
+  padding: 6px 9px;
+  min-height: 18px;
+  box-sizing: border-box;
+}
+
+/* =================================
+   参考の撮影技法・構図
+   ================================= */
+
+.reference-technique {
+  margin-top: 16px;
+  padding: 14px;
+  border: 1px solid #dfe3e8;
+  border-radius: 8px;
+  background: #fafbfc
+}
+
+.reference-technique h3 {
+  margin: 0 0 12px;
+  font-size: 14px;
+}
+
+.reference-technique-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.reference-technique-tag {
+  background: #bfc5cc;
+  border: 1px solid #d5d9df;
+  border-radius: 5px;
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+
+/* =========================================
+   アップロード
+   ========================================= */
+
+.challenge-upload {
+  border: 1px dashed #cfd5dc;
+  border-radius: 8px;
+  padding: 25px 15px;
+  background: #fff;
+  text-align: center;
+}
+
+.challenge-upload strong {
+  display: block;
+  margin-top: 8px;
+}
+
+.challenge-upload p {
+  font-size: 11px;
+  color: #777;
+  margin: 8px 0 4px;
+}
+
+.challenge-upload span {
+  display: block;
+  font-size: 10px;
+  color: #999;
+  margin-bottom: 10px;
+}
+
+
+/* =========================================
+   フォーム
+   ========================================= */
+
+.challenge-form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.challenge-form-section label {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #d5d9df;
+  border-radius: 6px;
+  padding: 9px;
+  font-size: 13px;
+}
+
+.form-textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+
+/* =========================================
+   撮影設定
+   ========================================= */
+
+.challenge-setting {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.challenge-setting-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 18px;
+  align-items: center;
+  column-gap: 8px;
+  row-gap: 12px;
+}
+
+.challenge-setting-row label {
+  font-size: 12px;
+}
+
+.challenge-setting-row input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 7px 9px;
+  border: 1px solid #d5d9df;
+  border-radius: 5px;
+}
+
+
+/* =========================================
+   技法
+   ========================================= */
+
+.challenge-technique-section {
+  margin-top: 18px;
+}
+
+.challenge-technique-section h3 {
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.optional {
+  font-size: 10px;
+  color: #6688aa;
+  font-weight: normal;
+}
+
+.challenge-technique-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 16px;
+}
+
+.challenge-technique-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.challenge-technique-item > input[type="checkbox"] {
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+
+/* =================================
+   撮影技法・構図
+   ================================= */
+
+.technique-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 40px;
+  row-gap: 18px;
+  margin-top: 14px;
+}
+
+.technique-item {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  align-items: start;
+  column-gap: 6px;
+  min-height: 28px;
+}
+
+.technique-item input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  margin: 3px 0 0 0;
+  flex-shrink: 0;
+}
+
+.technique-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.technique-details {
+  margin: 0;
+  min-width: 0;
+}
+
+.technique-details summary {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  cursor: pointer;
+  list-style: none;
+
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.technique-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.technique-details .info-icon {
+  font-size: 11px;
+  color: #aab2bd;
+}
+
+.technique-description {
+  margin-top: 5px;
+  padding: 0;
+
+  font-size: 11px;
+  line-height: 1.5;
+
+  color: #333;
+  background: transparent;
+  border-radius: 0;
+}
+
+/* =========================================
+   コメント
+   ========================================= */
+
+.challenge-comment {
+  margin-top: 20px;
+}
+
+.challenge-comment label {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.challenge-comment textarea {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 90px;
+}
+
+
+/* =========================================
+   ボタン
+   ========================================= */
+
+.challenge-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.cancel-button,
+.submit-button {
+  min-height: 42px;
+  border-radius: 6px;
+  font-size: 13px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.cancel-button {
+  border: 1px solid #cbd1d8;
+  background: #fff;
+  color: #444;
+  text-decoration: none;
+}
+
+.submit-button {
+  border: none;
+  background: #202938;
+  color: #fff;
+  cursor: pointer;
+}
+
+
+/* =========================================
+   スマホ
+   ========================================= */
+
+@media (max-width: 768px) {
+
+  .challenge-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .challenge-page {
+    margin: 25px auto;
+    padding: 0 15px;
+  }
+
 }
