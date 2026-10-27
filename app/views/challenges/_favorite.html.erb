@@ -1,0 +1,17 @@
+<%= turbo_frame_tag "challenge_favorite_#{challenge.id}" do %>
+
+  <%= button_to challenge_challenge_favorite_path(challenge),
+      method: challenge.favorited_by?(current_user) ? :delete : :post,
+      class: "challenge-favorite-button" do %>
+
+    <% if challenge.favorited_by?(current_user) %>
+      ♥
+    <% else %>
+      ♡
+    <% end %>
+
+    <%= challenge.challenge_favorites.count %>
+
+  <% end %>
+
+<% end %>
