@@ -1,12 +1,29 @@
 <div class="home-page">
 
-  <div class="home-logo">
-    <%= image_tag "TORUNTOimage.png", alt: "TORUNTO" %>
-  </div>
-
   <div class="home-hero">
+
     <%= image_tag "cosmos.JPG", alt: "TORUNTO", id: "home-main-image" %>
-    
+
+    <!-- 写真の上に重ねるコンテンツ -->
+    <div class="home-hero-overlay">
+
+      <div class="home-logo">
+        <%= image_tag "TORUNTOimage.png", alt: "TORUNTO" %>
+      </div>
+
+      <section class="home-intro">
+        <h1>写真を見て、撮影を学ぼう。</h1>
+
+        <p>
+          写真から撮影のヒントを見つけて、実際の撮影につなげよう。
+        </p>
+
+        <%= link_to "写真を見る", photos_path, class: "home-main-button" %>
+      </section>
+
+    </div>
+
+    <!-- 左右の切り替えボタン -->
     <button type="button" class="home-prev-button" id="home-prev-button">
       ←
     </button>
@@ -14,14 +31,8 @@
     <button type="button" class="home-next-button" id="home-next-button">
       →
     </button>
+
   </div>
-
-  <section class="home-intro">
-    <h1>写真を見て、撮影を学ぼう。</h1>
-    <p>写真から撮影のヒントを見つけて、実際の撮影につなげよう。</p>
-
-    <%= link_to "写真を見る", photos_path, class: "home-main-button" %>
-  </section>
 
   <section class="home-features">
 
@@ -29,18 +40,21 @@
       <div class="home-feature-icon">📷</div>
       <h2>写真を見る</h2>
       <p>いろんな写真から撮影のヒントを探す</p>
+      <h2>→</h2>
     <% end %>
 
     <%=link_to how_to_use_path, class: "home-feature" do %>
       <div class="home-feature-icon">📖</div>
       <h2>撮影を学ぶ</h2>
       <p>撮影設定や技法・構図を知る</p>
+      <h2>→</h2>
     <% end %>
 
     <%=link_to challenges_path, class: "home-feature" do %>
       <div class="home-feature-icon">🔥</div>
       <h2>撮影チャレンジ</h2>
       <p>参考写真をもとに実際に撮ってみる</p>
+      <h2>→</h2>
     <% end %>
 
   </section>
