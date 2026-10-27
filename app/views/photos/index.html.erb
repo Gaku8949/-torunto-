@@ -1,4 +1,7 @@
-<h1>写真一覧</h1>
+<div class="photos-header">
+  <h1> 写真一覧</h1>
+  <%= link_to "＋ 写真を投稿", new_photo_path, class: "photo-post-button" %>
+</div>
 
 <div class="photo-list">
   <% @photos.each do |photo| %>
@@ -42,5 +45,3 @@
     </div>
   <% end %>
 </div>
-
-<%= link_to "写真を投稿する", new_photo_path %>

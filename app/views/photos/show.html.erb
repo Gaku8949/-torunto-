@@ -1,171 +1,365 @@
-<%= link_to "← 写真一覧に戻る", photos_path, class: "back-link" %>
+<div class="photo-show-page">
 
-<h1><%= @photo.title %></h1>
+  <!-- 写真一覧に戻る -->
+  <%= link_to "← 写真一覧に戻る", photos_path, class: "back-link" %>
 
-<% if @photo.image.attached? %>
-  <div class="photo-zoom-container">
-    <%= image_tag @photo.image, class: "photo-show-image", id: "photo-zoom-trigger" %>
+  <!-- タイトル -->
+  <div class="photo-show-header">
+    <div>
+      <h1><%= @photo.title %></h1>
+
+      <p class="photo-meta">
+        <strong><%= @photo.user.username %></strong>
+      </p>
+    </div>
+
+    <div class="photo-favorite">
+      <% favorite = @photo.favorites.find_by(user: current_user) %>
+
+      <% if favorite %>
+        <%= button_to "♡ お気に入り解除",
+                      photo_favorite_path(@photo, favorite),
+                      method: :delete,
+                      data: { turbo_confirm: "お気に入りを解除しますか？" } %>
+      <% else %>
+        <%= button_to "♡ お気に入り",
+                      photo_favorites_path(@photo),
+                      method: :post %>
+      <% end %>
+    </div>
   </div>
 
-  <div id="photo-zoom-modal" class="photo-zoom-modal">
-    <button id="photo-zoom-close" class="photo-zoom-close">×</button>
 
-    <%= image_tag @photo.image, class: "photo-zoom-image" %>
+  <!-- メインコンテンツ -->
+  <div class="photo-show-layout">
+
+    <!-- ===================== -->
+    <!-- 左側 -->
+    <!-- ===================== -->
+    <main class="photo-show-main">
+
+      <% if @photo.image.attached? %>
+
+        <div class="photo-zoom-container">
+          <%= image_tag @photo.image,
+                        class: "photo-show-image",
+                        id: "photo-zoom-trigger" %>
+        </div>
+
+        <!-- 拡大表示 -->
+        <div id="photo-zoom-modal" class="photo-zoom-modal">
+
+          <button id="photo-zoom-close"
+                  class="photo-zoom-close">
+            ×
+          </button>
+
+          <%= image_tag @photo.image,
+                        class: "photo-zoom-image" %>
+
+        </div>
+
+      <% end %>
+
+
+      <!-- 写真の説明 -->
+      <section class="photo-show-section">
+
+        <h2>説明</h2>
+
+        <p>
+          <%= @photo.description %>
+        </p>
+
+      </section>
+
+
+      <!-- コメント -->
+      <section class="photo-show-section">
+
+        <h2>コメント</h2>
+
+        <%= form_with model: [@photo, Comment.new] do |f| %>
+
+          <div class="comment-form">
+
+            <%= f.text_area :body,
+                            placeholder: "コメントを入力してください" %>
+
+            <%= f.submit "送信" %>
+
+          </div>
+
+        <% end %>
+
+
+        <div class="comments-list">
+
+          <% @photo.comments.each do |comment| %>
+
+            <div class="comment-item">
+
+              <strong>
+                <%= comment.user.username %>
+              </strong>
+
+              <p>
+                <%= comment.body %>
+              </p>
+
+              <% if comment.user == current_user %>
+
+                <%= button_to "削除",
+                              photo_comment_path(@photo, comment),
+                              method: :delete,
+                              data: {
+                                turbo_confirm: "このコメントを削除しますか？"
+                              } %>
+
+              <% end %>
+
+            </div>
+
+          <% end %>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+    <!-- ===================== -->
+    <!-- 右側 -->
+    <!-- ===================== -->
+    <aside class="photo-show-sidebar">
+
+
+      <!-- 撮影場所 -->
+      <section class="photo-info-card">
+
+        <h2>撮影場所</h2>
+
+        <% if @photo.location.present? %>
+
+          <p>
+            📍 <%= @photo.location %>
+          </p>
+
+        <% else %>
+
+          <p>撮影場所未登録</p>
+
+        <% end %>
+
+      </section>
+
+
+      <!-- 撮影設定 -->
+      <% if @photo.shooting_setting.present? %>
+
+        <section class="photo-info-card">
+
+          <h2>撮影設定</h2>
+
+
+          <details class="shooting-setting-show-details">
+
+            <summary>
+              F値：
+              <%= @photo.shooting_setting.aperture %>
+              ⓘ
+            </summary>
+
+            <div class="shooting-setting-description">
+              F値はレンズの絞りの大きさを表す値です。
+              数値が小さいほど背景をぼかしやすくなります。
+            </div>
+
+          </details>
+
+
+          <details class="shooting-setting-show-details">
+
+            <summary>
+              ISO：
+              <%= @photo.shooting_setting.iso %>
+              ⓘ
+            </summary>
+
+            <div class="shooting-setting-description">
+              ISO感度は、カメラが光を受け取る感度を表します。
+              数値を上げると暗い場所でも明るく撮影できますが、
+              ノイズが増えやすくなります。
+            </div>
+
+          </details>
+
+
+          <details class="shooting-setting-show-details">
+
+            <summary>
+              シャッタースピード：
+              <%= @photo.shooting_setting.shutter_speed %>
+              ⓘ
+            </summary>
+
+            <div class="shooting-setting-description">
+              シャッターが開いている時間を表します。
+              速くすると動きを止めやすく、
+              遅くすると動きのブレや光の軌跡を表現できます。
+            </div>
+
+          </details>
+
+
+          <details class="shooting-setting-show-details">
+
+            <summary>
+              焦点距離：
+              <%= @photo.shooting_setting.focal_length %>
+              ⓘ
+            </summary>
+
+            <div class="shooting-setting-description">
+              レンズの焦点距離を表す値です。
+              数値が小さいほど広い範囲を写し、
+              数値が大きいほど遠くの被写体を大きく写せます。
+            </div>
+
+          </details>
+
+        </section>
+
+      <% end %>
+
+
+      <!-- 撮影技法・構図 -->
+      <% if @photo.techniques.any? %>
+
+        <section class="photo-info-card">
+
+          <h2>撮影技法・構図</h2>
+
+          <div class="technique-list">
+
+            <% @photo.techniques.each do |technique| %>
+
+              <details class="technique-details">
+
+                <summary class="technique-header">
+
+                  <span>
+                    <%= technique.name %>
+                  </span>
+
+                  <span>ⓘ</span>
+
+                </summary>
+
+                <div class="technique-description">
+                  <%= technique.description %>
+                </div>
+
+              </details>
+
+            <% end %>
+
+          </div>
+
+        </section>
+
+      <% end %>
+
+
+      <!-- チャレンジ -->
+      <section class="photo-action-card">
+
+        <%= link_to "🔥 この写真でチャレンジする",
+                    new_photo_challenge_path(@photo),
+                    class: "challenge-button" %>
+
+      </section>
+
+
+      <!-- 編集・削除 -->
+      <% if @photo.user == current_user %>
+
+        <section class="photo-action-card">
+
+          <%= link_to "編集する（投稿者のみ）",
+                      edit_photo_path(@photo),
+                      class: "edit-button" %>
+
+
+          <%= button_to "削除する",
+                        @photo,
+                        method: :delete,
+                        data: {
+                          turbo_confirm: "本当に削除しますか？"
+                        },
+                        class: "delete-button" %>
+
+        </section>
+
+      <% end %>
+
+    </aside>
+
   </div>
-<% end %>
 
-<% favorite = @photo.favorites.find_by(user: current_user) %>
 
-<% if favorite %>
-  <%= button_to "お気に入り解除", photo_favorite_path(@photo, favorite), method: :delete, data: { turbo_confirm: "お気に入りを解除しますか？" } %>
-<% else %>
-  <%= button_to "♡ お気に入り", photo_favorites_path(@photo), method: :post %>
-<% end %>
+  <!-- ===================== -->
+  <!-- 撮影チャレンジ一覧 -->
+  <!-- ===================== -->
 
-<%= link_to "📷 チャレンジ🔥", new_photo_challenge_path(@photo) %>
+  <section class="photo-challenges">
 
-<p>写真のポイント : <%= @photo.description %></p>
+    <h2>撮影チャレンジ</h2>
 
-<h2>撮影場所</h2>
+    <% @photo.challenges.each do |challenge| %>
 
-<% if @photo.location.present? %>
-  <p><%= @photo.location %></p>
-<% end %>
+      <div class="challenge-item">
 
-<h2>撮影設定</h2>
+        <p>
+          <strong>
+            <%= challenge.user.username %>
+          </strong>
+        </p>
 
-<% if @photo.shooting_setting.present? %>
 
-  <div class="shooting-setting-item">
+        <% if challenge.image.attached? %>
 
-    <details class="shooting-setting-show-details">
-      <summary>F値：<%= @photo.shooting_setting.aperture %> ⓘ</summary>
+          <%= image_tag challenge.image,
+                        class: "challenge-image" %>
 
-      <div class="shooting-setting-description">
-        ➤F値はレンズの絞りの大きさを表す値です。
-        数値が小さいほど背景をぼかしやすくなります。
+        <% end %>
+
+
+        <% if challenge.comment.present? %>
+
+          <p>
+            <%= challenge.comment %>
+          </p>
+
+        <% end %>
+
+
+        <% if challenge.user == current_user %>
+
+          <%= button_to "削除",
+                        photo_challenge_path(@photo, challenge),
+                        method: :delete,
+                        data: {
+                          turbo_confirm: "この撮影チャレンジを削除しますか？"
+                        } %>
+
+        <% end %>
+
       </div>
-    </details>
-  </div>
 
-  <div class="shooting-setting-item">
-
-    <details class="shooting-setting-show-details">
-      <summary>ISO：<%= @photo.shooting_setting.iso %> ⓘ</summary>
-
-      <div class="shooting-setting-description">
-        ➤ISO感度は、カメラが光を受け取る感度を表します。
-        数値を上げると暗い場所でも明るく撮影できますが、
-        ノイズが増えやすくなります。
-      </div>
-    </details>
-  </div>
-
-  <div class="shooting-setting-item">
-
-    <details class="shooting-setting-show-details">
-      <summary>シャッタースピード：<%= @photo.shooting_setting.shutter_speed %> ⓘ</summary>
-
-      <div class="shooting-setting-description">
-        ➤シャッターが開いている時間を表します。
-        速くすると動きを止めやすく、
-        遅くすると動きのブレや光の軌跡を表現できます。
-      </div>
-    </details>
-  </div>
-
-  <div class="shooting-setting-item">
-  
-    <details class="shooting-setting-show-details">
-      <summary>焦点距離：<%= @photo.shooting_setting.focal_length %> ⓘ</summary>
-
-      <div class="shooting-setting-description">
-        ➤レンズの焦点距離を表す値です。
-        数値が小さいほど広い範囲を写し、
-        数値が大きいほど遠くの被写体を大きく写せます。
-      </div>
-    </details>
-  </div>
-
-<% end %>
-
-<h2>撮影技法・構図</h2>
-
-<% if @photo.techniques.any? %>
-
-  <% @photo.techniques.each do |technique| %>
-
-    <details class="technique-details">
-
-      <summary class="technique-header">
-        <span><%= technique.name %></span>
-        <span>ⓘ</span>
-      </summary>
-
-      <div class="technique-description">
-        <%= technique.description %>
-      </div>
-      
-    </details>
-
-  <% end %>
-<% end %>
-
-<%= link_to "編集する", edit_photo_path(@photo) %>
-
-<%= button_to "削除する",
-            @photo,
-            method: :delete,
-            data: { turbo_confirm: "本当に削除しますか？" } %>
-
-<h2>コメント</h2>
-
-<%= form_with model: [@photo, Comment.new] do |f| %>
-  <div>
-    <%= f.text_area :body, placeholder: "コメントを入力してください" %>
-  </div>
-
-  <%= f.submit "コメントする" %>
-<% end %>
-
-<h2>投稿されたコメント</h2>
-
-<% @photo.comments.each do |comment| %>
-  <div>
-    <p>
-      <strong><%= comment.user.username %></strong>
-    </p>
-
-    <p>
-      <%= comment.body %>
-    </p>
-
-    <% if comment.user == current_user %>
-      <%= button_to "削除", photo_comment_path(@photo, comment), method: :delete, data: { turbo_confirm: "このコメントを削除しますか？" } %>
     <% end %>
-  </div>
-<% end %>
 
-<h2>撮影チャレンジ</h2>
+  </section>
 
-<% @photo.challenges.each do |challenge| %>
-  <div>
-    <p>
-      <strong><%= challenge.user.username %></strong>
-    </p>
-
-    <% if challenge.image.attached? %>
-      <%= image_tag challenge.image, width: 300 %>
-    <% end %>
-
-    <% if challenge.comment.present? %>
-      <p><%= challenge.comment %></p>
-    <% end %>
-
-    <% if challenge.user == current_user %>
-      <%= button_to "削除", photo_challenge_path(@photo, challenge), method: :delete, data: { turbo_confirm: "この撮影チャレンジを削除しますか？" } %>
-    <% end %>
-  </div>
-<% end %>
-
-<p>投稿者 : <%= @photo.user.username %></p>
+</div>
