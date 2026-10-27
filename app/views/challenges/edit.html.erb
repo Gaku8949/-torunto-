@@ -1,134 +1,137 @@
 <%= link_to "← チャレンジ一覧に戻る", challenges_path, class: "back-link" %>
 
-<h1>撮影チャレンジを編集</h1>
+<div class="form-container">
 
-<h2>参考写真</h2>
+  <h1>撮影チャレンジを編集</h1>
 
-<% if @photo.image.attached? %>
-  <%= image_tag @photo.image, width: 400 %>
-<% end %>
+  <h2>参考写真</h2>
 
-<h2>チャレンジ写真</h2>
+  <% if @photo.image.attached? %>
+    <%= image_tag @photo.image, width: 400 %>
+  <% end %>
 
-<%= form_with model: [@photo, @challenge] do |f| %>
-  <div>
-    <%= f.label :image, "撮影した写真" %>
-    <%= f.file_field :image %>
-  </div>
+  <h2>チャレンジ写真</h2>
 
-   <div>
-      <%= f.label :title, "タイトル" %>
-      <%= f.text_field :title %>
+  <%= form_with model: [@photo, @challenge] do |f| %>
+    <div>
+      <%= f.label :image, "撮影した写真" %>
+      <%= f.file_field :image %>
     </div>
 
-  <div>
-    <%= f.label :location, "撮影場所" %>
-    <%= f.text_field :location %>
-  </div>
+    <div>
+        <%= f.label :title, "タイトル" %>
+        <%= f.text_field :title %>
+      </div>
 
-<%= f.fields_for :shooting_setting do |sf| %>
-  <div class="shooting-setting-item">
+    <div>
+      <%= f.label :location, "撮影場所" %>
+      <%= f.text_field :location %>
+    </div>
 
-      <details class="shooting-setting-details">
+  <%= f.fields_for :shooting_setting do |sf| %>
+    <div class="shooting-setting-item">
 
-        <summary class="shooting-setting-header">
-          <%= sf.label :aperture, "F値" %>
-          <%= sf.number_field :aperture, placeholder: "例：5.6" %>
+        <details class="shooting-setting-details">
+
+          <summary class="shooting-setting-header">
+            <%= sf.label :aperture, "F値" %>
+            <%= sf.number_field :aperture, placeholder: "例：5.6" %>
+            <span class="info-icon">ⓘ</span>
+          </summary>
+
+          <div class="shooting-setting-description">
+            ➤F値はレンズの絞りの大きさを表す値です。
+            数値が小さいほど背景をぼかしやすくなります。
+          </div>
+
+        </details>
+      </div>
+
+      <div class="shooting-setting-item">
+
+        <details class="shooting-setting-details">
+
+          <summary class="shooting-setting-header">
+            <%= sf.label :iso, "ISO" %>
+            <%= sf.number_field :iso, placeholder: "例：100" %>
+              <span class="info-icon">ⓘ</span>
+          </summary>
+
+          <div class="shooting-setting-description">
+            ➤ISO感度は、カメラが光を受け取る感度を表します。
+            数値を上げると暗い場所でも明るく撮影できますが、ノイズが増えやすくなります。
+          </div>
+
+        </details>
+      </div>
+
+      <div class="shooting-setting-item">
+        
+        <details class="shooting-setting-details">
+
+          <summary class="shooting-setting-header">
+            <%= sf.label :shutter_speed, "シャッタースピード" %>
+            <%= sf.text_field :shutter_speed, placeholder: "例：1/250" %>
+              <span class="info-icon">ⓘ</span>
+          </summary>
+
+          <div class="shooting-setting-description">
+            ➤シャッターが開いている時間を表します。
+            速くすると動きを止めやすく、遅くすると動きのブレや光の軌跡を表現できます。
+          </div> 
+
+        </details>
+      </div>
+
+      <div class="shooting-setting-item">
+
+        <details class="shooting-setting-details">
+
+          <summary class="shooting-setting-header">
+            <%= sf.label :focal_length, "焦点距離" %>
+            <%= sf.text_field :focal_length, placeholder: "例：50mm" %>
+              <span class="info-icon">ⓘ</span>
+          </summary>
+        
+          <div class="shooting-setting-description">
+            ➤レンズの焦点距離を表す値です。
+            数値が小さいほど広い範囲を写し、数値が大きいほど遠くの被写体を大きく写せます。
+          </div>
+
+        </details>
+      </div>
+      
+    <% end %>
+
+  <h3>意識した撮影技法・構図</h3>
+
+  <% @techniques.each do |technique| %>
+    <div class="technique-item">
+
+      <%= check_box_tag "challenge[technique_ids][]",
+          technique.id,
+          @challenge.technique_ids.include?(technique.id),
+          id: "challenge_technique_#{technique.id}" %>
+
+      <details class="technique-details">
+
+        <summary>
+          <%= label_tag "technique_#{technique.id}", technique.name %>
           <span class="info-icon">ⓘ</span>
         </summary>
 
-        <div class="shooting-setting-description">
-          ➤F値はレンズの絞りの大きさを表す値です。
-          数値が小さいほど背景をぼかしやすくなります。
+        <div class="technique-description">
+          <%= technique.description %>
         </div>
 
       </details>
+
     </div>
-
-    <div class="shooting-setting-item">
-
-      <details class="shooting-setting-details">
-
-        <summary class="shooting-setting-header">
-          <%= sf.label :iso, "ISO" %>
-          <%= sf.number_field :iso, placeholder: "例：100" %>
-            <span class="info-icon">ⓘ</span>
-        </summary>
-
-        <div class="shooting-setting-description">
-          ➤ISO感度は、カメラが光を受け取る感度を表します。
-          数値を上げると暗い場所でも明るく撮影できますが、ノイズが増えやすくなります。
-        </div>
-
-      </details>
-    </div>
-
-    <div class="shooting-setting-item">
-       
-      <details class="shooting-setting-details">
-
-        <summary class="shooting-setting-header">
-          <%= sf.label :shutter_speed, "シャッタースピード" %>
-          <%= sf.text_field :shutter_speed, placeholder: "例：1/250" %>
-            <span class="info-icon">ⓘ</span>
-        </summary>
-
-        <div class="shooting-setting-description">
-          ➤シャッターが開いている時間を表します。
-          速くすると動きを止めやすく、遅くすると動きのブレや光の軌跡を表現できます。
-        </div> 
-
-      </details>
-    </div>
-
-    <div class="shooting-setting-item">
-
-      <details class="shooting-setting-details">
-
-        <summary class="shooting-setting-header">
-          <%= sf.label :focal_length, "焦点距離" %>
-          <%= sf.text_field :focal_length, placeholder: "例：50mm" %>
-            <span class="info-icon">ⓘ</span>
-        </summary>
-      
-        <div class="shooting-setting-description">
-          ➤レンズの焦点距離を表す値です。
-          数値が小さいほど広い範囲を写し、数値が大きいほど遠くの被写体を大きく写せます。
-        </div>
-
-      </details>
-    </div>
-    
   <% end %>
 
-<h3>意識した撮影技法・構図</h3>
+  <%= f.label :comment, "コメント" %>
+  <%= f.text_area :comment, placeholder: "撮影してみた感想や意識したポイント" %>
 
-<% @techniques.each do |technique| %>
-  <div class="technique-item">
-
-    <%= check_box_tag "challenge[technique_ids][]",
-        technique.id,
-        @challenge.technique_ids.include?(technique.id),
-        id: "challenge_technique_#{technique.id}" %>
-
-    <details class="technique-details">
-
-      <summary>
-        <%= label_tag "technique_#{technique.id}", technique.name %>
-        <span class="info-icon">ⓘ</span>
-      </summary>
-
-      <div class="technique-description">
-        <%= technique.description %>
-      </div>
-
-    </details>
-
-  </div>
-<% end %>
-
-<%= f.label :comment, "コメント" %>
-<%= f.text_area :comment, placeholder: "撮影してみた感想や意識したポイント" %>
-
-<%= f.submit "チャレンジを更新する" %>
-<% end %>
+  <%= f.submit "チャレンジを更新する" %>
+  <% end %>
+</div>
