@@ -26,6 +26,11 @@ class ChallengesController < ApplicationController
     end
   end
 
+  def show
+    @challenge = Challenge.find(params[:id])
+    @photo = @challenge.reference_photo
+  end
+
   def edit
     @challenge = Challenge.find(params[:id])
     @photo = @challenge.reference_photo
