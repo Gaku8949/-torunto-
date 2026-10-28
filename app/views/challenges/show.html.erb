@@ -1,0 +1,386 @@
+<div class="challenge-show">
+
+  <!-- 戻る -->
+  <%= link_to "← チャレンジ一覧に戻る",
+      challenges_path,
+      class: "challenge-back-link" %>
+
+  <!-- タイトル・編集ボタン -->
+  <div class="challenge-show-header">
+
+   
+
+    <% if @challenge.user == current_user %>
+      <%= link_to "✎ 編集する",
+          edit_photo_challenge_path(@photo, @challenge),
+          class: "challenge-edit-button" %>
+    <% end %>
+
+  </div>
+
+
+  <!-- ==================== -->
+  <!-- 左右2カラム -->
+  <!-- ==================== -->
+
+  <div class="challenge-show-columns">
+
+    <!-- ==================== -->
+    <!-- 左：参考写真 -->
+    <!-- ==================== -->
+
+    <section class="challenge-show-card">
+
+      <h2>📷 参考写真</h2>
+
+      <!-- 参考写真 -->
+      <% if @photo.image.attached? %>
+        <%= image_tag @photo.image,
+            class: "challenge-show-image challenge-zoom-trigger" %>
+      <% end %>
+
+
+      <!-- 基本情報 -->
+      <div class="challenge-show-info">
+
+        <h3>タイトル</h3>
+        <p><%= @photo.title %></p>
+
+        <h3>撮影場所</h3>
+        <p><%= @photo.location %></p>
+
+      </div>
+
+
+      <!-- 撮影設定 -->
+      <% if @photo.shooting_setting.present? %>
+
+        <section class="challenge-show-section">
+
+          <h3>📷 撮影設定</h3>
+
+          <details class="shooting-setting-show-details">
+
+            <summary>
+                F値：
+                <%= @photo.shooting_setting.aperture %>
+                ⓘ
+            </summary>
+
+            <div class="shooting-setting-description">
+                F値はレンズの絞りの大きさを表す値です。
+                数値が小さいほど背景をぼかしやすくなります。
+            </div>
+
+          </details>
+
+
+          <details class="shooting-setting-show-details">
+
+            <summary>
+                ISO：
+                <%= @photo.shooting_setting.iso %>
+                ⓘ
+            </summary>
+
+            <div class="shooting-setting-description">
+                ISO感度は、カメラが光を受け取る感度を表します。
+                数値を上げると暗い場所でも明るく撮影できますが、
+                ノイズが増えやすくなります。
+            </div>
+
+          </details>
+
+
+          <details class="shooting-setting-show-details">
+
+            <summary>
+                シャッタースピード：
+                <%= @photo.shooting_setting.shutter_speed %>
+                ⓘ
+            </summary>
+
+            <div class="shooting-setting-description">
+                シャッターが開いている時間を表します。
+                速くすると動きを止めやすく、
+                遅くすると動きのブレや光の軌跡を表現できます。
+            </div>
+
+          </details>
+
+
+          <details class="shooting-setting-show-details">
+
+            <summary>
+                焦点距離：
+                <%= @photo.shooting_setting.focal_length %>
+                ⓘ
+            </summary>
+
+            <div class="shooting-setting-description">
+                レンズの焦点距離を表す値です。
+                数値が小さいほど広い範囲を写し、
+                数値が大きいほど遠くの被写体を大きく写せます。
+            </div>
+
+          </details>
+
+        </section>
+
+      <% else %>
+
+        <p>撮影設定は登録されていません。</p>
+
+      <% end %>
+
+
+      <!-- 撮影技法・構図 -->
+      <% if @photo.techniques.any? %>
+
+        <section class="challenge-show-section">
+
+            <h3>📷 撮影技法・構図</h3>
+
+            <div class="technique-list">
+
+            <% @photo.techniques.each do |technique| %>
+
+                <details class="technique-details">
+
+                <summary class="technique-header">
+                
+                    <span>
+                    <%= technique.name %>
+                    </span>
+
+                    <span>ⓘ</span>
+
+                </summary>
+
+                <div class="technique-description">
+                    <%= technique.description %>
+                </div>
+
+                </details>
+
+            <% end %>
+
+            </div>
+
+        </section>
+
+      <% end %>
+
+
+      <!-- コメント -->
+      <div class="challenge-show-section">
+
+        <h3>💬 コメント</h3>
+
+        <div class="challenge-comment">
+          <%= @photo.description.presence || "コメントはありません。" %>
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ==================== -->
+    <!-- 右：チャレンジ写真 -->
+    <!-- ==================== -->
+
+    <section class="challenge-show-card">
+
+      <h2>🔥 チャレンジ写真</h2>
+
+
+      <!-- チャレンジ写真 -->
+      <% if @challenge.image.attached? %>
+
+        <%= image_tag @challenge.image,
+            class: "challenge-show-image challenge-zoom-trigger" %>
+
+      <% end %>
+
+
+      <!-- 基本情報 -->
+      <div class="challenge-show-info">
+
+        <h3>タイトル</h3>
+        <p><%= @challenge.title %></p>
+
+        <h3>撮影場所</h3>
+        <p><%= @challenge.location %></p>
+
+      </div>
+
+
+      <!-- 撮影設定 -->
+      <% if @challenge.shooting_setting.present? %>
+
+        <section class="challenge-show-section">
+
+          <h3>📷 撮影設定</h3>
+
+          <details class="shooting-setting-show-details">
+
+            <summary>
+              F値：
+              <%= @challenge.shooting_setting.aperture %>
+              ⓘ
+            </summary>
+
+            <div class="shooting-setting-description">
+              F値はレンズの絞りの大きさを表す値です。
+              数値が小さいほど背景をぼかしやすくなります。
+            </div>
+
+          </details>
+
+          <details class="shooting-setting-show-details">
+
+            <summary>
+                ISO：
+                <%= @challenge.shooting_setting.iso %>
+                ⓘ
+            </summary>
+
+            <div class="shooting-setting-description">
+                ISO感度は、カメラが光を受け取る感度を表します。
+                数値を上げると暗い場所でも明るく撮影できますが、
+                ノイズが増えやすくなります。
+            </div>
+
+          </details>
+
+
+          <details class="shooting-setting-show-details">
+
+            <summary>
+                シャッタースピード：
+                <%= @challenge.shooting_setting.shutter_speed %>
+                ⓘ
+            </summary>
+
+            <div class="shooting-setting-description">
+                シャッターが開いている時間を表します。
+                速くすると動きを止めやすく、
+                遅くすると動きのブレや光の軌跡を表現できます。
+            </div>
+
+          </details>
+
+
+          <details class="shooting-setting-show-details">
+
+            <summary>
+                焦点距離：
+                <%= @challenge.shooting_setting.focal_length %>
+                ⓘ
+            </summary>
+
+            <div class="shooting-setting-description">
+                レンズの焦点距離を表す値です。
+                数値が小さいほど広い範囲を写し、
+                数値が大きいほど遠くの被写体を大きく写せます。
+            </div>
+
+          </details>
+
+        </section>
+
+      <% else %>
+
+        <p>撮影設定は登録されていません。</p>
+
+      <% end %>
+
+
+      <!-- 撮影技法・構図 -->
+      <% if @challenge.techniques.any? %>
+
+        <section class="challenge-show-section">
+
+          <h3>📷 撮影技法・構図</h3>
+
+          <div class="technique-list">
+
+            <% @challenge.techniques.each do |technique| %>
+
+              <details class="technique-details">
+
+                <summary class="technique-header">
+
+                  <span>
+                    <%= technique.name %>
+                  </span>
+
+                  <span>ⓘ</span>
+
+                </summary>
+
+                <div class="technique-description">
+                  <%= technique.description %>
+                </div>
+
+              </details>
+              
+            <% end %>
+
+          </div>
+
+        </section>
+
+      <% end %>
+
+
+      <!-- コメント -->
+      <div class="challenge-show-section">
+
+        <h3>💬 コメント</h3>
+
+        <div class="challenge-comment">
+          <%= @challenge.comment.presence || "コメントはありません。" %>
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+
+  <!-- ==================== -->
+  <!-- このチャレンジに挑戦 -->
+  <!-- ==================== -->
+
+  <div class="challenge-action">
+
+    <%= link_to "📷 このチャレンジに挑戦する",
+        new_photo_challenge_path(@photo),
+        class: "challenge-action-button" %>
+
+  </div>
+
+</div>
+
+<!-- 写真拡大モーダル -->
+<div id="challenge-zoom-modal" class="photo-zoom-modal">
+
+  <button
+    id="challenge-zoom-close"
+    class="photo-zoom-close">
+    ×
+  </button>
+
+  <img
+    id="challenge-zoom-image"
+    class="photo-zoom-image"
+    src=""
+    alt="拡大写真"
+  >
+
+</div>
+
