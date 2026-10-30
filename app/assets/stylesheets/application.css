@@ -1779,7 +1779,7 @@ main {
   padding: 14px;
   border: 1px solid #dfe3e8;
   border-radius: 8px;
-  background: #fafbfc
+  background: #ebfafa
 }
 
 .reference-setting div {
@@ -1823,7 +1823,7 @@ main {
   padding: 14px;
   border: 1px solid #dfe3e8;
   border-radius: 8px;
-  background: #fafbfc
+  background: #ebfafa
 }
 
 .reference-technique h3 {
@@ -1908,6 +1908,10 @@ main {
   resize: vertical;
 }
 
+/* タイトルと撮影場所の間隔 */
+.challenge-title-section {
+  margin-bottom: 16px;
+}
 
 /* =========================================
    撮影設定
@@ -1940,6 +1944,28 @@ main {
   border-radius: 5px;
 }
 
+/* チャレンジ投稿　撮影設定・撮影技法のカード */
+
+
+
+.challenge-new-container .challenge-new-blue-card {
+  background: #fafafa;
+  border: 1px solid #ccc;
+  padding: 10px 20px 20px;
+}
+
+.challenge-new-card {
+  margin-bottom: 16px;
+  padding: 12px 16px;
+
+  border: 1px solid #ddd;
+  border-radius: 8px;
+
+  background: #faebeb;
+  box-sizing: border-box;
+}
+
+
 
 /* =========================================
    技法
@@ -1963,7 +1989,8 @@ main {
 .challenge-technique-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px 16px;
+  column-gap: 16px;
+  row-gap: 2px;
 }
 
 .challenge-technique-item {
@@ -2157,7 +2184,7 @@ main {
 
   box-sizing: border-box;
 
-  background: #fff;
+  background: #f8f9fa;
 
   border: 1px solid #ddd;
   border-radius: 12px;
@@ -2165,6 +2192,7 @@ main {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 
   overflow: hidden;
+  
 }
 
 
@@ -2879,4 +2907,548 @@ main {
     width: 100%;
     min-width: 0;
   }
+}
+
+
+
+/* =========================
+   チャレンジ編集画面
+========================= */
+
+.challenge-edit-container {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 0 24px;
+}
+
+.challenge-edit-container h1 {
+  margin-bottom: 30px;
+}
+
+
+/* =========================
+   参考写真
+========================= */
+
+.challenge-edit-reference {
+  margin-bottom: 40px;
+}
+
+.challenge-edit-reference h2,
+.challenge-edit-section h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.challenge-edit-reference-image {
+  display: block;
+  width: 400px;
+  max-width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+
+/* =========================
+   セクション
+========================= */
+
+.challenge-edit-section {
+  margin-bottom: 35px;
+  padding: 25px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+}
+
+
+/* =========================
+   入力欄
+========================= */
+
+.challenge-edit-field {
+  margin-bottom: 20px;
+}
+
+.challenge-edit-field label {
+  display: block;
+  margin-bottom: 7px;
+  font-weight: bold;
+}
+
+.challenge-edit-field input[type="text"],
+.challenge-edit-field input[type="number"],
+.challenge-edit-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.challenge-edit-field input[type="file"] {
+  margin-top: 5px;
+}
+
+
+/* =========================
+   ⓘ 解説
+========================= */
+
+.edit-info-details {
+  display: inline-block;
+  margin-left: 8px;
+}
+
+.edit-info-details summary {
+  display: inline-block;
+  cursor: pointer;
+  color: #777;
+  list-style: none;
+  font-size: 14px;
+}
+
+.edit-info-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.edit-info-details summary:hover {
+  color: #333;
+}
+
+
+/* 解説本文 */
+
+.shooting-setting-description,
+.technique-description {
+  margin-top: 10px;
+  padding: 12px 15px;
+  background: #f7f7f7;
+  border-radius: 6px;
+  color: #555;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+
+
+/* ========================================
+   チャレンジ編集画面
+   ======================================== */
+
+.challenge-edit-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 40px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.challenge-edit-container h1 {
+  margin-bottom: 35px;
+  font-size: 28px;
+}
+
+
+/* ========================================
+   2カラムレイアウト
+   ======================================== */
+
+.challenge-edit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.challenge-edit-left,
+.challenge-edit-right {
+  min-width: 0;
+}
+
+
+/* ========================================
+   参考写真
+   ======================================== */
+
+.challenge-edit-reference {
+  margin-bottom: 25px;
+}
+
+.challenge-edit-reference h2,
+.challenge-edit-card h2 {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.challenge-edit-reference-image {
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+  height: 380px;
+
+  object-fit: contain;
+
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+
+/* ========================================
+   各カード
+   ======================================== */
+
+.challenge-edit-card {
+  margin-bottom: 20px;
+  padding: 20px;
+
+  border: 1px solid #ddd;
+  border-radius: 8px;
+
+  background: #fff;
+  box-sizing: border-box;
+}
+
+
+/* ========================================
+   チャレンジ写真アップロード
+   ======================================== */
+
+.challenge-image-upload-box {
+  min-height: 220px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 25px;
+
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+
+  background: #fafafa;
+
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.challenge-image-upload-icon {
+  margin-bottom: 15px;
+
+  font-size: 28px;
+  color: #999;
+}
+
+.challenge-image-upload-box strong {
+  margin-bottom: 10px;
+}
+
+.challenge-image-upload-box p {
+  margin: 5px 0;
+
+  color: #888;
+  font-size: 13px;
+}
+
+.challenge-image-upload-box span {
+  margin-bottom: 12px;
+
+  color: #999;
+  font-size: 12px;
+}
+
+.challenge-image-file-input {
+  max-width: 100%;
+}
+
+
+/* ========================================
+   入力欄
+   ======================================== */
+
+.challenge-edit-field {
+  margin-bottom: 0;
+}
+
+.challenge-edit-field label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-weight: bold;
+}
+
+.challenge-edit-field input[type="text"],
+.challenge-edit-field input[type="number"],
+.challenge-edit-field textarea,
+.challenge-edit-card > input[type="text"] {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 10px;
+
+  border: 1px solid #ccc;
+  border-radius: 5px;
+
+  background: #fff;
+}
+
+
+/* ========================================
+   コメント
+   ======================================== */
+
+.challenge-comment-field textarea {
+  min-height: 130px;
+
+  resize: vertical;
+}
+
+
+/* ========================================
+   撮影設定
+   ======================================== */
+
+/*
+  シャッタースピードの「かぶり」を防ぐため、
+  ラベル・入力欄・ⓘを3列に分ける。
+*/
+
+.challenge-shooting-setting-item {
+  padding: 12px 0;
+}
+
+.challenge-shooting-setting-item:last-child {
+  border-bottom: none;
+}
+
+.challenge-shooting-setting-details {
+  width: 100%;
+}
+
+.challenge-shooting-setting-header {
+  display: grid;
+
+  grid-template-columns: 120px minmax(0, 1fr) 20px;
+
+  align-items: center;
+
+  column-gap: 10px;
+
+  width: 100%;
+
+  cursor: pointer;
+
+  list-style: none;
+}
+
+.challenge-shooting-setting-header::-webkit-details-marker {
+  display: none;
+}
+
+.challenge-shooting-setting-header label {
+  min-width: 0;
+
+  white-space: nowrap;
+
+  font-size: 14px;
+}
+
+.challenge-shooting-setting-header input {
+  width: 100%;
+
+  min-width: 0;
+
+  box-sizing: border-box;
+
+  padding: 8px 10px;
+
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.challenge-info-icon {
+  color: #aaa;
+
+  font-size: 13px;
+
+  white-space: nowrap;
+}
+
+.challenge-shooting-setting-description {
+  margin-top: 10px;
+  padding: 12px 15px;
+
+  background: #f7f7f7;
+
+  border-radius: 6px;
+
+  color: #555;
+
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+
+/* ========================================
+   撮影技法・構図
+   ======================================== */
+
+.challenge-edit-optional {
+  font-size: 10px;
+  color: #6688aa;
+  font-weight: normal;
+}
+
+.challenge-edit-container .challenge-technique-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 40px;
+  row-gap: 22px;
+}
+
+.challenge-edit-container .challenge-edit-blue-card {
+  background: #fafafa;
+  border: 1px solid #ccc;
+}
+
+.challenge-technique-item {
+  display: grid;
+
+  grid-template-columns: 20px minmax(0, 1fr);
+
+  align-items: start;
+
+  gap: 8px;
+
+  padding: 12px 0;
+
+  
+}
+
+.challenge-technique-item:last-child {
+  border-bottom: none;
+}
+
+.challenge-technique-item > input[type="checkbox"] {
+  margin-top: 3px;
+
+  cursor: pointer;
+}
+
+.challenge-technique-details {
+  min-width: 0;
+}
+
+.challenge-technique-details summary {
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  cursor: pointer;
+
+  list-style: none;
+
+  font-size: 14px;
+}
+
+.challenge-technique-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.challenge-technique-description {
+  margin-top: 10px;
+  padding: 12px 15px;
+
+  background: #f7f7f7;
+
+  border-radius: 6px;
+
+  color: #555;
+
+  font-size: 13px;
+
+  line-height: 1.8;
+}
+
+
+/* ========================================
+   ボタン
+   ======================================== */
+
+.challenge-edit-actions {
+  display: flex;
+
+  gap: 15px;
+
+  margin-top: 30px;
+}
+
+.challenge-cancel-button,
+.challenge-update-button {
+  flex: 1;
+
+  padding: 12px 20px;
+
+  border-radius: 5px;
+
+  text-align: center;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  box-sizing: border-box;
+}
+
+.challenge-cancel-button {
+  border: 1px solid #ccc;
+
+  background: #fff;
+
+  color: #333;
+}
+
+.challenge-update-button {
+  border: none;
+
+  background: #202938;
+
+  color: #fff;
+}
+
+.challenge-update-button:hover {
+  opacity: 0.85;
+}
+
+
+/* ========================================
+   画面が狭い場合
+   ======================================== */
+
+@media (max-width: 800px) {
+
+  .challenge-edit-container {
+    margin: 20px auto;
+    padding: 20px;
+  }
+
+  .challenge-edit-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .challenge-edit-reference-image {
+    height: 300px;
+  }
+
+  .challenge-shooting-setting-header {
+    grid-template-columns: 110px minmax(0, 1fr) 20px;
+  }
+
 }
