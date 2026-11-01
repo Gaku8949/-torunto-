@@ -460,3 +460,35 @@ document.addEventListener("turbo:load", () => {
   });
 
 });
+
+
+  // -----------------------------
+  // プロフィールタブ
+  // -----------------------------
+document.addEventListener("click", (event) => {
+  const tab = event.target.closest(".profile-tab");
+
+  if (!tab) return;
+
+  const target = tab.dataset.tab;
+
+  // タブの選択状態を変更
+  document.querySelectorAll(".profile-tab").forEach(item => {
+    item.classList.remove("active");
+  });
+
+  tab.classList.add("active");
+
+  // 表示する一覧を切り替え
+  document.querySelectorAll(".profile-tab-content").forEach(content => {
+    content.hidden = true;
+    content.classList.remove("active");
+  });
+
+  const targetContent = document.getElementById(target);
+
+  if (targetContent) {
+    targetContent.hidden = false;
+    targetContent.classList.add("active");
+  }
+});
