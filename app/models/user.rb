@@ -9,5 +9,7 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
 
   has_many :challenges, dependent: :destroy
+
+  has_one_attached :avatar
   
 end

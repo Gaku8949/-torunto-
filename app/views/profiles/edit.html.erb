@@ -14,12 +14,17 @@
       <%= f.email_field :email %>
     </div>
 
+    <div class="profile-image-field">
+      <%= f.label :avatar, "プロフィール写真" %>
+      <%= f.file_field :avatar, accept: "image/*" %>
+    </div>
+
     <div>
       <%= f.submit "保存" %>
     </div>
 
-    <% end %>
+  <% end %>
 
-    <%=link_to "プロフィールに戻る", profile_path %>
+  <%=link_to "プロフィールに戻る", profile_path %>
 
 </div>

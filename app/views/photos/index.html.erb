@@ -21,7 +21,17 @@
         <p>📍  <%= photo.location %></p>
       <% end %>
 
-      <p>👤  <%= photo.user.username %></p>
+      <div class="photo-user">
+        <div class="profile-avatar">
+          <% if photo.user.avatar.attached? %>
+            <%= image_tag photo.user.avatar %>
+          <% else %>
+            <%= photo.user.username.first.upcase %>
+          <% end %>
+        </div>
+
+        <span><%= photo.user.username %></span>
+      </div>
 
       <p class="photo-stats">
         ♡ <%= photo.favorites.count %>

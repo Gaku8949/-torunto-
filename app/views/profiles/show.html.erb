@@ -1,43 +1,204 @@
 <div class="profile-page">
 
-  <h1>プロフィール</h1>
-  <%= link_to "プロフィールを編集", edit_profile_path %>
+  <!-- ページタイトル -->
+  <div class="profile-header">
+    <h1>プロフィール</h1>
 
-  <section class="profile-into">
-  <p>ユーザー名: <%= @user.username %></p>
-  </section>
+    <%= link_to edit_profile_path, class: "profile-edit-button" do %>
+      ✎ プロフィールを編集
+    <% end %>
+  </div>
 
-  <p>メールアドレス: <%= @user.email %></p>
-  <section class="profile-photos">
-    <h2>投稿した写真</h2>
+  <!-- プロフィール情報 -->
+  <section class="profile-info-card">
 
-    <% if @photos.any? %>
-      <div class="photo-list">
-        <% @photos.each do |photo| %>
+    <div class="profile-main">
 
-          <%= link_to photo_path(photo), class: "photo-card-link" do %>
-
-            <div class="photo-card">
-
-              <% if photo.image.attached? %>
-                <%= image_tag photo.image %>
-              <% end %>
-
-              <h3>
-                <%= photo.title %>
-              </h3>
-
-              <% if photo.location.present? %>
-                <p>📍 <%= photo.location %></p>
-              <% end %>
-
-            </div>
-          <% end %>
+      <!-- プロフィール画像（現在はユーザー名の顔文字を表示） -->
+      <div class="profile-avatar">
+        <% if @user.avatar.attached? %>
+          <%= image_tag @user.avatar %>
+        <% else %>
+          <%= @user.username.first.upcase %>
         <% end %>
       </div>
-    <% else %>
-      <p>まだ写真を投稿していません。</p>
-    <% end %>
+
+      <!-- ユーザー情報 -->
+      <div class="profile-details">
+        <h2><%= @user.username %></h2>
+
+        <p class="profile-email">
+          ✉ <%= @user.email %>
+        </p>
+      </div>
+
+    </div>
+
+    <!-- プロフィール統計 -->
+    <div class="profile-status">
+
+      <div class="profile-stat">
+        <span class="stat-number"><%= @photo_count %></span>
+        <span class="stat-label">投稿した写真</span>
+      </div>
+
+      <div class="profile-stat">
+        <span class="stat-number"><%= @challenge_count %></span>
+        <span class="stat-label">チャレンジした写真</span>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- 写真一覧タブ -->
+
+  <section class="profile-photos">
+
+    <div class="profile-tabs">
+
+      <button type="button" class="profile-tab active" data-tab="photos">
+        投稿した写真
+      </button>
+
+      <button type="button" class="profile-tab" data-tab="challenges">
+        チャレンジした写真
+      </button>
+
+    </div>
+
+    <!-- 投稿した写真 -->
+    <div class="profile-tab-content active" id="photos">
+
+      <% if @photos.any? %>
+
+        <div class="profile-photo-grid">
+
+          <% @photos.each do |photo| %>
+
+            <%= link_to photo_path(photo), class: "profile-photo-link" do %>
+
+              <div class="profile-photo-card">
+
+                <!-- 写真 -->
+                <div class="profile-photo-image">
+
+                  <% if photo.image.attached? %>
+                    <%= image_tag photo.image %>
+                  <% else %>
+                    <div class="no-image">
+                      写真がありません
+                    </div>
+                  <% end %>
+                
+                </div>
+
+                <!--　写真情報 -->
+                <div class="profile-photo-content">
+
+                  <h3><%= photo.title %></h3>
+
+                  <% if photo.location.present? %>
+                    <p class="profile-photo-location">
+                      📍 <%= photo.location %>
+                    </p>
+                  <% end %>
+
+                  <!-- お気に入り・コメント数 -->
+                  <div class="profile-photo-stats">
+
+                    <span>
+                      ♡ <%= photo.favorites.count %>
+                    </span>
+
+                    <span>
+                      ♧ <%= photo.comments.count %>
+                    </span>
+
+                  </div>
+
+                </div>
+              
+              </div>
+
+            <% end %>
+
+          <% end %>
+
+        </div>
+
+      <% else %>
+
+        <div class="profile-empty">
+          <p>まだ写真を投稿していません。</p>
+          <%= link_to "写真を投稿する", new_photo_path %>
+        </div>
+
+      <% end %>
+
+    </div>  
+
+
+    <!-- チャレンジした写真 -->
+    <div class="profile-tab-content" id="challenges" hidden>
+
+        <% if @challenges.any? %>
+
+        <div class="profile-photo-grid">
+
+          <% @challenges.each do |challenge| %>
+
+            <%= link_to photo_challenge_path(challenge.reference_photo, challenge),
+                class: "profile-photo-link" do %>
+
+              <div class="profile-photo-card">
+
+                <div class="profile-photo-image">
+
+                  <% if challenge.image.attached? %>
+                    <%= image_tag challenge.image %>
+                  <% else %>
+                    <div class="no-image">
+                      写真がありません
+                    </div>
+                  <% end %>
+
+                </div>
+
+                <div class="profile-photo-content">
+
+                  <h3><%= challenge.title %></h3>
+
+                  <% if challenge.location.present? %>
+                    <p class="profile-photo-location">
+                      📍 <%= challenge.location %>
+                    </p>
+                  <% end %>
+
+                  <% if challenge.comment.present? %>
+                    <p><%= challenge.comment %></p>
+                  <% end %>
+
+                </div>
+
+              </div>
+            
+            <% end %>
+
+          <% end %>
+
+        </div>
+
+      <% else %>
+
+        <div class="profile-empty">
+          <p>まだチャレンジした写真がありません。</p>
+        </div>
+
+      <% end %>
+
+    </div>
+  
   </section>
 
 </div>

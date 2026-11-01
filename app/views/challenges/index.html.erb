@@ -94,9 +94,17 @@
 
           <div class="challenge-meta">
 
-            <span class="challenge-user">
-              👤 <%= challenge.user.username %>
-            </span>
+            <div class="photo-user">
+              <div class="profile-avatar">
+                <% if challenge.user.avatar.attached? %>
+                  <%= image_tag challenge.user.avatar %>
+                <% else %>
+                  <%= challenge.user.username.first.upcase %>
+                <% end %>
+              </div>
+
+              <span><%= challenge.user.username %></span>
+            </div>
 
             <span class="challenge-stats">
 
