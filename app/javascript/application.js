@@ -462,22 +462,23 @@ document.addEventListener("turbo:load", () => {
 });
 
 
-  // -----------------------------
-  // プロフィールタブ
-  // -----------------------------
-document.addEventListener("click", (event) => {
-  const tab = event.target.closest(".profile-tab");
+// ------------------------------
+// プロフィールタブ
+// ------------------------------
 
-  if (!tab) return;
-
-  const target = tab.dataset.tab;
-
+const activateProfileTab = (target) => {
   // タブの選択状態を変更
   document.querySelectorAll(".profile-tab").forEach(item => {
     item.classList.remove("active");
   });
 
-  tab.classList.add("active");
+  const activeTab = document.querySelector(
+    `.profile-tab[data-tab="${target}"]`
+  );
+
+  if (activeTab) {
+    activeTab.classList.add("active");
+  }
 
   // 表示する一覧を切り替え
   document.querySelectorAll(".profile-tab-content").forEach(content => {
@@ -491,4 +492,53 @@ document.addEventListener("click", (event) => {
     targetContent.hidden = false;
     targetContent.classList.add("active");
   }
+};
+
+// Turboによる画面遷移後もタブを初期化
+document.addEventListener("turbo:load", () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const initialTab = urlParams.get("tab") || "photos";
+
+  activateProfileTab(initialTab);
 });
+
+// タブクリック時の処理
+document.addEventListener("click", (event) => {
+  const tab = event.target.closest(".profile-tab");
+
+  if (!tab) return;
+
+  activateProfileTab(tab.dataset.tab);
+});
+
+// ------------------------------
+// プロフィールのページネーション：スクロール位置を維持
+// ------------------------------
+
+const profileScrollKey = "profileScrollPosition";
+
+// ページネーションをクリックしたときに位置を保存
+document.addEventListener("click", (event) => {
+  const paginationLink = event.target.closest(".profile-page .pagination a");
+
+  if (!paginationLink) return;
+
+  sessionStorage.setItem(profileScrollKey, window.scrollY);
+});
+
+// ページ移動後に保存した位置へ戻す
+function restoreProfileScroll() {
+  const savedPosition = sessionStorage.getItem(profileScrollKey);
+
+  if (savedPosition === null) return;
+
+  sessionStorage.removeItem(profileScrollKey);
+
+  requestAnimationFrame(() => {
+    window.scrollTo(0, Number(savedPosition));
+  });
+}
+
+// 通常のページ読み込み・Turboによるページ遷移に対応
+document.addEventListener("DOMContentLoaded", restoreProfileScroll);
+document.addEventListener("turbo:load", restoreProfileScroll);

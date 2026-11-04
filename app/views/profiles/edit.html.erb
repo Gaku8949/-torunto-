@@ -1,30 +1,60 @@
-<div class="profile-page">
+<div class="profile-edit-page">
 
-  <h1>プロフィール編集</h1>
+  <div class="profile-edit-header">
+    <h1>プロフィール編集</h1>
+    <p>アカウント情報やプロフィール写真を変更できます。</p>
+  </div>
 
-  <%= form_with model: @user, url: edit_profile_path, method: :patch do |f| %>
+  <div class="profile-edit-card">
 
-    <div>
-      <%= f.label :username, "ユーザー名" %>
-      <%= f.text_field :username %>
-    </div>
+    <%= form_with model: @user, url: edit_profile_path, method: :patch, class: "profile-edit-form" do |f| %>
 
-    <div>
-      <%= f.label :email, "メールアドレス" %>
-      <%= f.email_field :email %>
-    </div>
+      <!-- プロフィール写真 -->
+      <div class="profile-edit-avatar-section">
+        <h2>プロフィール写真</h2>
 
-    <div class="profile-image-field">
-      <%= f.label :avatar, "プロフィール写真" %>
-      <%= f.file_field :avatar, accept: "image/*" %>
-    </div>
+        <div class="profile-edit-avatar">
+          <% if @user.avatar.attached? %>
+            <%= image_tag @user.avatar, class: "profile-edit-avatar-image" %>
+          <% else %>
+            <div class="profile-edit-avatar-placeholder">
+              <%= @user.username.first.upcase %>
+            </div>
+          <% end %>
+        </div>
 
-    <div>
-      <%= f.submit "保存" %>
-    </div>
+        <div class="profile-image-field">
+          <%= f.label :avatar, "写真を選択", class: "profile-image-label" %>
+          <%= f.file_field :avatar, accept: "image/*", class: "profile-image-input" %>
+          <p>JPG・PNGなどの画像を選択してください。</p>
+        </div>
+      </div>
 
-  <% end %>
+      <div class="profile-edit-divider"></div>
 
-  <%=link_to "プロフィールに戻る", profile_path %>
+      <!-- ユーザー名 -->
+      <div class="profile-form-group">
+        <%= f.label :username, "ユーザー名" %>
+        <%= f.text_field :username, class: "profile-form-input" %>
+      </div>
+
+      <!-- メールアドレス -->
+      <div class="profile-form-group">
+        <%= f.label :email, "メールアドレス" %>
+        <%= f.email_field :email, class: "profile-form-input" %>
+      </div>
+
+      <!-- 保存ボタン -->
+      <div class="profile-edit-actions">
+        <%= f.submit "変更を保存", class: "profile-save-button" %>
+      </div>
+
+    <% end %>
+
+  </div>
+
+  <div class="profile-edit-back">
+    <%= link_to "← プロフィールに戻る", profile_path %>
+  </div>
 
 </div>

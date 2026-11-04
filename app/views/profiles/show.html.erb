@@ -112,7 +112,7 @@
                     </span>
 
                     <span>
-                      ♧ <%= photo.comments.count %>
+                      💬 <%= photo.comments.count %>
                     </span>
 
                   </div>
@@ -126,6 +126,11 @@
           <% end %>
 
         </div>
+
+        <div class="pagination">
+          <%= paginate @photos, param_name: :photos_page,
+                                params: { tab: "photos" } %>
+        </div>  
 
       <% else %>
 
@@ -187,6 +192,11 @@
 
           <% end %>
 
+        </div>
+
+        <div class="pagination">
+          <%= paginate @challenges, param_name: :challenges_page,
+                                    params: { tab: "challenges" } %>
         </div>
 
       <% else %>
