@@ -41,4 +41,9 @@ Technique.create!([
     category: "technique",
     description: "➤動く被写体に合わせてカメラを動かし、背景を流して撮影する技法"
   }
+  {
+    name: "その他",
+    category: "technique"
+    description: "➤説明欄やコメント欄にて使用した構図を入力してください"
+  }
 ])

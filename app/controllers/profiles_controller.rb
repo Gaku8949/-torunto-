@@ -4,8 +4,15 @@ class ProfilesController < ApplicationController
   def show
     @user = current_user
     @photos = current_user.photos
+                          .order(created_at: :desc)
+                          .page(params[:photos_page])
+                          .per(6)
+
     @photo_count = current_user.favorites.count
     @challenges = current_user.challenges
+                              .order(created_at: :desc)
+                              .page(params[:challenges_page])
+                              .per(6)
     @challenge_count = current_user.challenges.count
   end
 

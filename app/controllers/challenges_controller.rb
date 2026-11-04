@@ -3,7 +3,7 @@ class ChallengesController < ApplicationController
 
 
   def index
-    @challenges = current_user.challenges
+    @challenges = Challenge.order(created_at: :desc).page(params[:page]).per(6)
   end
 
   def new
