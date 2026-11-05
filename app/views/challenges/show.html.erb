@@ -8,12 +8,17 @@
   <!-- タイトル・編集ボタン -->
   <div class="challenge-show-header">
 
-   
-
     <% if @challenge.user == current_user %>
       <%= link_to "✎ 編集する",
           edit_photo_challenge_path(@photo, @challenge),
           class: "challenge-edit-button" %>
+
+      <%= button_to "削除する",
+          challenge_path(@challenge),
+          method: :delete,
+          data: { turbo_confirm: "このチャレンジを削除しますか？" },
+          class: "delete-button" ,
+          form: { class: "challenge-delete-form" } %>
     <% end %>
 
   </div>

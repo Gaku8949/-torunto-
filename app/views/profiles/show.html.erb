@@ -65,6 +65,10 @@
         チャレンジした写真
       </button>
 
+      <button type="button" class="profile-tab" data-tab="favorites">
+        お気に入り
+      </button>
+
     </div>
 
     <!-- 投稿した写真 -->
@@ -208,7 +212,84 @@
       <% end %>
 
     </div>
-  
+
+    <!-- お気に入りした写真 -->
+    <div class="profile-tab-content" id="favorites" hidden>
+
+      <% if @favorite_photos.any? %>
+
+        <div class="profile-photo-grid">
+
+          <% @favorite_photos.each do |photo| %>
+
+            <%= link_to photo_path(photo), class: "profile-photo-link" do %>
+
+              <div class="profile-photo-card">
+
+                <!-- 写真 -->
+                <div class="profile-photo-image">
+
+                  <% if photo.image.attached? %>
+                    <%= image_tag photo.image %>
+                  <% else %>
+                    <div class="no-image">
+                      写真がありません
+                    </div>
+                  <% end %>
+
+                </div>
+
+                <!-- 写真情報 -->
+                <div class="profile-photo-content">
+
+                  <h3><%= photo.title %></h3>
+
+                  <% if photo.location.present? %>
+                    <p class="profile-photo-location">
+                      📍 <%= photo.location %>
+                    </p>
+                  <% end %>
+
+                  <!-- お気に入り・コメント数 -->
+                  <div class="profile-photo-status">
+
+                    <span>
+                      ♡ <%= photo.favorites.count %>
+                    </span>
+
+                    <span>
+                      💬 <%= photo.comments.count %>
+                    </span>
+
+                  </div>
+
+                </div>
+              
+              </div>
+
+            <% end %>
+
+          <% end %>
+
+        </div>
+
+        <div class="pagination">
+          <%= paginate @favorite_photos,
+                       param_name: :favorites_page,
+                       params: { tab: "favorites" } %>
+        </div>
+      
+      <% else %>
+
+        <div class="profile-empty">
+          <p>まだお気に入りした写真がありません。</p>
+          <%= link_to "写真一覧を見る", photos_path %>
+        </div>
+
+      <% end %>
+
+    </div>
+
   </section>
 
 </div>
