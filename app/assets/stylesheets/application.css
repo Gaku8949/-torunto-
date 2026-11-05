@@ -247,6 +247,50 @@ main {
     object-fit: cover;
 }
 
+/* ==========================
+   共通フッター
+========================== */
+
+.site-footer {
+  width: 100%;
+  padding: 28px 20px;
+  text-align: center;
+  background-color: #f8f8f8;
+  border-top: 1px solid #e5e5e5;
+  margin-top: 40px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.footer-links a {
+  color: #555;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+.footer-divider {
+  color: #ccc;
+}
+
+.copyright {
+  margin: 0;
+  color: #888;
+  font-size: 12px;
+}
+
+
 /* =========================
    ホーム画面 ホームヒーロー
    ========================= */
@@ -4008,5 +4052,90 @@ main {
 @media (max-width: 600px) {
   .how-to-use-page {
     padding: 15px 10px;
+  }
+}
+
+/* ==========================
+   利用規約・プライバシーポリシー
+========================== */
+
+.legal-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 40px 64px;
+  color: #333;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+
+/* ページタイトル */
+.legal-page h1 {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 32px;
+  padding-bottom: 18px;
+  border-bottom: 2px solid #e5e5e5;
+  line-height: 1.5;
+}
+
+/* 条文タイトル */
+.legal-page h2 {
+  font-size: 21px;
+  font-weight: 700;
+  margin-top: 36px;
+  margin-bottom: 16px;
+  padding-left: 14px;
+  border-left: 4px solid #333;
+  line-height: 1.5;
+}
+
+/* 本文 */
+.legal-page p {
+  font-size: 15px;
+  line-height: 1.9;
+  margin-bottom: 14px;
+}
+
+/* 番号付きリスト・箇条書き */
+.legal-page ol,
+.legal-page ul {
+  padding-left: 28px;
+  margin-top: 12px;
+  margin-bottom: 24px;
+}
+
+/* リストの各項目 */
+.legal-page li {
+  font-size: 15px;
+  line-height: 1.9;
+  padding-left: 2px;
+  margin-bottom: 6px;
+}
+
+/* 入れ子になったリスト */
+.legal-page li ul,
+.legal-page li ol {
+  margin-top: 8px;
+  margin-bottom: 12px;
+}
+
+/* スマートフォン対応 */
+@media (max-width: 768px) {
+  .legal-page {
+    padding: 30px 20px 40px;
+  }
+
+  .legal-page h1 {
+    font-size: 24px;
+  }
+
+  .legal-page h2 {
+    font-size: 18px;
+    margin-top: 28px;
+  }
+
+  .legal-page p,
+  .legal-page li {
+    font-size: 14px;
   }
 }
