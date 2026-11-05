@@ -50,5 +50,18 @@
     <main>
     <%= yield %>
     </main>
+
+    <footer class="site-footer">
+      <div class="footer-links">
+        <%= link_to "利用規約", terms_path %>
+        <span class="footer-divider">|</span>
+        <%= link_to "プライバシーポリシー", privacy_path %>
+      </div>
+
+      <p class="copyright">
+        &copy; 2026 TORUNTO
+      </p>
+    </footer>
+
   </body>
 </html>
