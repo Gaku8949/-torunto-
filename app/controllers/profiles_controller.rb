@@ -8,12 +8,18 @@ class ProfilesController < ApplicationController
                           .page(params[:photos_page])
                           .per(6)
 
-    @photo_count = current_user.favorites.count
+    @photo_count = current_user.photos.count
     @challenges = current_user.challenges
                               .order(created_at: :desc)
                               .page(params[:challenges_page])
                               .per(6)
     @challenge_count = current_user.challenges.count
+    @favorite_photos = current_user.favorite_photos
+                                   .order(created_at: :desc)
+                                   .page(params[:favorites_page])
+                                   .per(6)
+
+    @favorite_count = current_user.favorite_photos.count
   end
 
   def edit

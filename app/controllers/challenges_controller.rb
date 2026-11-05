@@ -58,9 +58,9 @@ class ChallengesController < ApplicationController
 
     if @challenge.user == current_user
       @challenge.destroy
-      redirect_to @challenge.reference_photo, notice: "撮影チャレンジを削除しました"
+      redirect_to challenges_path, notice: "撮影チャレンジを削除しました", status: :see_other
     else
-      redirect_to @challenge.reference_photo, alert: "このチャレンジを削除する権限がありません"
+      redirect_to challenges_path, alert: "このチャレンジを削除する権限がありません"
     end
   end
   

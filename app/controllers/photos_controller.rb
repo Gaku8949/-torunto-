@@ -45,7 +45,7 @@ class PhotosController < ApplicationController
      @photo = Photo.find(params[:id])
      @photo.destroy
 
-     redirect_to photo_path, notice: "写真を削除しました"
+     redirect_to photos_path, notice: "写真を削除しました", status: :see_other
    end
    
    private
