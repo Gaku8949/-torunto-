@@ -1060,15 +1060,32 @@ main {
 }
 
 
-/* お気に入り */
-
-.photo-favorite button {
+/* 写真詳細画面のお気に入りボタン */
+.photo-favorite-button {
   border: 1px solid #ddd;
-  background: #fff;
-  border-radius: 8px;
-  padding: 10px 18px;
+  border-radius: 6px;
+  background: white;
+  padding: 9px 16px;
   cursor: pointer;
+  font-size: 13px;
+  color: #333;
+  transition: all 0.2s ease;
 }
+
+/* お気に入り済み */
+.photo-favorite-button.liked {
+  color: #e85d75;
+  border-color: #e85d75;
+}
+
+/* マウスを乗せたとき */
+.photo-favorite-button:hover {
+  background: #fff5f7;
+  color: #e85d75;
+  border-color: #e85d75;
+}
+
+
 
 
 /* =========================================
@@ -2535,26 +2552,6 @@ main {
   align-items: center;
   gap: 8px;
   color: #666;
-}
-
-/* いいねボタン */
-.challenge-favorite-button {
-  border: none;
-  background: none;
-  padding: 0;
-  cursor: pointer;
-  font-size: 14px;
-  color: #777;
-}
-
-/* いいね済み */
-.challenge-favorite-button.liked {
-  color: #e85d75;
-}
-
-/* マウスを乗せたとき */
-.challenge-favorite-button:hover {
-  color: #e85d75;
 }
 
 /* コメント */
@@ -4301,4 +4298,56 @@ main {
   .devise-card h1 {
     font-size: 24px;
   }
+}
+
+.challenge-show-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.challenge-show-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* お気に入りボタン */
+.challenge-favorite-button {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: white;
+  padding: 9px 16px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #333;
+}
+
+.challenge-favorite-button.liked {
+  color: #e85d75;
+  border-color: #e85d75;
+}
+
+.challenge-favorite-button:hover {
+  background: #fff5f7;
+  color: #e85d75;
+}
+
+/* お気に入り欄のチャレンジ作品バッジ */
+.challenge-favorite-image {
+  position: relative;
+}
+
+.challenge-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(30, 30, 30, 0.8);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: bold;
 }

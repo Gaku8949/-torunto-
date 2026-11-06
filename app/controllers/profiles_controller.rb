@@ -16,10 +16,11 @@ class ProfilesController < ApplicationController
     @challenge_count = current_user.challenges.count
     @favorite_photos = current_user.favorite_photos
                                    .order(created_at: :desc)
-                                   .page(params[:favorites_page])
-                                   .per(6)
 
-    @favorite_count = current_user.favorite_photos.count
+    @favorite_challenges = current_user.favorite_challenges
+                                   .order(created_at: :desc)
+
+    @favorite_count = @favorite_photos.count + @favorite_challenges.count
   end
 
   def edit

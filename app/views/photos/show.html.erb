@@ -20,11 +20,12 @@
         <%= button_to "♡ お気に入り解除",
                       photo_favorite_path(@photo, favorite),
                       method: :delete,
-                      data: { turbo_confirm: "お気に入りを解除しますか？" } %>
+                      class: "photo-favorite-button liked" %>
       <% else %>
         <%= button_to "♡ お気に入り",
                       photo_favorites_path(@photo),
-                      method: :post %>
+                      method: :post,
+                      class: "photo-favorite-button" %>
       <% end %>
     </div>
   </div>

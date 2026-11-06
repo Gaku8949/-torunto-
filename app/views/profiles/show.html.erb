@@ -216,7 +216,7 @@
     <!-- お気に入りした写真 -->
     <div class="profile-tab-content" id="favorites" hidden>
 
-      <% if @favorite_photos.any? %>
+      <% if @favorite_photos.any? || @favorite_challenges.any? %>
 
         <div class="profile-photo-grid">
 
@@ -254,7 +254,7 @@
                   <div class="profile-photo-status">
 
                     <span>
-                      ♡ <%= photo.favorites.count %>
+                      ♥ <%= photo.favorites.count %>
                     </span>
 
                     <span>
@@ -271,13 +271,55 @@
 
           <% end %>
 
+          <% @favorite_challenges.each do |challenge| %>
+
+            <%= link_to photo_challenge_path(challenge.reference_photo,challenge),
+                class: "profile-photo-link" do %>
+
+              <div class="profile-photo-card">
+
+                <div class="profile-photo-image challenge-favorite-image">
+
+                  <% if challenge.image.attached? %>
+                    <%= image_tag challenge.image %>
+                  <% else %>
+                    <div class="no-image">
+                      写真がありません
+                    </div>
+                  <% end %>
+
+                  <span class="challenge-badge">
+                    🔥 チャレンジ作品
+                  </span>
+
+                </div>
+
+                <div class="profile-photo-content">
+
+                  <h3><%= challenge.title %></h3>
+
+                  <% if challenge.location.present? %>
+                    <p class="profile-photo-location">
+                      📍 <%= challenge.location %>
+                    </p>
+                  <% end %>
+
+                  <div class="profile-photo-status">
+                    <span>
+                      ♥ <%= challenge.challenge_favorites.count %>
+                    </span>
+                  </div>
+
+                </div>
+
+              </div>
+
+            <% end %>
+
+          <% end %>
+
         </div>
 
-        <div class="pagination">
-          <%= paginate @favorite_photos,
-                       param_name: :favorites_page,
-                       params: { tab: "favorites" } %>
-        </div>
       
       <% else %>
 
