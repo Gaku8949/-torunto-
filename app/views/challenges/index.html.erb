@@ -108,7 +108,15 @@
 
             <span class="challenge-stats">
 
-              <%= render "favorite", challenge: challenge %>
+              <span class="challenge-favorite-display">
+                <% if challenge.favorited_by?(current_user) %>
+                  ♥
+                <% else %>
+                  ♡
+                <% end %>
+
+                <%= challenge.challenge_favorites.count %>
+              </span>
 
               <span class="challenge-comment-count">
                 💬 <%= challenge.challenge_comments.count %>

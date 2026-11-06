@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :favorite_photos, through: :favorites, source: :photo
 
   has_many :challenges, dependent: :destroy
+  has_many :challenge_favorites, dependent: :destroy
+  has_many :favorite_challenges, through: :challenge_favorites, source: :challenge
 
   has_one_attached :avatar
   
