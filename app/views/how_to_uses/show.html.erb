@@ -1,7 +1,25 @@
+<%= link_to "ホームに戻る", home_path %>
+
 <div class="how-to-use-page">
 
   <%= image_tag "how_to_use.png",
       alt: "TORUNTOの使い方",
-      class: "how-to-use-image" %>
+      class: "how-to-use-image",
+      id: "how-to-use-trigger" %>
+
+</div>
+
+<!-- 拡大表示モーダル -->
+<div id="how-to-use-modal" class="photo-zoom-modal">
+
+  <button id="how-to-use-close"
+          class="photo-zoom-close"
+          type="button">
+    ×
+  </button>
+
+  <%= image_tag "how_to_use.png",
+      alt: "TORUNTOの使い方",
+      class: "photo-zoom-image" %>
 
 </div>

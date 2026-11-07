@@ -542,3 +542,26 @@ function restoreProfileScroll() {
 // 通常のページ読み込み・Turboによるページ遷移に対応
 document.addEventListener("DOMContentLoaded", restoreProfileScroll);
 document.addEventListener("turbo:load", restoreProfileScroll);
+
+// 使い方画像の拡大表示
+document.addEventListener("turbo:load", () => {
+  const trigger = document.getElementById("how-to-use-trigger");
+  const modal = document.getElementById("how-to-use-modal");
+  const close = document.getElementById("how-to-use-close");
+
+  if (!trigger || !modal || !close) return;
+
+  trigger.addEventListener("click", () => {
+    modal.classList.add("active");
+  });
+
+  close.addEventListener("click", () => {
+    modal.classList.remove("active");
+  });
+
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.classList.remove("active");
+    }
+  });
+});
