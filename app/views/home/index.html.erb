@@ -1,6 +1,12 @@
 <div class="home-page">
 
-  <div class="home-hero">
+  <div class="home-hero"
+     data-images="<%= [
+       image_path('blue.JPG'),
+       image_path('cosmos.JPG'),
+       image_path('forest.png'),
+       image_path('hana.JPG')
+     ].to_json %>">
 
     <%= image_tag "cosmos.JPG", alt: "TORUNTO", id: "home-main-image" %>
 
@@ -17,20 +23,20 @@
         <p>
           写真から撮影のヒントを見つけて、実際の撮影につなげよう。
         </p>
-
       </section>
 
+    
+      <!-- 左右の切り替えボタン -->
+      <button type="button" class="home-prev-button" id="home-prev-button">
+        ←
+      </button>
+
+      <button type="button" class="home-next-button" id="home-next-button">
+        →
+      </button>
+
     </div>
-
-    <!-- 左右の切り替えボタン -->
-    <button type="button" class="home-prev-button" id="home-prev-button">
-      ←
-    </button>
-
-    <button type="button" class="home-next-button" id="home-next-button">
-      →
-    </button>
-
+  
   </div>
 
   <section class="home-features">
