@@ -80,7 +80,7 @@
 
                 <summary class="shooting-setting-header">
                   <%= sf.label :aperture, "F値" %>
-                  <%= sf.number_field :aperture, placeholder: "例：5.6" %>
+                  <%= sf.number_field :aperture, placeholder: "例：5.6", step: "any" %>
                   <span class="info-icon">ⓘ</span>
                 </summary>
 
@@ -98,7 +98,7 @@
 
                 <summary class="shooting-setting-header">
                   <%= sf.label :iso, "ISO" %>
-                  <%= sf.number_field :iso, placeholder: "例：100" %>
+                  <%= sf.number_field :iso, placeholder: "例：100", step: "any" %>
                     <span class="info-icon">ⓘ</span>
                 </summary>
 
@@ -116,7 +116,7 @@
 
                 <summary class="shooting-setting-header">
                   <%= sf.label :shutter_speed, "シャッタースピード" %>
-                  <%= sf.text_field :shutter_speed, placeholder: "例：1/250" %>
+                  <%= sf.text_field :shutter_speed, placeholder: "例：1/250", step: "any" %>
                     <span class="info-icon">ⓘ</span>
                 </summary>
 
