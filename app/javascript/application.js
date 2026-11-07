@@ -9,13 +9,9 @@ document.addEventListener("turbo:load", () => {
 
   if (!image || !nextButton || !prevButton) return
 
-  const images = [
-    "/assets/ame.JPG",
-    "/assets/blue.JPG",
-    "/assets/cosmos.JPG",
-    "/assets/forest.png",
-    "/assets/hana.JPG"
-  ]
+  const hero = document.querySelector(".home-hero")
+  if (!hero) return
+  const images = JSON.parse(hero.dataset.images)
 
   let currentIndex = 0
 

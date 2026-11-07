@@ -1,0 +1,14 @@
+.git
+.github
+.env
+.env.*
+!.env.example
+
+log/*
+tmp/*
+storage/*
+vendor/bundle
+
+coverage
+.byebug_history
+.DS_Store
