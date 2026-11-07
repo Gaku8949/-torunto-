@@ -8,6 +8,7 @@ RSpec.describe "profiles/show.html.erb", type: :view do
     assign(:photos, [])
     assign(:challenges, [])
     assign(:favorite_photos, [])
+    assign(:favorite_challenges, [])
   end
 
   it "プロフィールのタイトルが表示されること" do

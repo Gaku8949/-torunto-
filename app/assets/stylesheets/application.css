@@ -712,15 +712,16 @@ main {
 .flash-messages {
   width: 90%;
   max-width: 900px;
-  margin: 0px auto;
+  margin: 0 auto 20px;
   text-align: center;
+}
 
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  pointer-events: none;
+.flash-notice {
+  color: #222;
+}
+
+.flash-alert {
+  color: #d00;
 }
 
 .flash-notice {
@@ -4350,4 +4351,697 @@ main {
   border-radius: 5px;
   font-size: 12px;
   font-weight: bold;
+}
+
+/* =========================
+   スマホ対応：ヘッダー
+   ========================= */
+
+@media (max-width: 768px) {
+  .site-header {
+    height: auto;
+    padding: 16px;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .header-logo img {
+    width: 130px;
+  }
+
+  .header-nav {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px 8px;
+    justify-items: center;
+  }
+
+  .header-nav a,
+  .header-nav button {
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .header-nav form {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.header-nav form {
+  display: flex;
+  justify-content: center;
+  grid-column: 1 / -1;
+}
+
+/* =========================
+   スマホ対応：ホーム画面
+   ========================= */
+
+@media (max-width: 768px) {
+
+  .home-hero {
+    width: 100%;
+    height: 380px;
+    margin-top: 20px;
+  }
+
+  .home-hero > #home-main-image {
+    height: 100%;
+  }
+
+  .home-hero-logo {
+    width: 145px;
+    margin-bottom: 18px;
+  }
+
+  .home-hero-overlay h1 {
+    font-size: 23px;
+    margin-bottom: 12px;
+    padding: 0 45px;
+  }
+
+  .home-hero-overlay p {
+    font-size: 13px;
+    padding: 0 25px;
+  }
+
+  .home-hero-overlay::before {
+    width: 90%;
+    height: 250px;
+  }
+
+  .home-prev-button,
+  .home-next-button {
+    width: 38px;
+    height: 38px;
+    font-size: 17px;
+  }
+
+  .home-prev-button {
+    left: 12px;
+  }
+
+  .home-next-button {
+    right: 12px;
+  }
+}
+
+/* =========================
+   スマホ対応：ホーム機能カード
+   ========================= */
+
+@media (max-width: 768px) {
+
+  .home-features {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 20px 8px 40px;
+  }
+
+  .home-feature {
+    padding: 24px 18px;
+    min-height: 180px;
+    box-sizing: border-box;
+  }
+
+  .home-feature-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+
+  .home-feature h2 {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .home-feature p {
+    font-size: 13px;
+  }
+}
+
+/* =========================
+   スマホ対応：ログイン・新規登録
+   ========================= */
+
+@media (max-width: 600px) {
+
+  .devise-container {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 30px auto;
+    padding: 20px 12px;
+  }
+
+  .devise-card {
+    width: 100%;
+    max-width: 100%;
+    padding: 28px 20px;
+    box-sizing: border-box;
+  }
+
+  .devise-card h1 {
+    font-size: 23px;
+    margin-bottom: 28px;
+  }
+
+  .devise-field {
+    margin-bottom: 18px;
+  }
+
+  .devise-field input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* =========================
+   写真詳細ページ：スマホ対応
+========================= */
+
+@media (max-width: 768px) {
+
+  /* ページ全体 */
+  .photo-show-page {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 24px 16px 40px;
+    margin: 0 auto;
+  }
+
+  /* タイトル・お気に入り */
+  .photo-show-header {
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .photo-show-header h1 {
+    font-size: 24px;
+    overflow-wrap: anywhere;
+  }
+
+  /* 左右2カラムを1カラムに変更 */
+  .photo-show-layout {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+  }
+
+  .photo-show-main,
+  .photo-show-sidebar {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  /* 写真 */
+  .photo-zoom-container {
+    width: 100%;
+  }
+
+  .photo-show-image {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: contain;
+  }
+
+  /* 説明・コメント */
+  .photo-show-section,
+  .photo-info-card,
+  .photo-action-card,
+  .photo-challenges {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* コメント入力欄 */
+  .comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .comment-form textarea {
+    width: 100%;
+    min-height: 80px;
+    box-sizing: border-box;
+  }
+
+  .comment-form input[type="submit"] {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  /* チャレンジ画像 */
+  .challenge-image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* 長い文字による横はみ出し防止 */
+  .photo-show-page p,
+  .photo-show-page summary {
+    overflow-wrap: anywhere;
+  }
+}
+
+/* =========================================
+   スマホ対応：写真詳細ページ
+========================================= */
+
+@media screen and (max-width: 600px) {
+
+  .photo-show-page {
+    width: 100%;
+    max-width: 100%;
+    padding: 25px 16px 40px;
+    box-sizing: border-box;
+  }
+
+  /* タイトル部分 */
+  .photo-show-header {
+    align-items: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .photo-show-header h1 {
+    font-size: 24px;
+  }
+
+  /* 左右2カラムを縦並びにする */
+  .photo-show-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .photo-show-main,
+  .photo-show-sidebar {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  /* メイン写真 */
+  .photo-zoom-container {
+    width: 100%;
+  }
+
+  .photo-show-image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+  }
+
+  /* 説明・コメント */
+  .photo-show-section {
+    width: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+
+  /* 撮影情報カード */
+  .photo-info-card {
+    width: 100%;
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  /* コメントフォーム */
+  .comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .comment-form textarea {
+    width: 100%;
+    min-height: 80px;
+    box-sizing: border-box;
+  }
+
+  .comment-form input[type="submit"] {
+    width: 100%;
+    min-height: 45px;
+  }
+
+  /* アクションボタン */
+  .photo-action-card {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .photo-action-card a,
+  .photo-action-card button {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* 撮影チャレンジ */
+  .photo-challenges {
+    width: 100%;
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  .challenge-image {
+    max-width: 100%;
+    height: auto;
+  }
+
+}
+
+/* =====================================
+   プロフィール画面：スマートフォン調整
+===================================== */
+
+@media (max-width: 480px) {
+
+  /* ページ全体 */
+  .profile-page {
+    margin: 30px auto;
+    padding: 0 16px;
+  }
+
+  /* タイトルと編集ボタン */
+  .profile-page .profile-header {
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .profile-page .profile-header h1 {
+    font-size: 22px;
+    white-space: nowrap;
+  }
+
+  .profile-page .profile-edit-button {
+    padding: 10px 12px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  /* プロフィールカード */
+  .profile-page .profile-info-card {
+    padding: 24px 16px;
+    margin-bottom: 32px;
+  }
+
+  /* アイコンとユーザー情報 */
+  .profile-page .profile-main {
+    gap: 16px;
+    padding-bottom: 24px;
+  }
+
+  .profile-page .profile-avatar {
+    width: 100px;
+    height: 100px;
+    min-width: 100px;
+  }
+
+  .profile-page .profile-details h2 {
+    font-size: 24px;
+  }
+
+  .profile-page .profile-email {
+    font-size: 13px;
+    overflow-wrap: anywhere;
+  }
+
+  /* 投稿数・チャレンジ数 */
+  .profile-page .profile-status {
+    display: flex;
+    flex-direction: row;
+    border-top: 1px solid #e5e9ed;
+    padding-top: 20px;
+  }
+
+  .profile-page .profile-stat {
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+  }
+
+  .profile-page .stat-number {
+    font-size: 26px;
+  }
+
+  .profile-page .stat-label {
+    font-size: 12px;
+  }
+
+  /* タブメニュー */
+  .profile-page .profile-tabs {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 20px;
+  }
+
+  .profile-page .profile-tab {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 2px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  /* 写真カード */
+  .profile-page .profile-photo-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .profile-page .profile-photo-image {
+    height: 220px;
+  }
+
+  .profile-page .profile-photo-content {
+    padding: 14px;
+  }
+
+}
+
+/* =====================================
+   写真編集画面：スマートフォン対応
+===================================== */
+
+@media (max-width: 768px) {
+
+  /* 編集画面全体 */
+  .photo-edit-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 24px auto;
+    padding: 0 16px 40px;
+    box-sizing: border-box;
+  }
+
+  .photo-edit-container h1 {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+
+  /* 左右2カラムを縦並びに変更 */
+  .photo-edit-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .photo-edit-left,
+  .photo-edit-right {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* カードの幅を調整 */
+  .edit-card,
+  .edit-form-section,
+  .form-section {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  /* 入力欄のはみ出し防止 */
+  .edit-form-section input,
+  .edit-form-section textarea,
+  .edit-card input {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* 撮影設定 */
+  .shooting-setting-header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* 撮影技法 */
+  .technique-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* 更新・キャンセルボタン */
+  .photo-edit-container .form-actions {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+}
+
+/* =====================================
+   チャレンジ投稿画面：スマホ対応
+===================================== */
+
+  @media (max-width: 768px) {
+  .challenge-technique-grid {
+      grid-template-columns: 1fr;
+  }
+  
+}
+
+/* =====================================
+   チャレンジ編集画面：スマホ対応
+===================================== */
+
+@media (max-width: 768px) {
+
+  /* 撮影技法・構図を縦一列にする */
+  .challenge-edit-container .challenge-technique-list {
+    grid-template-columns: 1fr;
+    row-gap: 8px;
+  }
+
+  /* チェックボックスと技法名の配置 */
+  .challenge-edit-container .challenge-technique-item {
+    display: grid;
+    grid-template-columns: 20px minmax(0, 1fr);
+    align-items: center;
+    gap: 8px;
+    padding: 10px 0;
+  }
+
+  /* 技法名を読みやすくする */
+  .challenge-edit-container .challenge-technique-details summary {
+    font-size: 14px;
+    white-space: normal;
+  }
+
+}
+
+/* =====================================
+   チャレンジ詳細画面：スマホの操作ボタン
+===================================== */
+
+@media (max-width: 480px) {
+
+  /* ボタンを横一列にする */
+  .challenge-show-actions {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 6px;
+    width: 100%;
+  }
+
+  /* 各ボタンの折り返しを防ぐ */
+  .challenge-show-actions > *,
+  .challenge-show-actions form {
+    flex: 0 0 auto;
+    margin: 0;
+  }
+
+  .challenge-favorite-button,
+  .challenge-edit-button,
+  .challenge-show-header .delete-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    width: auto;
+    min-width: 0;
+    padding: 9px 8px;
+    font-size: 12px;
+    box-sizing: border-box;
+  }
+
+}
+
+/* =========================
+   使い方画像の拡大表示
+========================= */
+
+.how-to-use-image {
+  cursor: zoom-in;
+  max-width: 100%;
+  height: auto;
+}
+
+#how-to-use-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  background: rgba(0, 0, 0, 0.85);
+
+  /* 画面全体を基準に中央配置 */
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+#how-to-use-modal.active {
+  display: flex;
+}
+
+/* 拡大画像 */
+#how-to-use-modal .photo-zoom-image {
+  display: block;
+
+  width: auto;
+  height: auto;
+
+  max-width: 100%;
+  max-height: 90%;
+
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+/* 閉じるボタン */
+#how-to-use-modal .photo-zoom-close {
+  position: absolute;
+
+  top: 15px;
+  right: 15px;
+
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 36px;
+  color: white;
+
+  background: transparent;
+  border: none;
+
+  cursor: pointer;
 }
