@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_10_27_081741) do
+ActiveRecord::Schema[7.2].define(version: 2026_11_11_071917) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,7 +72,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_10_27_081741) do
 
   create_table "challenges", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.integer "reference_photo_id"
+    t.bigint "reference_photo_id"
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -82,6 +82,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_10_27_081741) do
     t.string "shutter_speed"
     t.string "focal_length"
     t.string "title"
+    t.index ["reference_photo_id"], name: "index_challenges_on_reference_photo_id"
     t.index ["user_id"], name: "index_challenges_on_user_id"
   end
 
@@ -102,12 +103,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_10_27_081741) do
     t.datetime "updated_at", null: false
     t.index ["photo_id"], name: "index_favorites_on_photo_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
-  end
-
-  create_table "locations", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "photo_techniques", force: :cascade do |t|
@@ -172,6 +167,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_10_27_081741) do
   add_foreign_key "challenge_favorites", "users"
   add_foreign_key "challenge_techniques", "challenges"
   add_foreign_key "challenge_techniques", "techniques"
+  add_foreign_key "challenges", "photos", column: "reference_photo_id"
   add_foreign_key "challenges", "users"
   add_foreign_key "comments", "photos"
   add_foreign_key "comments", "users"
