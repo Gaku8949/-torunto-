@@ -37,18 +37,24 @@
     </header>
     <% end %>
 
-    <main>
-      <div class="flash-messages">
-        <% if notice %>
-          <p class="flash-notice"><%= notice %></p>
-        <% end %>
+    <% is_landing = controller_name == "home" && action_name == "landing" %>
 
-        <% if alert %>
-          <p class="flash flash-alert"><%= alert %></p>
-        <% end %>
-      </div>
+    <main class="<%= 'landing-main' if  is_landing %>">
+   
+      <% unless is_landing %>
+        <div class="flash-messages">
+          <% if notice %>
+            <p class="flash-notice"><%= notice %></p>
+          <% end %>
+
+          <% if alert %>
+            <p class="flash flash-alert"><%= alert %></p>
+          <% end %>
+        </div>
+      <% end %>
 
       <%= yield %>
+
     </main>
 
     <footer class="site-footer">

@@ -236,17 +236,6 @@ main {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.04);
 }
 
-/* ランディング画面 */
-.landing-page {
-    text-align: center;
-}
-
-.landing-page img {
-    width: 360px;
-    height: 240px;
-    object-fit: cover;
-}
-
 /* ==========================
    共通フッター
 ========================== */
@@ -611,23 +600,27 @@ main {
    ========================= */
 
 .landing-page {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     position: relative;
-    margin-left: calc(50% - 50vw);
-    margin-top: -40px;
-    margin-bottom: -40px;
+
+    margin: 0;
+
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
 
-    background-image: 
-      url("AOI.png");
-
+    background-image: url("AOI.png");
     background-size: 100% auto;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+.landing-page img {
+    width: 360px;
+    height: 240px;
+    object-fit: cover;
 }
 
 .landing-content {
@@ -5044,4 +5037,35 @@ main {
   border: none;
 
   cursor: pointer;
+}
+
+/* ランディングページ専用のmain設定 */
+main.landing-main {
+    max-width: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+/* ランディングページのフラッシュメッセージ */
+.landing-flash-messages {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 900px;
+    margin: 0;
+    z-index: 10;
+    text-align: center;
+}
+
+.landing-flash-messages p {
+    display: inline-block;
+    margin: 0;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.85);
 }
