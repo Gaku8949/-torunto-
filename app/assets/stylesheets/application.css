@@ -5069,3 +5069,15 @@ main.landing-main {
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.85);
 }
+
+.demo-account-badge {
+  display: inline-block;
+  padding: 5px 12px;
+  margin-left: 12px;
+  border-radius: 20px;
+  background-color: #fff0d9;
+  color: #b87519;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}

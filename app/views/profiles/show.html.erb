@@ -4,6 +4,10 @@
   <div class="profile-header">
     <h1>プロフィール</h1>
 
+    <% if @user.demo? %>
+      <span class="demo-account-badge">DEMO ACCOUNT</span>
+    <% end %>
+
     <%= link_to edit_profile_path, class: "profile-edit-button" do %>
       ✎ プロフィールを編集
     <% end %>

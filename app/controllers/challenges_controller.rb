@@ -1,6 +1,7 @@
 class ChallengesController < ApplicationController
   before_action :authenticate_user!
-
+  before_action :set_challenge, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_challenge_owner!, only: [:edit, :update, :destroy]
 
   def index
     @challenges = Challenge.order(created_at: :desc).page(params[:page]).per(6)
@@ -27,44 +28,50 @@ class ChallengesController < ApplicationController
   end
 
   def show
-    @challenge = Challenge.find(params[:id])
     @photo = @challenge.reference_photo
   end
 
   def edit
-    @challenge = Challenge.find(params[:id])
     @photo = @challenge.reference_photo
     @techniques = Technique.all
   end
 
   def update
-    @challenge = Challenge.find(params[:id])
+    if @challenge.demo_sample?
+      redirect_to @challenge, alert: "このチャレンジはデモ用サンプルのため保存・削除できません"
+      return
+    end
 
-    if @challenge.user == current_user
-      if @challenge.update(challenge_params)
-        redirect_to challenges_path, notice: "撮影チャレンジを更新しました"
-      else
-        @photo = @challenge.reference_photo
-        @techniques = Technique.all
-        render :edit, status: :unprocessable_entity
-      end
+    if @challenge.update(challenge_params)
+      redirect_to challenges_path, notice: "撮影チャレンジを更新しました"
     else
-      redirect_to challenges_path, alert: "このチャレンジを編集する権限がありません"
+      @photo = @challenge.reference_photo
+      @techniques = Technique.all
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @challenge = Challenge.find(params[:id])
+    if @challenge.demo_sample?
+      redirect_to @challenge, alert: "このチャレンジはデモ用サンプルのため保存・削除できません"
+      return
+    end
 
-    if @challenge.user == current_user
-      @challenge.destroy
-      redirect_to challenges_path, notice: "撮影チャレンジを削除しました", status: :see_other
-    else
-      redirect_to challenges_path, alert: "このチャレンジを削除する権限がありません"
+    @challenge.destroy
+    redirect_to challenges_path, notice: "撮影チャレンジを削除しました", status: :see_other
+  end
+
+  private
+
+  def set_challenge
+    @challenge = Challenge.find(params[:id])
+  end
+
+  def authorize_challenge_owner!
+    unless @challenge.user == current_user
+      redirect_to challenges_path, alert: "このチャレンジを編集・削除する権限がありません"
     end
   end
-  
-  private
 
   def challenge_params
     params.require(:challenge).permit(

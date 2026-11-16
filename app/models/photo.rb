@@ -13,4 +13,8 @@ class Photo < ApplicationRecord
   has_many :challenges, foreign_key: :reference_photo_id, dependent: :destroy
 
   accepts_nested_attributes_for :shooting_setting, update_only: true
+
+  def demo_sample?
+    demo_sample
+  end
 end

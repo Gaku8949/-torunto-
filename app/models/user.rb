@@ -14,5 +14,9 @@ class User < ApplicationRecord
   has_many :favorite_challenges, through: :challenge_favorites, source: :challenge
 
   has_one_attached :avatar
+
+  def demo?
+    demo
+  end
   
 end
