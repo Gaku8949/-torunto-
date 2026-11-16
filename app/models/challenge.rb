@@ -17,4 +17,8 @@ class Challenge < ApplicationRecord
   def favorited_by?(user)
     challenge_favorites.exists?(user: user)
   end
+
+  def demo_sample?
+    demo_sample
+  end
 end
