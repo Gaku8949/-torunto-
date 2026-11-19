@@ -16,7 +16,15 @@ RSpec.describe ChallengeFavorite, type: :model do
   describe 'バリデーション' do
     it '同じユーザーが同じチャレンジを重複してお気に入り登録できないこと' do
       user = create(:user)
-      challenge = create(:challenge)
+      challenge = build(:challenge)
+
+      challenge.image.attach(
+        io: File.open(Rails.root.join("spec/fixtures/files/test.JPG")),
+        filename: "test.JPG",
+        content_type: "image/jpeg"
+      )
+
+      challenge.save!
 
       create(:challenge_favorite, user: user, challenge: challenge)
 

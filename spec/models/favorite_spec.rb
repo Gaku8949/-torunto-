@@ -21,10 +21,18 @@ RSpec.describe Favorite, type: :model do
         password: "password"
       )
 
-      photo = Photo.create!(
+      photo = Photo.new(
         user: user,
         title: "テスト写真"
       )
+
+      photo.image.attach(
+        io: File.open(Rails.root.join("spec/fixtures/files/test.JPG")),
+        filename: "test.JPG",
+        content_type: "image/jpeg"
+      )
+
+      photo.save!
 
       Favorite.create!(
         user: user,

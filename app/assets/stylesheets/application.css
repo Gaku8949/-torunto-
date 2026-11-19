@@ -2232,9 +2232,9 @@ main {
   .challenge-page {
   width: 100%;
   max-width: 100%;
-  margin: 25px auto;
-  padding: 0 15px;
   box-sizing: border-box;
+  padding: 25px 15px 40px;
+  margin: 0 auto;
   }
 
 }

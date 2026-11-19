@@ -14,6 +14,8 @@ class Photo < ApplicationRecord
 
   accepts_nested_attributes_for :shooting_setting, update_only: true
 
+  validates :image, presence: true
+
   def demo_sample?
     demo_sample
   end

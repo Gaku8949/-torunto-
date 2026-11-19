@@ -4,6 +4,8 @@ class Challenge < ApplicationRecord
 
   has_one_attached :image
 
+  validates :image, presence: true
+
   has_one :shooting_setting, inverse_of: :challenge, dependent: :destroy
 
   has_many :challenge_techniques, dependent: :destroy

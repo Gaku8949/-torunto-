@@ -23,6 +23,7 @@ class ChallengesController < ApplicationController
     if @challenge.save
       redirect_to @photo, notice: "撮影チャレンジを投稿しました"
     else
+      @techniques = Technique.all
       render :new, status: :unprocessable_entity
     end
   end

@@ -10,11 +10,20 @@ RSpec.describe "Challenges", type: :request do
   end
 
   let!(:photo) do
-    Photo.create!(
+    photo = Photo.new(
       user: user,
       title: "参考写真",
       description: "参考写真の説明"
     )
+
+    photo.image.attach(
+      io: File.open(Rails.root.join("spec/fixtures/files/test.JPG")),
+      filename: "test.JPG",
+      content_type: "image/jpeg"
+    )
+
+    photo.save!
+    photo
   end
 
   before do
@@ -44,7 +53,11 @@ RSpec.describe "Challenges", type: :request do
           challenge: {
             title: "チャレンジ写真",
             location: "福岡",
-            comment: "撮影してみました"
+            comment: "撮影してみました",
+            image: fixture_file_upload(
+              "test.JPG",
+              "image/jpeg"
+            )
           }
         }
       }.to change(Challenge, :count).by(1)
@@ -55,13 +68,21 @@ RSpec.describe "Challenges", type: :request do
 
   describe "GET /photos/:photo_id/challenges/:id/edit" do
     it "チャレンジ編集ページが正常に表示される" do
-      challenge = Challenge.create!(
+      challenge = Challenge.new(
         user: user,
         reference_photo: photo,
-        title: "チャレンジ写真",
+        title: "変更前",
         location: "福岡",
-        comment: "テストコメント"
+        comment: "変更前コメント"
       )
+
+      challenge.image.attach(
+        io: File.open(Rails.root.join("spec/fixtures/files/test.JPG")),
+        filename: "test.JPG",
+        content_type: "image/jpeg"
+      )
+
+      challenge.save!
 
       get edit_photo_challenge_path(photo, challenge)
 
@@ -71,13 +92,21 @@ RSpec.describe "Challenges", type: :request do
 
   describe "PATCH /photos/:photo_id/challenges/:id" do
     it "チャレンジを編集できる" do
-      challenge = Challenge.create!(
+      challenge = Challenge.new(
         user: user,
         reference_photo: photo,
         title: "変更前",
         location: "福岡",
         comment: "変更前コメント"
       )
+
+      challenge.image.attach(
+        io: File.open(Rails.root.join("spec/fixtures/files/test.JPG")),
+        filename: "test.JPG",
+        content_type: "image/jpeg"
+      )
+
+      challenge.save!
 
       patch photo_challenge_path(photo, challenge), params: {
         challenge: {

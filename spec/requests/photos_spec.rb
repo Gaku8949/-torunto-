@@ -23,11 +23,19 @@ RSpec.describe "Photos", type: :request do
 
   describe "GET /photos/:id" do
     it "写真詳細ページが正常に表示される" do
-      photo = Photo.create!(
+      photo = Photo.new(
         user: user,
         title: "テスト写真",
         description: "テスト説明"
       )
+
+      photo.image.attach(
+        io: File.open(Rails.root.join("spec/fixtures/files/test.JPG")),
+        filename: "test.JPG",
+        content_type: "image/jpeg"
+      )
+
+      photo.save!
 
       get photo_path(photo)
 
