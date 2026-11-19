@@ -2,7 +2,39 @@ require 'rails_helper'
 
 RSpec.describe "ChallengeFavorites", type: :request do
   let(:user) { create(:user) }
-  let(:challenge) { create(:challenge) }
+  
+  let(:photo) do
+    photo = Photo.new(
+      user: user,
+      title: "参考写真"
+    )
+
+    photo.image.attach(
+      io: File.open(Rails.root.join("spec/fixtures/files/test.JPG")),
+      filename: "test.JPG",
+      content_type: "image/jpeg"
+    )
+
+    photo.save!
+    photo
+  end
+
+  let(:challenge) do
+    challenge = Challenge.new(
+      user: user,
+      reference_photo: photo,
+      title: "チャレンジ写真"
+    )
+
+    challenge.image.attach(
+      io: File.open(Rails.root.join("spec/fixtures/files/test.JPG")),
+      filename: "test.JPG",
+      content_type: "image/jpeg"
+    )
+
+    challenge.save!
+    challenge
+  end
 
   before do
     sign_in user
