@@ -30,6 +30,12 @@ class ProfilesController < ApplicationController
   def update
     @user = current_user
 
+    # デモアカウントのプロフィール変更を禁止
+    if @user.demo?
+      redirect_to edit_profile_path, alert: "このプロフィールを編集・変更する権限がありません"
+      return
+    end
+
     if @user.update(profile_params)
       redirect_to profile_path, notice: "プロフィールを更新しました"
     else

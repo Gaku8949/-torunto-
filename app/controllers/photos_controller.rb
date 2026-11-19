@@ -20,6 +20,7 @@ class PhotosController < ApplicationController
      if @photo.save
         redirect_to @photo, notice: "写真を投稿しました"
      else
+        @techniques = Technique.all
         render :new, status: :unprocessable_entity
      end
    end
