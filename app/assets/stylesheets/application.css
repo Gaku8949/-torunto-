@@ -2230,8 +2230,11 @@ main {
   }
 
   .challenge-page {
-    margin: 25px auto;
-    padding: 0 15px;
+  width: 100%;
+  max-width: 100%;
+  margin: 25px auto;
+  padding: 0 15px;
+  box-sizing: border-box;
   }
 
 }
