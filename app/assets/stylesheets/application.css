@@ -2226,7 +2226,9 @@ main {
 @media (max-width: 768px) {
 
   .challenge-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr); /* 1fr から変更 */
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .challenge-page {
